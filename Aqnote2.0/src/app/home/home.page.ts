@@ -16,7 +16,6 @@ export class HomePage {
     spaceBetween: 20,
     centeredSlides: true
   };
-  @ViewChild('myTabs') tabs: IonTabs;
   private activeTabName: string;
   segmentChanged(ev: any) {
     console.log(ev['detail']['value']);
