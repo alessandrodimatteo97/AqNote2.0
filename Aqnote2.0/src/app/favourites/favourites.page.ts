@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MenuController, ModalController} from '@ionic/angular';
-import { IonTabs} from '@ionic/angular';
-import { ViewChild} from '@angular/core';
 import {ImageModalPage} from '../image-modal/image-modal.page';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-favourites',
+  templateUrl: './favourites.page.html',
+  styleUrls: ['./favourites.page.scss'],
 })
-export class HomePage {
+export class FavouritesPage implements OnInit {
+
   sliderOpts = {
     zoom: false,
     slidesPerView: 1.5,
@@ -49,7 +48,7 @@ export class HomePage {
     this.menu.open('custom');
   }
 
+  ngOnInit(): void {
+  }
 
 }
-
-
