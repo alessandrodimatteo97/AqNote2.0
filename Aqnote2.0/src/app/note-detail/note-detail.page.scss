@@ -1,0 +1,65 @@
+ion-row {
+  background-color:  #F5F5F5;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+ion-col {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.toolbar {
+  --background: #FFD54D;
+  text-align: center;
+}
+
+.pd {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.delete-span {
+  text-align: right;
+  color: black;
+  float: right;
+  font-size: 26px;
+}
+
+/* SLIDER DELLE IMMAGINI */
+
+
+.category-block {
+  margin-bottom: 4px;
+}
+
+ion-slide {
+  max-width: 40%;
+}
+
+ion-card {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+ion-card-content {
+  margin-right: 0px;
+  margin-left: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+ion-slide {
+  margin-right: 0px;
+  margin-left: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
