@@ -63,3 +63,29 @@ ion-slide {
   padding-right: 0px;
   padding-left: 0px;
 }
+
+.comment-header {
+  font-size: 20px;
+}
+
+
+.comment {
+  font-size: 10px;
+}
+
+.span-star {
+  font-size: 14px;
+}
+
+.icon-send {
+  text-align: center;
+  margin-left: 80%;
+}
+
+:host(.item-interactive), :host(.item-lines-full){
+  --border-width: 0px;
+}
+
+ion-textarea {
+  font-size: 10px;
+}
