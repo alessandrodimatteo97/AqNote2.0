@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfilePage implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+  segment: string;
 
   ngOnInit() {
   }

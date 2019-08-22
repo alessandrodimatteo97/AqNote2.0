@@ -11,8 +11,8 @@ export const URL = {
     LOGIN: URL_BASE + '/login',
     PROFILE: URL_BASE + '/profile',
     UPDATE: URL_BASE + '/update',
-    SENDPHOTO: URL_BASE + '/8/notes/upload'
-
+    SENDPHOTO: URL_BASE + '/8/notes/upload',
+    HOME: URL_BASE + '/homepage/informatica'
 };
 
 export const X_AUTH = 'Authorization';

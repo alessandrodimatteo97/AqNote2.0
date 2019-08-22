@@ -19,6 +19,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+<<<<<<< HEAD
+=======
+
+>>>>>>> a00757f06a7c045a5462539fb758bf357fabccd7
     RouterModule.forChild(routes)
   ],
   declarations: [NoteDetailPage]

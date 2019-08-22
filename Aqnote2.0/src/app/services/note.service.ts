@@ -16,5 +16,7 @@ export class NoteService {
 
     return this.http.get<Note[]>(noteslUrl);
   }
+
+
   // la lista di noteDetail è in post e anche l'upload delle note
 }

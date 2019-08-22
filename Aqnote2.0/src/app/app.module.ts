@@ -15,10 +15,14 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
+<<<<<<< HEAD
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, ImageModalPageModule, IonicStorageModule.forRoot({
     name: 'AqNote__db',
     driverOrder: ['indexeddb', 'sqlite', 'websql']
   }),],
+=======
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ImageModalPageModule, HttpClientModule],
+>>>>>>> a00757f06a7c045a5462539fb758bf357fabccd7
   providers: [
     StatusBar,
     SplashScreen,
