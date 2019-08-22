@@ -1,0 +1,38 @@
+.photo {
+  display: inline-block;
+  font-size: 40px;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  vertical-align: bottom;
+  hover: white;
+}
+
+h2 {
+  text-align: center;
+  color: #806b26;
+}
+
+ion-item {
+  --background: white;
+}
+
+ion-card {
+  background-color: white;
+}
+
+.toolbar {
+  --background: #FFD54D;
+  text-align: center;
+}
+/*
+ion-button {
+  --background-activated: #806B26;
+  --background-hover: #806B26;
+  --background-focused: #806B26;
+  --color-hover: #806B26;
+
+}
+
+ */

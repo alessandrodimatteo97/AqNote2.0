@@ -6,27 +6,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-
-
-
-  <ion-router-outlet main></ion-router-outlet>
+<ion-content>
+<ion-router-outlet main></ion-router-outlet>
   <ion-toolbar>
     <ion-grid>
       <ion-row>
-        <ion-segment (ionChange)="segmentChanged($event)" >
+        <ion-segment [(ngModel)]="segment"  (ionChange)="segmentChanged($event)" >
           <ion-col size="4">
-            <ion-segment-button color="primary" value="first">
+            <ion-segment-button value="first" color="primary" value="first">
               <ion-label color="secondary">Primo anno</ion-label>
             </ion-segment-button>
           </ion-col>
           <ion-col size="4">
-            <ion-segment-button color="primary" value="second">
+            <ion-segment-button value="second" color="primary" value="second">
               <ion-label color="secondary">Secondo anno</ion-label>
             </ion-segment-button>
           </ion-col>
           <ion-col size="4">
-            <ion-segment-button  color="primary" value="third" >
+            <ion-segment-button value="third" color="primary" value="third" >
               <ion-label color="secondary">Terzo anno</ion-label>
             </ion-segment-button>
           </ion-col>
@@ -35,9 +32,12 @@
     </ion-grid>
   </ion-toolbar>
 
+
+<div [ngSwitch]="segment">
+  <div *ngSwitchCase="'first'">
   <ion-card class="cards">
     <ion-card-header class="card-header">
-      <ion-card-title color="secondary">Web Engineering<span class="right"><a href="#">vedi tutti gli appunti</a></span></ion-card-title>
+      <ion-card-title color="secondary">Web Engineering<span class="right"><a href="/list-notes">vedi tutti gli appunti</a></span></ion-card-title>
     </ion-card-header>
     <ion-card-header class="second-header">
       <ion-card-subtitle>I migliori per questa materia</ion-card-subtitle>
@@ -102,10 +102,11 @@
       </ion-slide>
     </ion-slides>
   </ion-card>
-
+  </div>
+  <div *ngSwitchCase="'second'">
   <ion-card class="cards">
     <ion-card-header class="card-header">
-      <ion-card-title color="secondary">Applicazioni per dispositivi mobili<span class="right"><a href="#">vedi tutti gli appunti</a></span></ion-card-title>
+      <ion-card-title color="secondary">Applicazioni per dispositivi mobili<span class="right"><a href="/list-notes">vedi tutti gli appunti</a></span></ion-card-title>
     </ion-card-header>
     <ion-card-header class="second-header">
       <ion-card-subtitle>I migliori per questa materia</ion-card-subtitle>
@@ -173,7 +174,7 @@
 
   <ion-card class="cards">
     <ion-card-header class="card-header">
-      <ion-card-title color="secondary">Applicazioni per dispositivi mobili<span class="right"><a href="#">vedi tutti gli appunti</a></span></ion-card-title>
+      <ion-card-title color="secondary">Applicazioni per dispositivi mobili<span class="right"><a href="/list-notes">vedi tutti gli appunti</a></span></ion-card-title>
     </ion-card-header>
     <ion-card-header class="second-header">
       <ion-card-subtitle>I migliori per questa materia</ion-card-subtitle>
@@ -238,10 +239,11 @@
       </ion-slide>
     </ion-slides>
   </ion-card>
-
+  </div>
+  <div *ngSwitchCase="'third'">
   <ion-card class="cards">
     <ion-card-header class="card-header">
-      <ion-card-title color="secondary">Applicazioni per dispositivi mobili<span class="right"><a href="#">vedi tutti gli appunti</a></span></ion-card-title>
+      <ion-card-title color="secondary">Applicazioni per dispositivi mobili<span class="right"><a href="/list-notes">vedi tutti gli appunti</a></span></ion-card-title>
     </ion-card-header>
     <ion-card-header class="second-header">
       <ion-card-subtitle>I migliori per questa materia</ion-card-subtitle>
@@ -306,31 +308,11 @@
       </ion-slide>
     </ion-slides>
   </ion-card>
+  </div>
+</div>
 
-  <br><br>  <br><br>
 
 
-  <ion-tabs  #myTabs (ionTabsDidChange)="getSelectedTab()">
-    <ion-tab-bar class="pd" slot="bottom">
-      <ion-tab-button tab="/home">
-        <ion-icon color="secondary" name="md-home"></ion-icon>
-        <ion-label>Home</ion-label>
-      </ion-tab-button>
 
-      <ion-tab-button tab="/favourite">
-        <ion-icon color="secondary" name="md-star"></ion-icon>
-        <ion-label>Favourite</ion-label>
-      </ion-tab-button>
 
-      <ion-tab-button tab="/camera">
-        <ion-icon color="secondary" name="md-camera"></ion-icon>
-        <ion-label>New note</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="/profile">
-        <ion-icon color="secondary" name="md-person"></ion-icon>
-        <ion-label>Profile</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
 </ion-content>

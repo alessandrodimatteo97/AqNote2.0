@@ -10,26 +10,33 @@ import {ImageModalPage} from '../image-modal/image-modal.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  constructor(private menu: MenuController, private modalController: ModalController) { }
+  segment: string;
   sliderOpts = {
     zoom: false,
     slidesPerView: 1.5,
     spaceBetween: 20,
     centeredSlides: true
   };
+
+
   private activeTabName: string;
+
+  ionViewWillEnter() {
+    this.segment = 'first';
+  }
   segmentChanged(ev: any) {
-    console.log(ev['detail']['value']);
+    console.log(ev.target.value);
   }
   getSelectedTab(): void {
     console.log('this');
     // this.activeTabName = this.tabs.getSelected();
   }
-  constructor(private menu: MenuController, private modalController: ModalController) { }
   openPreview(img) {
     this.modalController.create({
       component: ImageModalPage,
       componentProps: {
-        img: img
+        img
       }
     }).then(modal => {
       modal.present();
