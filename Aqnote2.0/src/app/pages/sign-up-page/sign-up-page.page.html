@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="light" text-center>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto">
+          <div padding-horizontal text-center >
+            <img src="../../../assets/aqnote.png"/>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- Login form -->
+    <form [formGroup]="signUpFormModel" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success" position="floating">
+          <ion-icon name="contact" item-start></ion-icon>name</ion-label>
+        <ion-input color="secondary" type="email" formControlName="name"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('name').touched && signUpFormModel.get('name').invalid">
+        <ion-text color="danger">name</ion-text>
+      </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success"position="floating">
+          <ion-icon name="contact" item-start></ion-icon>surname</ion-label>
+        <ion-input color="secondary" type="email" formControlName="surname"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('surname').touched && signUpFormModel.get('surname').invalid">
+        <ion-text color="danger">Username</ion-text>
+      </p><ion-item no-padding class="animated fadeInUp">
+      <ion-label color="success"position="floating">
+        <ion-icon name="contact" item-start></ion-icon>email</ion-label>
+      <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+    </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('email').touched && signUpFormModel.get('email').invalid">
+        <ion-text color="danger">Username required</ion-text>
+      </p><ion-item no-padding class="animated fadeInUp">
+      <ion-label color="success"position="floating">
+        <ion-icon name="contact" item-start></ion-icon>matricola</ion-label>
+      <ion-input color="secondary" type="email" formControlName="cdl"></ion-input>
+    </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('cdl').touched && signUpFormModel.get('cdl').invalid">
+        <ion-text color="danger">Username required</ion-text>
+      </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success"position="floating">
+          <ion-icon name="lock" item-start></ion-icon>password</ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('password').touched && signUpFormModel.get('password').invalid">
+        <ion-text color="danger">Password required</ion-text>
+      </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success"position="floating">
+          <ion-icon name="lock" item-start></ion-icon> Repeat password</ion-label>
+        <ion-input color="secondary" type="password" formControlName="repeatPassword"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('repeatPassword').touched && signUpFormModel.get('repeatPassword').invalid">
+        <ion-text color="danger">Password required</ion-text>
+      </p>
+      <div margin-top="10px">
+        <ion-button icon-left size="medium" expand="full" expand="block" color="primary" (click)="onSignUp()" [disabled]="!signUpFormModel.valid" tappable>
+          <ion-icon name="log-in">  </ion-icon>
+          Sign up
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
