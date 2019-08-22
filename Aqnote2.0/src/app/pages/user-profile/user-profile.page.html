@@ -17,22 +17,22 @@
   <ion-toolbar>
 
 
-    <ion-segment color="primary" scrollable>
-      <ion-segment-button checked layout="icon-end">
+    <ion-segment  [(ngModel)]="segment" color="primary" scrollable>
+      <ion-segment-button value="data" checked layout="icon-end">
         <ion-label>Personal data</ion-label>
       </ion-segment-button>
-      <ion-segment-button layout="icon-end">
+      <ion-segment-button value="comments" layout="icon-end">
         <ion-label>My comments</ion-label>
       </ion-segment-button>
-      <ion-segment-button layout="icon-end">
+      <ion-segment-button value="notes" layout="icon-end">
         <ion-label>My notes</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
 
-  <!--  QUESTA SLIDE DEVE ANDARE SOTTO APPUNTI CARICATI
-
+<div [ngSwitch]="segment">
+  <div *ngSwitchCase="'notes'">
    <ion-list>
      <ion-item>
        <ion-label>
@@ -77,11 +77,13 @@
        </ion-label>
      </ion-item>
    </ion-list>
+</div>
+</div>
 
 
 
-    QUESTA SLIDE VA SOTTO DATI UTENTE
-
+<div [ngSwitch]="segment">
+  <div *ngSwitchCase="'data'">
   <form  #form="ngForm" (ngSubmit)="register(form)">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
@@ -115,11 +117,13 @@
             <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Modify </ion-button>
     </ion-grid>
   </form>
+</div>
+</div>
 
-  CHIUSURA -->
 
   <!-- QUESTA VA SOTTO I COMMENTI POSTATI -->
-
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'comments'">
   <ion-list>
     <ion-list-header>
       I tuoi commenti
@@ -239,6 +243,8 @@
     </ion-item>
 
   </ion-list>
+    </div>
+  </div>
 
 
 

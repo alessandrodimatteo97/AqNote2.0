@@ -4,5 +4,5 @@ export class Subject {
     id: number;
     nameS: string;
     year: number;
-    degreeCourse: DegreeCourse;
+   // degreeCourse: DegreeCourse;
 }

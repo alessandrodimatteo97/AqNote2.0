@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
   { path: 'user-profile', loadChildren: './pages/user-profile/user-profile.module#UserProfilePageModule' },
   { path: 'note-detail', loadChildren: './pages/note-detail/note-detail.module#NoteDetailPageModule' },
-  { path: 'list-notes', loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule' },
+ // { path: 'list-notes', loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule' },
   { path: 'upload-note', loadChildren: './pages/upload-note/upload-note.module#UploadNotePageModule' },
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
 ];

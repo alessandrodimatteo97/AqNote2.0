@@ -19,7 +19,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    TabsPageModule,
+
     RouterModule.forChild(routes)
   ],
   declarations: [NoteDetailPage]

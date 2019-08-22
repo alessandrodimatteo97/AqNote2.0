@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {URL} from '../constants';
 import {Subject} from '../model/Subject.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,4 +18,9 @@ export class SubjectService {
 
 
   }
+
+  listHome(): Observable<any[]> {
+    const subjectUrl = `${URL.HOME}`;
+    return this.http.get<any[]>(subjectUrl);
+}
 }

@@ -16,7 +16,8 @@ const routes: Routes = [
             loadChildren: '../favourites/favourites.module#FavouritesPageModule'
           }
         ]
-      },{
+      },
+      {
         path: 'home',
         children: [
           {
@@ -24,12 +25,26 @@ const routes: Routes = [
             loadChildren: '../home/home.module#HomePageModule'
           },
           {
-            path: '',
-            redirectTo: '/list-notes',
-            pathMatch: 'full'
-          }
+            path: 'list-notes',
+            children: [
+              {
+                path: '',
+                loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule'
+              }
         ]
       },
+          {
+            path: 'note-detail',
+            children: [
+              {
+                path: '',
+                loadChildren: './pages/note-detail/note-detail.module#NoteDetailPageModule'
+              }
+            ]
+          }
+      ]
+      }
+      ,
       {
         path: 'upload-note',
         children: [
