@@ -10,7 +10,7 @@ export interface Account {
   name: string;
   surname: string;
   email: string;
-  matriculation: string;
+  cdl: string;
   password: string;
   repeatPassword: string;
 }
@@ -64,11 +64,17 @@ export class UserService {
         .set('name', account.name)
         .set('surname', account.surname)
         .set('mail', account.email)
-        .set('matriculationNumber', account.matriculation)
+        .set('cdl', account.cdl)
         .set('password', account.password)
         .set('repeatPassword', account.repeatPassword);
-
-    const signUpUrl = `${URL.SIGNUP}/?${params}`;
+      console.log(params.get('name'));
+      console.log(params.get('surname'));
+      console.log(params.get('mail'));
+      console.log(params.get('password'));
+      console.log(params.get('mail'));
+      console.log(params.get('repeatPassword'));
+      console.log(params.get('cdl'));
+      const signUpUrl = `${URL.SIGNUP}/?${params}`;
     return this.http.post<User>(URL.SIGNUP, account, {observe: 'response'}).pipe(
       map((resp: HttpResponse<User>) => {
         console.log(resp);

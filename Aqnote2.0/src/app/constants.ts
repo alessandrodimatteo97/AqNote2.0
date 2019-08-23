@@ -1,4 +1,4 @@
-export const USE_PROXY = false;
+export const USE_PROXY = true;
 
 export const URL_BASE = USE_PROXY ? '/api' : 'http://127.0.0.1:12345/api';
 
