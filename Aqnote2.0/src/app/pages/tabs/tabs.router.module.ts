@@ -29,7 +29,7 @@ const routes: Routes = [
             children: [
               {
                 path: '',
-                loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule'
+                loadChildren: '../list-notes/list-notes.module#ListNotesPageModule'
               }
         ]
       },
@@ -38,7 +38,7 @@ const routes: Routes = [
             children: [
               {
                 path: '',
-                loadChildren: './pages/note-detail/note-detail.module#NoteDetailPageModule'
+                loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
               }
             ]
           }

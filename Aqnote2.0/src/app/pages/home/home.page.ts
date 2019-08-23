@@ -15,7 +15,8 @@ import {Observable} from 'rxjs';
 export class HomePage implements OnInit{
   private subject$: Observable<any>;
 
-  constructor(private menu: MenuController, private modalController: ModalController, private subjectService: SubjectService) { }
+  constructor(private menu: MenuController, private modalController: ModalController, private subjectService: SubjectService) {
+  }
   segment: string;
   sliderOpts = {
     zoom: false,
