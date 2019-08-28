@@ -5,6 +5,9 @@ import {AlertController} from '@ionic/angular';
 import {Account} from '../../services/user.service';
 import {UserService} from '../../services/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {CdlService} from '../../services/cdl.service';
+import {Observable} from 'rxjs';
+import {DegreeCourse} from '../../model/DegreeCourse.model';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -12,7 +15,7 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./sign-up-page.page.scss'],
 })
 export class SignUpPagePage implements OnInit {
-
+  private cdl$: Observable<DegreeCourse[]>;
   private signUpFormModel: FormGroup;
 
 
@@ -20,11 +23,15 @@ export class SignUpPagePage implements OnInit {
       private formBuilder: FormBuilder,
       private alertController: AlertController,
       private router: Router,
-      private userService: UserService
+      private userService: UserService,
+      private cdlService: CdlService
       ) {
   }
 
   ngOnInit() {
+    // this.cdlService.list().subscribe(p => console.log(p));
+    this.cdl$ = this.cdlService.list();
+
     this.signUpFormModel = new FormGroup({
       name: new FormControl(''), // da aggiungere
       surname: new FormControl(''),
@@ -35,7 +42,10 @@ export class SignUpPagePage implements OnInit {
     });
 
   }
-
+  onDCChange() {
+    // let cdl = this.signUpFormModel.get('cdl').value;
+    console.log(this.signUpFormModel.get('cdl').value);
+  }
   onSignUp() {
     const account: Account = this.signUpFormModel.value;
     this.userService.signUp(account).subscribe(() => {

@@ -19,19 +19,175 @@
 
     <ion-segment  [(ngModel)]="segment" color="primary" scrollable>
       <ion-segment-button value="data" checked layout="icon-end">
-        <ion-label>Personal data</ion-label>
+        <ion-label class="text">Personal data</ion-label>
       </ion-segment-button>
       <ion-segment-button value="comments" layout="icon-end">
-        <ion-label>My comments</ion-label>
+        <ion-label class="text">My comments</ion-label>
       </ion-segment-button>
       <ion-segment-button value="notes" layout="icon-end">
-        <ion-label>My notes</ion-label>
+        <ion-label class="text">My notes</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
 
 <div [ngSwitch]="segment">
+  <div *ngSwitchCase="'data'">
+    <form  #form="ngForm" (ngSubmit)="register(form)">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-item>
+              <ion-input  name="name" type="text" placeholder="Name" ngModel ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="your@email.com" ngModel ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-item>
+              <ion-input name="password" type="password" placeholder="Password" ngModel ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-item>
+              <ion-input name="confirm" type="password" placeholder="Password again" ngModel ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Modify </ion-button>
+      </ion-grid>
+    </form>
+  </div>
+  <div *ngSwitchCase="'comments'">
+    <ion-list>
+      <ion-list-header>
+        I tuoi commenti
+      </ion-list-header>
+
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+        </ion-avatar>
+        <ion-grid>
+          <ion-row >
+            <ion-col>
+              <h3>Marco Rossi</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <h5>Titolo del mio commento</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <p class="comment">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Beatae iusto omnis ratione similique.
+                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
+                recusandae reiciendis suscipit vero voluptates. Nobis.
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+        </ion-avatar>
+        <ion-grid>
+          <ion-row >
+            <ion-col>
+              <h3>Marco Rossi</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <h5>Titolo del mio commento</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <p class="comment">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Beatae iusto omnis ratione similique.
+                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
+                recusandae reiciendis suscipit vero voluptates. Nobis.
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+        </ion-avatar>
+        <ion-grid>
+          <ion-row >
+            <ion-col>
+              <h3>Marco Rossi</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <h5>Titolo del mio commento</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <p class="comment">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Beatae iusto omnis ratione similique.
+                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
+                recusandae reiciendis suscipit vero voluptates. Nobis.
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+        </ion-avatar>
+        <ion-grid>
+          <ion-row >
+            <ion-col>
+              <h3>Marco Rossi</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <h5>Titolo del mio commento</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row class="modified-row">
+            <ion-col>
+              <p class="comment">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Beatae iusto omnis ratione similique.
+                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
+                recusandae reiciendis suscipit vero voluptates. Nobis.
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+    </ion-list>
+  </div>
   <div *ngSwitchCase="'notes'">
    <ion-list>
      <ion-item>
@@ -78,173 +234,9 @@
      </ion-item>
    </ion-list>
 </div>
+
+
 </div>
-
-
-
-<div [ngSwitch]="segment">
-  <div *ngSwitchCase="'data'">
-  <form  #form="ngForm" (ngSubmit)="register(form)">
-    <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input  name="name" type="text" placeholder="Name" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input name="email" type="email" placeholder="your@email.com" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input name="password" type="password" placeholder="Password" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input name="confirm" type="password" placeholder="Password again" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Modify </ion-button>
-    </ion-grid>
-  </form>
-</div>
-</div>
-
-
-  <!-- QUESTA VA SOTTO I COMMENTI POSTATI -->
-  <div [ngSwitch]="segment">
-    <div *ngSwitchCase="'comments'">
-  <ion-list>
-    <ion-list-header>
-      I tuoi commenti
-    </ion-list-header>
-
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-      </ion-avatar>
-      <ion-grid>
-        <ion-row >
-          <ion-col>
-            <h3>Marco Rossi</h3>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <h5>Titolo del mio commento</h5>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <p class="comment">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Beatae iusto omnis ratione similique.
-              Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-              recusandae reiciendis suscipit vero voluptates. Nobis.
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-      </ion-avatar>
-      <ion-grid>
-        <ion-row >
-          <ion-col>
-            <h3>Marco Rossi</h3>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <h5>Titolo del mio commento</h5>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <p class="comment">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Beatae iusto omnis ratione similique.
-              Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-              recusandae reiciendis suscipit vero voluptates. Nobis.
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-      </ion-avatar>
-      <ion-grid>
-        <ion-row >
-          <ion-col>
-            <h3>Marco Rossi</h3>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <h5>Titolo del mio commento</h5>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <p class="comment">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Beatae iusto omnis ratione similique.
-              Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-              recusandae reiciendis suscipit vero voluptates. Nobis.
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-      </ion-avatar>
-      <ion-grid>
-        <ion-row >
-          <ion-col>
-            <h3>Marco Rossi</h3>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <h5>Titolo del mio commento</h5>
-          </ion-col>
-        </ion-row>
-        <ion-row class="modified-row">
-          <ion-col>
-            <p class="comment">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Beatae iusto omnis ratione similique.
-              Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-              recusandae reiciendis suscipit vero voluptates. Nobis.
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-
-  </ion-list>
-    </div>
-  </div>
 
 
 

@@ -11,8 +11,8 @@ export class CdlService {
 
   constructor(private http: HttpClient) { }
 
-  list(idDepartment): Observable<DegreeCourse[]> {
-    const cdlUrl = `${URL.CDL}/${idDepartment}/`;
+  list(): Observable<DegreeCourse[]> {
+    const cdlUrl = `${URL.CDL}/`;
 
     return this.http.get<DegreeCourse[]>(cdlUrl);
 };

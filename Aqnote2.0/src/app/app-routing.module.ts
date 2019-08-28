@@ -11,6 +11,9 @@ const routes: Routes = [
  { path: 'list-notes', loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule' },
   { path: 'upload-note', loadChildren: './pages/upload-note/upload-note.module#UploadNotePageModule' },
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+    {path: 'sign-up-page', loadChildren: './pages/sign-up-page/sign-up-page.module#SignUpPagePageModule'},
+    {path: 'sign-in', loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'}
+
 ];
 
 @NgModule({

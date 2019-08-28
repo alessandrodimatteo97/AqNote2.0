@@ -12,7 +12,9 @@ export const URL = {
     PROFILE: URL_BASE + '/profile',
     UPDATE: URL_BASE + '/update',
     SENDPHOTO: URL_BASE + '/8/notes/upload',
-    HOME: URL_BASE + '/homepage/informatica'
+    HOME: URL_BASE + '/homepage/informatica',
+    NOTE_DETAIL: URL_BASE + '/download'
+
 };
 
 export const X_AUTH = 'Authorization';
