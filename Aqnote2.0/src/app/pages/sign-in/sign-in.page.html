@@ -9,9 +9,15 @@
   <div class="auth-content">
 
     <!-- Logo -->
-    <div padding-horizontal text-center class="animated fadeInDown">
-      <div class="logo"></div>
-    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto">
+          <div padding-horizontal text-center >
+            <img src="../../../assets/aqnote.png"/>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <!-- Login form -->
     <form [formGroup]="loginFormModel" class="list-form">
@@ -52,22 +58,18 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item color="success">
+            <ion-label> Skip to DegreeCourse page</ion-label>
+            <ion-select (ionChange)="onDCSelect($event)">
+              <ion-select-option value="{{c.idDC}}" *ngFor="let c of cdl$ | async">{{c.nameDC}}</ion-select-option>
+            </ion-select>S
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-<ion-grid>
-  <ion-row>
-    <ion-col size="12">
-      <ion-item color="danger">
-        <ion-label> Salta ai Corsi di Laurea senza loggarti</ion-label>
-        <ion-select interface="popover">
-          <ion-select-option value="nes">informatica</ion-select-option>
-          <ion-select-option value="n64">matematica</ion-select-option>
-          <ion-select-option value="ps">ingegneria</ion-select-option>
-          <ion-select-option value="genesis">quello che è</ion-select-option>
-          <ion-select-option value="saturn">bella pe te</ion-select-option>
-          <ion-select-option value="snes">minchia</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-</ion-grid>
 </ion-content>

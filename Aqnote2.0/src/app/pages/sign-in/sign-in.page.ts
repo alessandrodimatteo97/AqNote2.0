@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import {LoginAccount, UserService} from '../../services/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
+import {Observable} from 'rxjs';
+import {DegreeCourse} from '../../model/DegreeCourse.model';
+import {CdlService} from "../../services/cdl.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -13,6 +16,7 @@ import {Storage} from '@ionic/storage';
 })
 export class SignInPage implements OnInit {
   private loginFormModel: FormGroup;
+  private cdl$: Observable<DegreeCourse[]>;
 
 
 
@@ -22,10 +26,14 @@ export class SignInPage implements OnInit {
               private userService: UserService,
               private storage: Storage,
               private navController: NavController,
+              private cdlService: CdlService
+
   ) {
   }
 
   ngOnInit() {
+    this.cdl$ = this.cdlService.list();
+
     this.loginFormModel = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
@@ -61,6 +69,10 @@ export class SignInPage implements OnInit {
     );
 
 
+  }
+  onDCSelect($event) {
+    // let cdl = this.signUpFormModel.get('cdl').value;
+    console.log($event.target.value);
   }
 
   onSignUp() {

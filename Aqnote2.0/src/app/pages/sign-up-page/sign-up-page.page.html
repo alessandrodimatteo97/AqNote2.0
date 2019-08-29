@@ -42,11 +42,19 @@
     </ion-item>
       <p ion-text class="text08" *ngIf="signUpFormModel.get('email').touched && signUpFormModel.get('email').invalid">
         <ion-text color="danger">Username required</ion-text>
-      </p><ion-item no-padding class="animated fadeInUp">
+      </p>
+     <!-- <ion-item no-padding class="animated fadeInUp">
       <ion-label color="success"position="floating">
         <ion-icon name="contact" item-start></ion-icon>matricola</ion-label>
       <ion-input color="secondary" type="email" formControlName="cdl"></ion-input>
-    </ion-item>
+    </ion-item> -->
+      <ion-item no-padding>
+        <ion-label color="success" position="floating">
+        <ion-icon name="contact" item-start></ion-icon>Select CdL</ion-label>
+        <ion-select (ionChange)="onDCChange()" formControlName="cdl" value="cdl" okText="Avanti" cancelText="Indietro">
+          <ion-select-option value="{{c.nameDC}}" *ngFor="let c of cdl$ | async">{{c.nameDC}}</ion-select-option>
+        </ion-select>
+      </ion-item>
       <p ion-text class="text08" *ngIf="signUpFormModel.get('cdl').touched && signUpFormModel.get('cdl').invalid">
         <ion-text color="danger">Username required</ion-text>
       </p>

@@ -11,6 +11,9 @@ export class UserProfilePage implements OnInit {
   }
   segment: string;
 
+  ionViewWillEnter() {
+    this.segment = 'data';
+  }
   ngOnInit() {
   }
 

@@ -14,7 +14,9 @@ export const URL = {
     SENDPHOTO: URL_BASE + '/8/notes/upload',
     HOME: URL_BASE + '/homepage/informatica',
     FAVOURITE: URL_BASE + '/favourites',
-    NAMESFAVOURITES: URL_BASE + '/nameSFavourites'
+    NAMESFAVOURITES: URL_BASE + '/nameSFavourites',
+    NOTE_DETAIL: URL_BASE + '/download'
+
 };
 
 export const X_AUTH = 'Authorization';

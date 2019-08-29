@@ -27,6 +27,8 @@ export class HomePage implements OnInit{
 
      this.subject$ = this.subjectService.listHome();
       }
+    // this.subjectService.listHome().subscribe
+
 
 
 
