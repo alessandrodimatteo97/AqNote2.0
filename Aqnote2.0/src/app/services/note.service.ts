@@ -20,7 +20,8 @@ export class NoteService {
 
   showNote(): Observable<Note[]> {
     const note = `${URL.NOTE_DETAIL}/`;
-    return this.http.get<Note[]>(note);
+    const ciao =  this.http.get<Note[]>(note);
+    return ciao;
   }
   //  const note = `${URL.NOTE_DETAIL}/`;
     // const ciao = this.http.get<ImageData>(note);return ciao;

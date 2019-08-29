@@ -10,17 +10,14 @@
   <ion-slides >
 
 
-      <ion-slide *ngFor="let c of note$ | async">
-          <div class="slider-box">
-              <ion-card>
-                  <ion-card-header>
-                      <ion-card-content>
-                          <p>{{c.photos}}</p>
-                          <img src='data:image/png;base64,"{{c.photos}}"' alt="succhia" tappable (click)="openPreview(img)">
-                      </ion-card-content>
-                  </ion-card-header>
-              </ion-card>
-          </div>
+      <ion-slide>
+          <img [src]="base64Image" />
+      </ion-slide>
+      <ion-slide>
+          <img [src]="base64Image" />
+      </ion-slide>
+      <ion-slide>
+          <img [src]="base64Image" />
       </ion-slide>
 
       <ion-slide >
