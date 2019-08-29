@@ -1,20 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {MenuController, ModalController} from '@ionic/angular';
-import {ImageModalPage} from '../image-modal/image-modal.page';
-import {SubjectService} from '../../services/subject.service';
-import {Subject} from '../../model/Subject.model';
+import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
+import {Subject} from '../model/Subject.model';
+import {MenuController, ModalController} from '@ionic/angular';
+import {SubjectService} from '../services/subject.service';
+import {ImageModalPage} from '../pages/image-modal/image-modal.page';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-prova-home',
+  templateUrl: './prova-home.page.html',
+  styleUrls: ['./prova-home.page.scss'],
 })
-export class HomePage implements OnInit{
-  private subject$: Observable<Subject[]>;
+export class ProvaHomePage implements OnInit {
 
   constructor(private menu: MenuController, private modalController: ModalController, private subjectService: SubjectService) {
   }
+  private subject$: Observable<Subject[]>;
   segment: string;
   sliderOpts = {
     zoom: false,
@@ -23,17 +23,17 @@ export class HomePage implements OnInit{
     centeredSlides: true
   };
 
-  ngOnInit() {
-
-     this.subject$ = this.subjectService.listHome();
-      }
-
 
 
   private activeTabName: string;
 
+  ngOnInit() {
+
+    this.subject$ = this.subjectService.listHome();
+  }
+
   ionViewWillEnter() {
-    this.segment = 'first';
+    this.segment = '1';
   }
   segmentChanged(ev: any) {
     console.log(ev.target.value);
@@ -53,8 +53,8 @@ export class HomePage implements OnInit{
     });
   }
   openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+    this.menu.enable(true, '1');
+    this.menu.open('1');
   }
 
   openEnd() {
@@ -68,5 +68,3 @@ export class HomePage implements OnInit{
 
 
 }
-
-

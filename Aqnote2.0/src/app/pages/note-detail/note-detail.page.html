@@ -6,77 +6,9 @@
 
 <ion-content>
 
-  <ion-slides >
-    <ion-slide>
-      <div class="slider-box">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-content>
-              <img src="assets/dametterenelprogetto.jpg" tappable (click)="openPreview(img)">
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-content>
-              <img src="assets/dametterenelprogetto.jpg" tappable (click)="openPreview(img)">
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div >
-        <ion-card>
-          <ion-card-header>
-            <ion-card-content>
-              <img src="assets/dametterenelprogetto.jpg" tappable (click)="openPreview(img)">
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div >
-        <ion-card>
-          <ion-card-header>
-            <ion-card-content>
-              <img src="assets/dametterenelprogetto.jpg" tappable (click)="openPreview(img)">
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div >
-        <ion-card>
-          <ion-card-header>
-            <ion-card-content>
-              <img src="assets/dametterenelprogetto.jpg" tappable (click)="openPreview(img)">
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div >
-        <ion-card>
-          <ion-card-header>
-            <ion-card-content>
-              <img src="assets/dametterenelprogetto.jpg" tappable (click)="openPreview(img)">
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </div>
+  <ion-slides [options]="sliderOpts">
+    <ion-slide *ngFor="let img of ['dametterenelprogetto','dametterenelprogetto','dametterenelprogetto','dametterenelprogetto','dametterenelprogetto','dametterenelprogetto']">
+      <img src="assets/{{ img }}.png" tappable (click)="openPreview(img)" >
     </ion-slide>
   </ion-slides>
 

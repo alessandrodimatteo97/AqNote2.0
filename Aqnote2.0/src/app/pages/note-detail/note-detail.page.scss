@@ -39,10 +39,6 @@ ion-col {
   margin-bottom: 4px;
 }
 
-ion-slide {
-  max-width: 40%;
-}
-
 ion-card {
   margin-left: 0px;
   margin-right: 0px;
@@ -57,13 +53,15 @@ ion-card-content {
   padding-left: 0px;
 }
 
-ion-slide {
-  margin-right: 0px;
-  margin-left: 0px;
-  padding-right: 0px;
-  padding-left: 0px;
-}
+ion-slides {
+  margin-top: 30%;
+  background: #e6e6e6;
 
+  img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
 .comment-header {
   font-size: 20px;
 }

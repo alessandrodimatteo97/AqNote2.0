@@ -19,8 +19,14 @@ export class SubjectService {
 
   }
 
-  listHome(): Observable<any[]> {
+
+  listHome(): Observable<Subject[]> {
     const subjectUrl = `${URL.HOME}`;
-    return this.http.get<any[]>(subjectUrl);
+    return this.http.get<Subject[]>(subjectUrl);
 }
+
+  listFavourite(): Observable<Subject[]>{
+    const favouriteUrl = `${URL.FAVOURITE}`;
+    return this.http.get<Subject[]>(favouriteUrl);
+  }
 }

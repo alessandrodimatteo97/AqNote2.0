@@ -12,14 +12,15 @@
 
   <ion-router-outlet main></ion-router-outlet>
 
-<h3>Web Engineering</h3>
+    <div *ngFor="let s of (d$ | async) | keyvalue">
+    <h3 >{{s.key}}</h3>
   <ion-card class="cards">
 
 
 
-          <ion-item [routerLink]="['/tabs/home/note-detail']">
+          <ion-item *ngFor='let obj of s.value'   [routerLink]="['/tabs/home/note-detail']">
             <ion-label>
-              <h1>Zia Pinetta</h1>
+              <h1> {{ obj.title }}</h1>
               <p>Numero di pagine 19</p>
               <p>Numero di commenti 127</p>
               <p>
@@ -33,206 +34,9 @@
           </ion-item>
 
 
-          <ion-item >
-            <ion-label>
-              <h1>Alessandro di matteo</h1>
-              <p>Numero di pagine 19 <span>bella per te</span></p>
-              <p>Numero di commenti 127</p>
 
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Davide Fontana</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
 
   </ion-card>
-<h3>Applicazioni per dispositivi mobili</h3>
-  <ion-card class="cards">
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Zia Pinetta</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Alessandro di matteo</h1>
-              <p>Numero di pagine 19 <span>bella per te</span></p>
-              <p>Numero di commenti 127</p>
-
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Davide Fontana</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-  </ion-card>
-<h3>Applicazioni per dispositivi mobili</h3>
-  <ion-card class="cards">
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Zia Pinetta</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Alessandro di matteo</h1>
-              <p>Numero di pagine 19 <span>bella per te</span></p>
-              <p>Numero di commenti 127</p>
-
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Davide Fontana</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-  </ion-card>
-<h3>Applicazioni per dispositivi mobili</h3>
-  <ion-card class="cards">
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Zia Pinetta</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Alessandro di matteo</h1>
-              <p>Numero di pagine 19 <span>bella per te</span></p>
-              <p>Numero di commenti 127</p>
-
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-
-
-          <ion-item >
-            <ion-label>
-              <h1>Davide Fontana</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
-              <p>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-label>
-          </ion-item>
-
-  </ion-card>
-
-  <br><br>  <br><br>
-
+    </div>
 
 </ion-content>
