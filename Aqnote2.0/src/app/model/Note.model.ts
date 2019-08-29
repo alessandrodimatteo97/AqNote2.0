@@ -6,5 +6,5 @@ export class Note {
     description: string;
     user: User;
     subject: Subject;
-    photos: ImageData;
+    photos: string;
 }

@@ -13,7 +13,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./note-detail.page.scss'],
 })
 export class NoteDetailPage implements OnInit {
-  private note$: Observable<Note>;
+  private note$: Observable<Note[]>;
 
   constructor(private modalController: ModalController,
               private noteService: NoteService) { }
@@ -29,10 +29,7 @@ export class NoteDetailPage implements OnInit {
   }
   ngOnInit() {
      this.note$ = this.noteService.showNote();
-     console.log(this.note$);
   }
-   // this.noteService.list(1);
-    // this.noteService.showNote();
 
 
 }

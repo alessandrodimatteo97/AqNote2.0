@@ -14,7 +14,8 @@
               <ion-card>
                   <ion-card-header>
                       <ion-card-content>
-                          <img src="{{c.photos}}" tappable (click)="openPreview(img)">
+                          <p>{{c.photos}}</p>
+                          <img src='data:image/png;base64,"{{c.photos}}"' alt="succhia" tappable (click)="openPreview(img)">
                       </ion-card-content>
                   </ion-card-header>
               </ion-card>

@@ -27,14 +27,8 @@ export class HomePage implements OnInit{
 
   ngOnInit() {
 
-     this.subjectService.listHome().subscribe((c ) => {
-        console.log(c);
-       console.log(c[1]);
-      console.log(c[2]);
-
-      });
-
-      }
+    // this.subjectService.listHome().subscribe
+  }
 
 
 
