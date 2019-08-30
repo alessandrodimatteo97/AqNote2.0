@@ -30,7 +30,7 @@ export class NoteDetailPage implements OnInit {
     });
   }
   ngOnInit() {
-    let imageUrl = 'http://localhost:12345/';
+    let imageUrl = 'http://localhost:12345/api/download';
 
     this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
       console.log(base64data);
@@ -54,16 +54,19 @@ export class NoteDetailPage implements OnInit {
       img.crossOrigin = 'Anonymous';
       img.src = url;  img.src = url;
       if (!img.complete) {
-        img.onload = () => {
+          console.log('sei tu?0');
+          img.onload = () => {
           observer.next(this.getBase64Image(img));
           observer.complete();
         };
-        img.onerror = (err) => {
-          observer.error(err);
-        };
+          img.onerror = (err) => {
+              console.log('sei tu?1');
+              observer.error(err);
+          };
       } else {
-        observer.next(this.getBase64Image(img));
-        observer.complete();
+          console.log('sei tu?2');
+          observer.next(this.getBase64Image(img));
+          observer.complete();
       }
     });
   }

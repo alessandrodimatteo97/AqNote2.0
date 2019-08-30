@@ -5,5 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <img [src]="transform()">
+  <div *ngFor="let c of ciao | keyvalue ">
+  <img [src]="transform(c.value)">
+  </div>
 </ion-content>
