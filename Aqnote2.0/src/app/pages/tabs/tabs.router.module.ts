@@ -25,7 +25,7 @@ const routes: Routes = [
             loadChildren: '../home/home.module#HomePageModule'
           },
           {
-            path: 'list-notes',
+            path: 'list-notes/:id',
             children: [
               {
                 path: '',
