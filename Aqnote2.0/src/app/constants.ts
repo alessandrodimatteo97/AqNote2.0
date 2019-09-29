@@ -1,6 +1,7 @@
-export const USE_PROXY = false;
+export const USE_PROXY = true;
 
-export const URL_BASE = USE_PROXY ? '/api' : 'http://127.0.0.1:12345/api';
+export const URL_BASE = USE_PROXY ? '/api' : 'http://192.168.1.100' +
+    ':12345/api';
 
 export const URL = {
     DEPARTMENTS: URL_BASE + '/department',

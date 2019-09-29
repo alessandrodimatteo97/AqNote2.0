@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'prova-home', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
     {path: 'sign-up-page', loadChildren: './pages/sign-up-page/sign-up-page.module#SignUpPagePageModule'},
     {path: 'sign-in', loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'},
-  { path: 'base64-encode', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' }
+  { path: 'base64-encode', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' },
+  { path: 'upload-photo', loadChildren: './pages/upload-photo/upload-photo.module#UploadPhotoPageModule' }
 
 ];
 

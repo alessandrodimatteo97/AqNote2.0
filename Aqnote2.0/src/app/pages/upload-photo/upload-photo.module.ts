@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UploadNotePage } from './upload-note.page';
+import { UploadPhotoPage } from './upload-photo.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: UploadNotePage
+    component: UploadPhotoPage
   }
 ];
 
@@ -18,10 +18,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [UploadNotePage]
+  declarations: [UploadPhotoPage]
 })
-export class UploadNotePageModule {}
+export class UploadPhotoPageModule {}

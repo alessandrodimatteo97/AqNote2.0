@@ -7,87 +7,37 @@
 </ion-header>
 
 <ion-content>
+  <br/>
   <h2>let's speak about your note</h2>
-<ion-card>
-  <form  #form="ngForm" (ngSubmit)="register(form)">
-    <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input  name="title" type="text" placeholder="title" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input name="description" type="email" placeholder="description" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-select name="subject" type="text" placeholder="subject" ngModel >
-              <ion-select-option>value1</ion-select-option>
-              <ion-select-option>value2</ion-select-option>
-              <ion-select-option>value3</ion-select-option>
-              <ion-select-option>value4</ion-select-option>
+  <br/>
 
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+  <form [formGroup]="signUpFormModel">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-card>
-      <ion-slides [options]="sliderOpts">
-        <ion-slide class="slide">
-          <ion-item-sliding class="item-slider" id="item100">
-            <ion-item>
-              <img src="../../assets/img/20171107_184127.jpg">
-            </ion-item>
-          </ion-item-sliding>
-        </ion-slide>
-
-        <ion-slide>
-          <ion-item-sliding class="item-slider" id="item100">
-            <ion-item >
-              <img src="../../../../../20180405_111106.jpg">
-            </ion-item>
-          </ion-item-sliding>
-        </ion-slide>
-
-        <ion-slide>
-          <ion-item-sliding class="item-slider" id="item100">
-            <ion-item >
-              <img src="../../../../../20180405_111106.jpg">
-            </ion-item>
-          </ion-item-sliding>
-        </ion-slide>
-      </ion-slides>
+      <ion-item>
+        <ion-label position="stacked">Title <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="title" ></ion-input>
+      </ion-item>
       </ion-card>
-      <ion-row>
-        <ion-col>
-          <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">send</ion-button>
-        </ion-col>
-        <ion-col class="photo">
-          <ion-fab>
-            <ion-fab-button hover="secondary"  ><ion-icon size="large" name="camera"></ion-icon></ion-fab-button>
-          </ion-fab>
 
-        </ion-col>
-      </ion-row>
+      <ion-card>
+        <ion-item>
+          <ion-label position="stacked">Description</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+      </ion-card>
+      <ion-card>
+      <ion-select [interfaceOptions]="customAlertOptions" interface="alert" multiple="true" placeholder="Select One Subject">
+        <ion-select-option value="bacon">algoritmi</ion-select-option>
+        <ion-select-option value="olives">Architettura degli elaboratori</ion-select-option>
 
-
-
-    </ion-grid>
+      </ion-select>
+      </ion-card>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin" (click)="processForm()">Insert note</ion-button>
+    </div>
   </form>
-</ion-card>
-  <!-- CHIUSURA -->
-  <!-- QUESTA VA SOTTO I COMMENTI POSTATI -->
-
-
-
-  <!-- CHIUSURA -->
 
 
 
