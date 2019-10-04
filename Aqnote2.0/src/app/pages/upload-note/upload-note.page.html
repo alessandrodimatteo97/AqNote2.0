@@ -1,94 +1,50 @@
 <ion-header>
-  <ion-toolbar  class="toolbar">
-    <ion-title>
-     Upload-Note
-    </ion-title>
+  <ion-toolbar>
+    <ion-title>let's speak about your note</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h2>let's speak about your note</h2>
-<ion-card>
-  <form  #form="ngForm" (ngSubmit)="register(form)">
-    <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input  name="title" type="text" placeholder="title" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-input name="description" type="email" placeholder="description" ngModel ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-item>
-            <ion-select name="subject" type="text" placeholder="subject" ngModel >
-              <ion-select-option>value1</ion-select-option>
-              <ion-select-option>value2</ion-select-option>
-              <ion-select-option>value3</ion-select-option>
-              <ion-select-option>value4</ion-select-option>
-
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-card>
-      <ion-slides [options]="sliderOpts">
-        <ion-slide class="slide">
-          <ion-item-sliding class="item-slider" id="item100">
-            <ion-item>
-              <img src="../../assets/img/20171107_184127.jpg">
-            </ion-item>
-          </ion-item-sliding>
-        </ion-slide>
-
-        <ion-slide>
-          <ion-item-sliding class="item-slider" id="item100">
-            <ion-item >
-              <img src="../../../../../20180405_111106.jpg">
-            </ion-item>
-          </ion-item-sliding>
-        </ion-slide>
-
-        <ion-slide>
-          <ion-item-sliding class="item-slider" id="item100">
-            <ion-item >
-              <img src="../../../../../20180405_111106.jpg">
-            </ion-item>
-          </ion-item-sliding>
-        </ion-slide>
-      </ion-slides>
-      </ion-card>
-      <ion-row>
-        <ion-col>
-          <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">send</ion-button>
-        </ion-col>
-        <ion-col class="photo">
-          <ion-fab>
-            <ion-fab-button hover="secondary"  ><ion-icon size="large" name="camera"></ion-icon></ion-fab-button>
-          </ion-fab>
-
-        </ion-col>
-      </ion-row>
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
 
 
+    <form [formGroup]="signUpFormModel" class="list-form">
+      <ion-list>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success" position="floating">
+          Title
+        </ion-label>
+        <ion-input color="secondary" type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('title').touched && signUpFormModel.get('title').invalid">
+        <ion-text color="danger">Title</ion-text>
+      </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success"position="floating">
+         Description</ion-label>
 
-    </ion-grid>
-  </form>
-</ion-card>
-  <!-- CHIUSURA -->
-  <!-- QUESTA VA SOTTO I COMMENTI POSTATI -->
+        <ion-textarea color="secondary" type="text" formControlName="description"></ion-textarea>
+      </ion-item>
 
 
+        <ion-label color="success" position="floating">
+          Select Course
+        </ion-label>
 
-  <!-- CHIUSURA -->
+        <ion-select (ionChange)="onDCChange()" formControlName="subject_id" value="cdl" okText="Avanti" cancelText="Indietro" >
+          <div >
+          <ion-select-option value="{{s.id}}" *ngFor="let s of s$ | async" text-wrap="">{{s.nameS}}</ion-select-option>
+          </div>
+        </ion-select>
 
 
-
+      <div margin-top="10px">
+        <ion-button icon-left size="medium" expand="full" expand="block" color="primary" (click)="goOn()" [disabled]="!signUpFormModel.valid" tappable>
+          Go on
+        </ion-button>
+      </div>
+      </ion-list>
+    </form>
+  </div>
 </ion-content>

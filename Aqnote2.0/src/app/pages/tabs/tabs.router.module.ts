@@ -51,6 +51,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../upload-note/upload-note.module#UploadNotePageModule'
+          },
+          {
+            path: 'upload-photo',
+            children: [
+              {
+                path: '',
+                loadChildren: '../upload-photo/upload-photo.module#UploadPhotoPageModule'
+              }
+            ]
           }
         ]
       },

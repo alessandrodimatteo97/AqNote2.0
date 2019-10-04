@@ -33,13 +33,14 @@ export class PhotoService {
     const params = new HttpParams()
         .set('photo', 'assets/images/Logo.jpg');
 
-    const INVIOFOTO = `${URL.SENDPHOTO}/?${params}`;
+    const INVIOFOTO = `${URL.UPLOAD_PHOTO}/?${params}`;
     return this.http.get<Photo>(INVIOFOTO);
   }
 
   public uploadFormData(formData) {
     console.log(formData);
-    return this.http.post<any>(`${URL.SENDPHOTO}/`, formData);
+    return this.http.post<any>(`${URL.UPLOAD_PHOTO}/`, formData);
+
   }
 }
 export class Photo {

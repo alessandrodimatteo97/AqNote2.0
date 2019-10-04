@@ -21,10 +21,11 @@ export interface CommentToUpdate {
 })
 export class NoteService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private httpParams: HttpParams) { }
 
-  list(idSubject): Observable<Note[]> {
+  list(idSubject) {
     const noteslUrl = `${URL.NOTES}/${idSubject}/`;
+
     return this.http.get<Note[]>(noteslUrl);
   }
 
@@ -42,14 +43,19 @@ export class NoteService {
   //  const note = `${URL.NOTE_DETAIL}/`;
     // const ciao = this.http.get<ImageData>(note);return ciao;
   updateComment(comment: CommentToUpdate) {
-    const params = new HttpParams()
-        .set('comment', comment.comment)
-        .set('stars', comment.stars);
-    const url = `${URL.UPDATE_COMMENT}/`;
-    return this.http.post('http://10.170.19.61:12345/api/notes/33/comment', params, {observe: 'response'});
+      const params = new HttpParams()
+          .set('comment', comment.comment)
+          .set('stars', comment.stars);
+      const url = `${URL.UPDATE_COMMENT}/`;
+      return this.http.post('http://10.170.19.61:12345/api/notes/33/comment', params, {observe: 'response'});
+  }
 
-    // const loginUpUrl = `${URL.LOGIN}/?${params}`;
-    // la lista di noteDetail è in post e anche l'upload delle note
+  public uploadFormData(formData) {
+    const subjectUrl = `${URL.UPLOAD_NOTE}`;
+
+    return this.http.post(subjectUrl, formData);
   }
 }
+
+  // la lista di noteDetail è in post e anche l'upload delle note
 

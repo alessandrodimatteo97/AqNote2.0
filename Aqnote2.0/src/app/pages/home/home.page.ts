@@ -24,7 +24,7 @@ export class HomePage implements OnInit{
   };
 
   ngOnInit() {
-
+      this.segment = '1';
      this.subject$ = this.subjectService.listHome();
       }
     // this.subjectService.listHome().subscribe
@@ -35,7 +35,7 @@ export class HomePage implements OnInit{
   private activeTabName: string;
 
   ionViewWillEnter() {
-    this.segment = 'first';
+    this.segment = '1';
   }
   segmentChanged(ev: any) {
     console.log(ev.target.value);
