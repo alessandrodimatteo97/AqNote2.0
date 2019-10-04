@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let c of ciao | keyvalue ">
-  <img [src]="transform(c.value)">
+  <div *ngFor="let c of photo$ | async ">
+  <!--<img [src]="transform(c)">-->
+    <p>{{c}}</p>
   </div>
 </ion-content>

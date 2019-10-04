@@ -196,7 +196,7 @@
 
 
 
-  <ion-item >
+  <ion-item *ngFor="let note of notes">
     <ion-label>
       <h1>Davide Fontana</h1>
       <p>Numero di pagine 19</p>
@@ -210,6 +210,7 @@
       </p>
     </ion-label>
   </ion-item>
+
 
 </ion-card>
 </ion-content>

@@ -5,6 +5,4 @@ export class Note {
     title: string;
     description: string;
     user: User;
-    subject: Subject;
-    photos: string;
 }

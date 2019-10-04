@@ -112,3 +112,19 @@ ion-textarea {
 .white {
   background-color: white;
 }
+
+.comment-input {
+  border-width: 0px;
+  background-color: #F5F5F5;
+  margin-top: 10px;
+}
+
+input[type=text]:focus {
+  color: red;
+  border-width: 1px;
+  border-color: #0ec254;
+}
+
+.logged {
+  margin-bottom: 0px;
+}

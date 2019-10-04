@@ -33,7 +33,6 @@ export class SignInPage implements OnInit {
 
   ngOnInit() {
     this.cdl$ = this.cdlService.list();
-
     this.loginFormModel = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
