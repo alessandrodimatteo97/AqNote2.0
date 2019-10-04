@@ -7,7 +7,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {Observable} from 'rxjs';
 import {DegreeCourse} from '../../model/DegreeCourse.model';
-import {CdlService} from "../../services/cdl.service";
+import {CdlService} from '../../services/cdl.service';
 
 @Component({
   selector: 'app-sign-in',

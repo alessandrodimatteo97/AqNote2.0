@@ -4,7 +4,7 @@ import {Subject} from './Subject.model';
 export class Note {
     title: string;
     description: string;
-    user: User;
-    subject: Subject;
     photos: string;
+    subject_id: string;
+    user_id: string;
 }

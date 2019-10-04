@@ -3,5 +3,6 @@ export class User {
         name: string;
         surname: string;
         password: string;
-        matriculationNumber: number;
+        cdl_id: number;
+        idU: number;
 }

@@ -3,11 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Note} from '../model/Note.model';
 import {URL} from '../constants';
-import {DegreeCourse} from "../model/DegreeCourse.model";
+import {Subject} from '../model/Subject.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class NoteService {
 
   constructor(private http: HttpClient) { }
@@ -23,8 +25,12 @@ export class NoteService {
     const ciao =  this.http.get<Note[]>(note);
     return ciao;
   }
-  //  const note = `${URL.NOTE_DETAIL}/`;
-    // const ciao = this.http.get<ImageData>(note);return ciao;
+
+  public uploadFormData(formData) {
+    const subjectUrl = `${URL.UPLOAD_NOTE}`;
+
+    return this.http.post(subjectUrl, formData);
+  }
   }
 
   // la lista di noteDetail è in post e anche l'upload delle note

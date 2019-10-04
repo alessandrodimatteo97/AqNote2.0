@@ -1,6 +1,6 @@
 export const USE_PROXY = true;
 
-export const URL_BASE = USE_PROXY ? '/api' : 'http://192.168.1.100' +
+export const URL_BASE = USE_PROXY ? '/api' : 'http://127.0.0.1' +
     ':12345/api';
 
 export const URL = {
@@ -12,11 +12,12 @@ export const URL = {
     LOGIN: URL_BASE + '/login',
     PROFILE: URL_BASE + '/profile',
     UPDATE: URL_BASE + '/update',
-    SENDPHOTO: URL_BASE + '/8/notes/upload',
+    UPLOAD_NOTE: URL_BASE + '/notes/upload',
     HOME: URL_BASE + '/homepage/informatica',
     FAVOURITE: URL_BASE + '/favourites',
     NAMESFAVOURITES: URL_BASE + '/nameSFavourites',
-    NOTE_DETAIL: URL_BASE + '/download'
+    NOTE_DETAIL: URL_BASE + '/download',
+    UPLOAD_PHOTO: URL_BASE + '/photos/upload/'
 
 };
 

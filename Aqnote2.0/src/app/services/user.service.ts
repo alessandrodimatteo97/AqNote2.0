@@ -118,6 +118,7 @@ export class UserService {
          const token = resp.headers.get(X_AUTH);
          console.log(resp.headers);
          this.storage.set(AUTH_TOKEN, token);
+
          this.authToken = token;
          console.log(resp.body);
          // Utente memorizzato nello storage in modo tale che se si vuole cambiare il

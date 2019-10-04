@@ -1,44 +1,50 @@
 <ion-header>
-  <ion-toolbar  class="toolbar">
-    <ion-title>
-     Upload-Note
-    </ion-title>
+  <ion-toolbar>
+    <ion-title>let's speak about your note</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <br/>
-  <h2>let's speak about your note</h2>
-  <br/>
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
 
-  <form [formGroup]="signUpFormModel">
-    <ion-list lines="full" class="ion-no-margin ion-no-padding">
-      <ion-card>
-      <ion-item>
-        <ion-label position="stacked">Title <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text" formControlName="title" ></ion-input>
+
+    <form [formGroup]="signUpFormModel" class="list-form">
+      <ion-list>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success" position="floating">
+          Title
+        </ion-label>
+        <ion-input color="secondary" type="text" formControlName="title"></ion-input>
       </ion-item>
-      </ion-card>
+      <p ion-text class="text08" *ngIf="signUpFormModel.get('title').touched && signUpFormModel.get('title').invalid">
+        <ion-text color="danger">Title</ion-text>
+      </p>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label color="success"position="floating">
+         Description</ion-label>
 
-      <ion-card>
-        <ion-item>
-          <ion-label position="stacked">Description</ion-label>
-          <ion-textarea formControlName="description"></ion-textarea>
-        </ion-item>
-      </ion-card>
-      <ion-card>
-      <ion-select [interfaceOptions]="customAlertOptions" interface="alert" multiple="true" placeholder="Select One Subject">
-        <ion-select-option value="bacon">algoritmi</ion-select-option>
-        <ion-select-option value="olives">Architettura degli elaboratori</ion-select-option>
-
-      </ion-select>
-      </ion-card>
-    </ion-list>
-    <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin" (click)="processForm()">Insert note</ion-button>
-    </div>
-  </form>
+        <ion-textarea color="secondary" type="text" formControlName="description"></ion-textarea>
+      </ion-item>
 
 
+        <ion-label color="success" position="floating">
+          Select Course
+        </ion-label>
 
+        <ion-select (ionChange)="onDCChange()" formControlName="subject_id" value="cdl" okText="Avanti" cancelText="Indietro" >
+          <div >
+          <ion-select-option value="{{s.id}}" *ngFor="let s of s$ | async" text-wrap="">{{s.nameS}}</ion-select-option>
+          </div>
+        </ion-select>
+
+
+      <div margin-top="10px">
+        <ion-button icon-left size="medium" expand="full" expand="block" color="primary" (click)="goOn()" [disabled]="!signUpFormModel.valid" tappable>
+          Go on
+        </ion-button>
+      </div>
+      </ion-list>
+    </form>
+  </div>
 </ion-content>

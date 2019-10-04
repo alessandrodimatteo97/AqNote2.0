@@ -19,6 +19,10 @@ export class SubjectService {
 
   }
 
+  list1(idDC): Observable<Subject[]> {
+    const subjectUrl = `${URL.SUBJECTS}/${idDC}`;
+    return this.http.get<Subject[]>(subjectUrl);
+  }
 
   listHome(): Observable<Subject[]> {
     const subjectUrl = `${URL.HOME}`;
