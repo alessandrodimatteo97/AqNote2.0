@@ -39,7 +39,7 @@ export class PhotoService {
 
   public uploadFormData(formData) {
     console.log(formData);
-    return this.http.post<any>(`${URL.UPLOAD_PHOTO}/`, formData);
+    return this.http.post<any>(`${URL.UPLOAD_PHOTO}`, formData);
 
   }
 }

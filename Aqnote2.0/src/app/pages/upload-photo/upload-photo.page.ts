@@ -4,6 +4,8 @@ import {ActionSheetController, LoadingController, ToastController} from '@ionic/
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {concat} from 'rxjs';
 import {PhotoService} from '../../services/photo.service';
+import {ActivatedRoute} from '@angular/router';
+import {stringify} from 'querystring';
 @Component({
   selector: 'app-upload-photo',
   templateUrl: './upload-photo.page.html',
@@ -11,10 +13,16 @@ import {PhotoService} from '../../services/photo.service';
 })
 export class UploadPhotoPage implements OnInit {
   public filePreviewPath: SafeUrl = [];
-  constructor(private uploadingService: PhotoService,private sanitizer: DomSanitizer) {
+  private idS: string;
+  private idN: string;
+  constructor(private uploadingService: PhotoService, private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute) {
     this.fileUploader.onAfterAddingFile = (fileItem) => {
       this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
     };
+    this.activatedRoute.params.subscribe(p => {
+      this.idS = p.idS;
+      this.idN = p.idN;
+    });
 
   }
   public fileUploader: FileUploader = new FileUploader({});
@@ -67,8 +75,11 @@ export class UploadPhotoPage implements OnInit {
 
 
       const formData = new FormData();
-      formData.append('porcodio' , file.rawFile, file.name);
-      formData.append('title', 'prova del cazzo');
+      formData.append('file' , file.rawFile, file.name);
+      console.log(this.idN, this.idS);
+      formData.append('idS', this.idS);
+      formData.append('idN', this.idN);
+
       formData.append('description', 'questa è proprio una bella prova del cazzo...');
       // formData.append('info','')
       // formData.append('file' , file.rawFile);
@@ -85,14 +96,6 @@ export class UploadPhotoPage implements OnInit {
 
     });
 
-    concat(...requests).subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {
-          console.log(err);
-        }
-    );
   }
 
 
