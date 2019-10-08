@@ -8,209 +8,55 @@
 
 
 <ion-content>
-
-
-  <ion-card class="cards">
-
-
-
-
-
-
-
-
-  </ion-card>
-  <ion-card class="cards">
-
-
-
-
-
-    <ion-item [routerLink]="['/tabs/home/note-detail']">
+  <ion-card class="cards" *ngFor="let note of notes$ | async">
+    <ion-item [routerLink]="['/note-detail'] " [queryParams]="note">
       <ion-label>
-        <h1>Davide Fontana</h1>
-        <p>Numero di pagine 19</p>
-        <p>Numero di commenti 127</p>
-        <p>
+        <h1>{{note.name}} {{note.surname}}</h1>
+        <p>Numero di pagine {{note.pages}}</p>
+        <p>Numero di commenti {{note.comments}}</p>
+        <p *ngIf="note.avarage == 0 || note.avarage == null ">
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+        </p>
+        <p *ngIf="note.avarage == 1 ">
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+        </p>
+        <p *ngIf="note.avarage == 2 ">
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+        </p>
+        <p *ngIf="note.avarage == 3 ">
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+        </p>
+        <p *ngIf="note.avarage == 4 ">
           <ion-icon name="star" color="primary"></ion-icon>
           <ion-icon name="star" color="primary"></ion-icon>
           <ion-icon name="star" color="primary"></ion-icon>
           <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star" color=""></ion-icon>
+        </p>
+        <p *ngIf="note.avarage == 5 ">
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
         </p>
       </ion-label>
     </ion-item>
-
   </ion-card>
-  <ion-card class="cards">
-
-
-
-
-
-    <ion-item [routerLink]="['/tabs/home/note-detail']">
-      <ion-label>
-        <h1>Davide Fontana</h1>
-        <p>Numero di pagine 19</p>
-        <p>Numero di commenti 127</p>
-        <p>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </p>
-      </ion-label>
-    </ion-item>
-
-  </ion-card>
-  <ion-card class="cards">
-
-
-
-
-
-    <ion-item [routerLink]="['/tabs/home/note-detail']">
-      <ion-label>
-        <h1>Davide Fontana</h1>
-        <p>Numero di pagine 19</p>
-        <p>Numero di commenti 127</p>
-        <p>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star" color="primary"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </p>
-      </ion-label>
-    </ion-item>
-
-  </ion-card> <ion-card class="cards">
-
-
-
-
-
-  <ion-item [routerLink]="['/tabs/home/note-detail']">
-    <ion-label>
-      <h1>Davide Fontana</h1>
-      <p>Numero di pagine 19</p>
-      <p>Numero di commenti 127</p>
-      <p>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </p>
-    </ion-label>
-  </ion-item>
-
-</ion-card> <ion-card class="cards">
-
-
-
-
-
-  <ion-item >
-    <ion-label>
-      <h1>Davide Fontana</h1>
-      <p>Numero di pagine 19</p>
-      <p>Numero di commenti 127</p>
-      <p>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </p>
-    </ion-label>
-  </ion-item>
-
-</ion-card> <ion-card class="cards">
-
-
-
-
-
-  <ion-item >
-    <ion-label>
-      <h1>Davide Fontana</h1>
-      <p>Numero di pagine 19</p>
-      <p>Numero di commenti 127</p>
-      <p>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </p>
-    </ion-label>
-  </ion-item>
-
-</ion-card> <ion-card class="cards">
-
-
-
-
-
-  <ion-item >
-    <ion-label>
-      <h1>Davide Fontana</h1>
-      <p>Numero di pagine 19</p>
-      <p>Numero di commenti 127</p>
-      <p>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </p>
-    </ion-label>
-  </ion-item>
-
-</ion-card> <ion-card class="cards">
-
-
-
-
-
-  <ion-item >
-    <ion-label>
-      <h1>Davide Fontana</h1>
-      <p>Numero di pagine 19</p>
-      <p>Numero di commenti 127</p>
-      <p>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </p>
-    </ion-label>
-  </ion-item>
-
-</ion-card> <ion-card class="cards">
-
-
-
-
-
-  <ion-item *ngFor="let note of notes">
-    <ion-label>
-      <h1>Davide Fontana</h1>
-      <p>Numero di pagine 19</p>
-      <p>Numero di commenti 127</p>
-      <p>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star" color="primary"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-      </p>
-    </ion-label>
-  </ion-item>
-
-
-</ion-card>
 </ion-content>

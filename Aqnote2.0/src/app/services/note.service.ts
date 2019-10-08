@@ -16,6 +16,16 @@ export interface CommentToUpdate {
   comment: string;
   stars: string;
 }
+
+export interface NoteDetailForList {
+  name: string;
+  surname: string;
+  pages: number;
+  comments: number;
+  avarage: number;
+  idN: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,16 +33,15 @@ export class NoteService {
 
   constructor(private http: HttpClient, private httpParams: HttpParams) { }
 
-  list(idSubject) {
+  list(idSubject): Observable<NoteDetailForList[]> {
     const noteslUrl = `${URL.NOTES}/${idSubject}/`;
-
-    return this.http.get<Note[]>(noteslUrl);
+    return this.http.get<NoteDetailForList[]>('http://192.168.1.10:12345/api/notesList/14');
   }
 
-  showNote(): Observable<Note[]> {
-    const note = `${URL.NOTE_DETAIL}/`;
-    const ciao =  this.http.get<Note[]>(note);
-    return ciao;
+  showNote(idNote): Observable<Note> {
+    const url = `${URL.NOTE_DETAIL}/${idNote}`;
+    const result =  this.http.get<Note>(url);
+    return result;
   }
 
   showImage(): Observable<string[]> {
@@ -51,7 +60,7 @@ export class NoteService {
   }
 
   public uploadFormData(formData) {
-    const subjectUrl = `${URL.UPLOAD_NOTE}`;
+    const subjectUrl = `${URL.UPLOAD_NOTE}`;  // da mettere in costants
 
     return this.http.post(subjectUrl, formData);
   }

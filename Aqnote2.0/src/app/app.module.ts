@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpParams} from '@angular/common/http';
 import {httpInterceptorProviders} from './interceptors';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -31,7 +31,6 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     HttpClientModule,
-
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -44,6 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
     Camera,
     StatusBar,
     SplashScreen,
+    HttpClientModule,
+    HttpParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     httpInterceptorProviders
   ],
