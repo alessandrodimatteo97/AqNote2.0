@@ -20,6 +20,8 @@ import {Note} from '../../model/Note.model';
 export class UploadNotePage implements OnInit {
   private s$: Observable<Subject[]>;
   private signUpFormModel: FormGroup;
+  private idS: number;
+
   constructor(
       private formBuilder: FormBuilder,
       private alertController: AlertController,
@@ -46,14 +48,15 @@ export class UploadNotePage implements OnInit {
   }
   onDCChange() {
     console.log(this.signUpFormModel.get('subject_id').value);
+    this.idS = this.signUpFormModel.get('subject_id').value;
   }
   goOn() {
+    console.log(this.idS + 'id subjects');
     const account: Note = this.signUpFormModel.value;
-    this.noteService.uploadFormData(account).subscribe((Id) => {
-          this.signUpFormModel.reset();
-          console.log(Id); // stampa l'id della nota appena creata
+    this.noteService.uploadFormData(account).subscribe((idN) => {
+          console.log(idN + ' ' + this.idS); // stampa l'id della nota appena creata
         //  this.showMessage().then(r => console.log(r));
-          this.router.navigate(['/upload-photo', Id]);
+          this.router.navigate(['upload-photo', this.idS, idN  ]);
         },
         (err: HttpErrorResponse) => {
           if (err.status === 401) {

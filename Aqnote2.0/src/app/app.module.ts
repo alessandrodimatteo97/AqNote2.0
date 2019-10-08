@@ -46,7 +46,8 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     HttpParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    HttpParams
   ],
   bootstrap: [AppComponent]
 })
