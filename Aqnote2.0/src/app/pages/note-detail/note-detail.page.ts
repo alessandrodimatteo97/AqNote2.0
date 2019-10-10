@@ -1,7 +1,7 @@
 import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 import { ModalController } from '@ionic/angular';
-import {CommentToUpdate, NoteService} from '../../services/note.service';
+import {CommentToLoad, CommentToUpdate, NoteService, PhotoSrc} from '../../services/note.service';
 import {UserService} from '../../services/user.service';
 import {Observable} from 'rxjs';
 import {Note} from '../../model/Note.model';
@@ -9,6 +9,7 @@ import {Observer} from 'rxjs';
 import { Directive, ElementRef} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {User} from "../../model/User.model";
 
 @Component({
   selector: 'app-note-detail',
@@ -16,13 +17,17 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./note-detail.page.scss'],
 })
 export class NoteDetailPage implements OnInit {
-  private note$: Observable<Note>;
+  private note: Observable<Note>;
+  private photos: Observable<PhotoSrc>;
   base64Image: any;
   public post: any = {color1: '', color2: '', color3: '', color4: '', color5: ''};
   public numberStar: number;
   private formComment: FormGroup;
+  private comments: Observable<CommentToLoad[]>;
+  private userLogged$: Observable<User>;
+  private alreadyCommented$: Observable<boolean>;
 
-  constructor(private modalController: ModalController,
+  constructor(private modalController: ModalController, private userService: UserService,
               private noteService: NoteService, private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
   segment: string;
 
@@ -37,27 +42,19 @@ export class NoteDetailPage implements OnInit {
     });
   }
   ngOnInit() {
-    this.activateRoute.queryParams.subscribe(params => {
-      // Defaults to 0 if no query param provided.
-    console.log(params.idN);
-    this.note$ = this.noteService.showNote(params.idN);
-    this.note$.subscribe(resp => {
-      console.log(resp);
-      console.log(resp[0].description);
-      console.log(resp[0].title);
-      console.log(resp[0].subject_id);
-      console.log(resp[0].user_id);
-    });
-    });
-    /*const imageUrl = 'http://10.170.19.61:12345/api/download';
-    this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
-      console.log(base64data);
-      this.base64Image = 'data:image/jpg;base64,' + base64data;
-    });
     this.formComment = new FormGroup({
-      stars: new FormControl(''),
-      comment: new FormControl(''),
-    });*/
+      title: new FormControl(),
+      comment: new FormControl(),
+      stars: new FormControl()
+    });
+    this.userLogged$ = this.userService.getUtente();
+    this.activateRoute.queryParams.subscribe(params => {
+      this.photos = this.noteService.loadPhotos(params.idN);
+      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.idN);
+      this.alreadyCommented$.subscribe(res => {
+        console.log(res);
+      });
+    });
   }
   /*{
      this.noteService.showNote().subscribe(items => {
@@ -70,6 +67,7 @@ export class NoteDetailPage implements OnInit {
        });
      });
   }*/
+
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       const img = new Image();
@@ -114,7 +112,9 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 1;
-    this.formComment.setValue({comment: '' , stars: this.numberStar});
+    this.formComment.patchValue({ stars: this.numberStar});
+    console.log(this.formComment);
+    console.log(this.formComment.getRawValue());
   }
 
   starTwo(event) {
@@ -124,7 +124,8 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 2;
-    this.formComment.setValue({comment: '' , stars: this.numberStar});
+    this.formComment.patchValue({ stars: this.numberStar});
+    console.log(this.formComment.getRawValue());
   }
 
   starThree(event) {
@@ -134,7 +135,7 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 3;
-    this.formComment.setValue({comment: '' , stars: this.numberStar});
+    this.formComment.patchValue({ stars: this.numberStar});
   }
 
   starFour(event) {
@@ -144,7 +145,7 @@ ionViewWillEnter() {
     this.post.color4 = 'primary';
     this.post.color5 = '';
     this.numberStar = 4;
-    this.formComment.setValue({comment: '' , stars: this.numberStar});
+    this.formComment.patchValue({ stars: this.numberStar});
   }
 
   starFive(event) {
@@ -154,7 +155,7 @@ ionViewWillEnter() {
     this.post.color4 = 'primary';
     this.post.color5 = 'primary';
     this.numberStar = 5;
-    this.formComment.setValue({comment: '' , stars: this.numberStar});
+    this.formComment.patchValue({ stars: this.numberStar});
   }
 
   sendComment(event) {
@@ -167,8 +168,36 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 0;
-    this.noteService.updateComment(comment).subscribe(() => {
-      this.formComment.setValue({comment: '' , stars: this.numberStar});
+    this.activateRoute.queryParams.subscribe(params => {
+    this.noteService.updateComment(comment, params.idN).subscribe(res  => {
+      this.formComment.setValue({title: '', comment: '' , stars: this.numberStar});
+      console.log(res);
+      this.loadComments();
+    });
+    });
+
+  }
+
+  loadDetails() {
+    this.activateRoute.queryParams.subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      console.log(params.idN);
+      this.note = this.noteService.showNote(params.idN);
+      console.log(this.note);
+      this.note.subscribe(resp => {
+        console.log(resp);
+      });
+    });
+  }
+
+  loadComments() {
+    this.activateRoute.queryParams.subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      console.log("commenti");
+      this.comments = this.noteService.showNotesComments(params.idN);
+      this.comments.subscribe(res => {
+        console.log(res);
+      });
     });
   }
 }

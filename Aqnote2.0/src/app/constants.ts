@@ -1,6 +1,6 @@
 export const USE_PROXY = true;
 
-export const URL_BASE = USE_PROXY ? '/api' : 'http://192.168.1.10:12345/api';
+export const URL_BASE = USE_PROXY ? '/api' : 'http://10.212.9.84:12345/api';
 
 export const URL = {
     DEPARTMENTS: URL_BASE + '/department',
@@ -18,8 +18,10 @@ export const URL = {
     NOTE_DETAIL: URL_BASE + '/notes',
     UPLOAD_PHOTO: URL_BASE + '/photos/upload/',
     SHOW_NOTE: URL_BASE + '/download/45',
-    UPDATE_COMMENT: URL_BASE + '/notes/33/comment',
-    UPLOAD_NOTE: URL_BASE + '',
+    UPDATE_COMMENT: URL_BASE + '/notes-update-comment',
+    LOAD_PHOTO: URL_BASE + '/notes-photos',
+    LOAD_COMMENT: URL_BASE + '/notes-comments',
+    ALREADY_COMMENTED: URL_BASE + '/check-commented'
 };
 
 export const X_AUTH = 'Authorization';
