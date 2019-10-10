@@ -17,7 +17,7 @@ export const URL = {
     NAMESFAVOURITES: URL_BASE + '/nameSFavourites',
     NOTE_DETAIL: URL_BASE + '/notes',
     UPLOAD_PHOTO: URL_BASE + '/photos/upload/',
-    SHOW_NOTE: URL_BASE + '/download/8',
+    SHOW_NOTE: URL_BASE + '/download/',
     UPDATE_COMMENT: URL_BASE + '/notes/33/comment',
     DELETE_PHOTO: URL_BASE + '/photos/delete'
 

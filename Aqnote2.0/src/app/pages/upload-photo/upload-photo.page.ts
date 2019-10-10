@@ -2,10 +2,12 @@ import { Component, OnInit} from '@angular/core';
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import {ActionSheetController, AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import {concat} from 'rxjs';
+import {concat, Observable} from 'rxjs';
 import {PhotoService} from '../../services/photo.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ImageModalPage} from '../image-modal/image-modal.page';
+import {NoteService} from '../../services/note.service';
+import {toNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Component({
   selector: 'app-upload-photo',
@@ -17,11 +19,11 @@ export class UploadPhotoPage implements OnInit {
   private idS: string;
   private idN: string;
   private queue = [];
-  private url;
-  private photos: any[] = [];
+  private photos = []
+  private photo$ : Observable<string[]> ;
   constructor(private router: Router, private alertController: AlertController,
               private uploadingService: PhotoService, private modalCtrl: ModalController,
-              private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute) {
+              private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private noteService: NoteService) {
     this.fileUploader.onAfterAddingFile = (fileItem) => {
       this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
     };
@@ -30,16 +32,17 @@ export class UploadPhotoPage implements OnInit {
       this.idN = p.idN;
     });
 
+
+
   }
   public fileUploader: FileUploader = new FileUploader({});
-  public hasBaseDropZoneOver = false;
-  public imagePath;
-  imgURL: any;
+
   public message: string;
 
 
 
   ngOnInit() {
+    this.photo$ = this.noteService.showImage(this.idN);
   }
 
 
@@ -110,9 +113,7 @@ export class UploadPhotoPage implements OnInit {
   formData.append('idS', this.idS);
   formData.append('idN', this.idN);
 
-  formData.append('description', 'questa è proprio una bella prova del cazzo...');
-    // formData.append('info','')
-    // formData.append('file' , file.rawFile);
+
   requests.push(this.uploadingService.uploadFormData(formData));
   concat(...requests).subscribe(
         (res) => {
@@ -128,7 +129,7 @@ export class UploadPhotoPage implements OnInit {
 
   }
 
-  onDelete(item) {
+  onDelete(item: any ) {
     if (this.queue.includes(item)) {
      // this.uploadingService.
       console.log(item.file.name);
@@ -145,10 +146,34 @@ export class UploadPhotoPage implements OnInit {
 
 
     }
+
     item.remove();
 
+    }
 
+    deleteDownload(item){
+            const formData = new FormData();
+            formData.append('idP', item );
+            this.uploadingService.deletePhoto(formData).subscribe(res => {
+                console.log(res);
+
+            });
+            this.ngOnInit();
+    }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.ngOnInit();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
+
+
+
+
+
 
   public async openModal(images, index) {
     console.log(index);
@@ -160,6 +185,10 @@ export class UploadPhotoPage implements OnInit {
       }
     });
     modal.present();
+  }
+  transform(c) {
+    this.photos.push(this.sanitizer.bypassSecurityTrustResourceUrl(c));
+    return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
 }
 

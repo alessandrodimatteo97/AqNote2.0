@@ -16,6 +16,8 @@ export class MediaPreviewDirective implements OnChanges {
       reader.onloadend = () => el.nativeElement.data = reader.result;
     } else if (this.media.type.startsWith('image')) {
       reader.onloadend = () => el.nativeElement.src = reader.result;
+    } else if (this.media.type.startsWith('data')) {
+      reader.onloadend = () => el.nativeElement.src = reader.result;
     }
     reader.readAsDataURL(this.media);
   }

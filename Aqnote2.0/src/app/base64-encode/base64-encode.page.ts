@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NoteService} from '../services/note.service';
 import {Observable} from 'rxjs';
+import {ImageModalPage} from '../pages/image-modal/image-modal.page';
 import {ModalController} from '@ionic/angular';
 
 @Component({
@@ -9,9 +10,9 @@ import {ModalController} from '@ionic/angular';
   templateUrl: './base64-encode.page.html',
   styleUrls: ['./base64-encode.page.scss'],
 })
-export class Base64EncodePage {
+export class Base64EncodePage implements OnInit{
   // Constructor Required
-  constructor(private sanitizer: DomSanitizer, private noteService: NoteService) {}
+  constructor(private modalCtrl: ModalController, private sanitizer: DomSanitizer, private noteService: NoteService) {}
   private photo$: Observable<string[]>;
   private photos = [];
   // Call this method in the image source, it will sanitize it.
@@ -19,17 +20,21 @@ export class Base64EncodePage {
     this.photos.push(this.sanitizer.bypassSecurityTrustResourceUrl(c));
     return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngOnInit() {
-    this.photo$ = this.noteService.showImage(); /*.subscribe(data => {
-      //console.log(data);
-      //this.photo$[0] = 'data:image/jpg;base64,' + base64data;
-      console.log(data);
-      this.photo$ = data;
-      //return this.sanitizer.bypassSecurityTrustResourceUrl(this.photo$[0]);
-    });*/
-  }
 
+  ngOnInit() {
+    this.photo$ = this.noteService.showImage('11');
+  }
+  public async openModal(images, index) {
+    console.log(images);
+    const modal = await this.modalCtrl.create({
+      component: ImageModalPage,
+      componentProps: {
+        value: images,
+        otherValue: index
+      }
+    });
+    modal.present();
+  }
 
 
 }

@@ -44,8 +44,8 @@ export class NoteService {
     return result;
   }
 
-  showImage(): Observable<string[]> {
-    const url = `${URL.SHOW_NOTE}/`;
+  showImage(idN): Observable<string[]> {
+    const url = `${URL.SHOW_NOTE}/${idN}`;
     const ciao = this.http.get<string[]>(url);
     return ciao;
   }

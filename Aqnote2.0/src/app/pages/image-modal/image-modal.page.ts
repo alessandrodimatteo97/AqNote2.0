@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef, Input} from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-image-modal',
@@ -8,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ImageModalPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private sanitizer: DomSanitizer ) { }
   @Input() value;
   @Input() otherValue;
   @ViewChild('slider', {static: false, read: ElementRef })slider: ElementRef;
@@ -22,7 +23,9 @@ export class ImageModalPage implements OnInit {
   };
 
   ngOnInit() {
-    this.sliderOpts.initialSlide = this.otherValue;
+   // this.massTimingsHtml = this.getInnerHTMLValue();
+    this.img = this.value;
+   this.sliderOpts.initialSlide = this.otherValue;
   }
 
   zoom(zoomIn: boolean) {
@@ -36,6 +39,10 @@ export class ImageModalPage implements OnInit {
 
   close() {
     this.modalController.dismiss();
+  }
+
+  transform(c) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
 
 }
