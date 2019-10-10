@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuController, ModalController} from '@ionic/angular';
-import {ImageModalPage} from '../image-modal/image-modal.page';
 import {SubjectService} from '../../services/subject.service';
 import {Subject} from '../../model/Subject.model';
 import {Observable} from 'rxjs';
@@ -43,16 +42,6 @@ export class HomePage implements OnInit{
   getSelectedTab(): void {
     console.log('this');
     // this.activeTabName = this.tabs.getSelected();
-  }
-  openPreview(img) {
-    this.modalController.create({
-      component: ImageModalPage,
-      componentProps: {
-        img
-      }
-    }).then(modal => {
-      modal.present();
-    });
   }
   openFirst() {
     this.menu.enable(true, 'first');

@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import {MediaPreviewDirective} from '../../media-preview.directive';
 import { IonicModule } from '@ionic/angular';
 import { UploadPhotoPage } from './upload-photo.page';
 import {FileUploadModule} from 'ng2-file-upload';
+import {MediaPreviewDirective} from '../../media-preview.directive';
 
 const routes: Routes = [
   {
@@ -20,8 +20,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    FileUploadModule
+    FileUploadModule,
+
   ],
-  declarations: [UploadPhotoPage, MediaPreviewDirective]
+  declarations: [UploadPhotoPage, MediaPreviewDirective],
+  exports: [MediaPreviewDirective]
 })
 export class UploadPhotoPageModule {}

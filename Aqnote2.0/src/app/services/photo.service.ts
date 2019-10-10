@@ -42,6 +42,11 @@ export class PhotoService {
     return this.http.post<any>(`${URL.UPLOAD_PHOTO}`, formData);
 
   }
+
+  public deletePhoto(formdata){
+
+    return this.http.post(`${URL.DELETE_PHOTO}`, formdata);
+  }
 }
 export class Photo {
   data: any;

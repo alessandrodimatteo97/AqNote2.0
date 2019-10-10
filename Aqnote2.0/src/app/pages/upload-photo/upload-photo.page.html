@@ -1,37 +1,54 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Ionic Image Upload
+      Upload-Note
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <h3 *ngIf="fileUploader.queue.length == 0" text-center>Please Select Image!</h3>
+  <h3 *ngIf="fileUploader.queue.length != 0" text-center text-wrap>push the button below the page for uploading images</h3>
 
   <ion-list>
     <ion-item *ngFor="let item of fileUploader.queue" text-wrap>
 
-        <img src mediaPreview [media]="item?._file" class="media-object" />
+        <img src mediaPreview [media]="item?._file" tappable (click)="openModal(fileUploader.queue, fileUploader.queue.indexOf(item))" />
 
       <ion-label>
         {{ item.file.name }}
       </ion-label>
-      <ion-button slot="end" fill="clear" >
+
+      <ion-button *ngIf="!(queue.includes(item))" slot="end" fill="clear" (click)="UploadItem(item)">
         <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
       </ion-button>
-      <ion-button slot="end" fill="clear" (click)="item.remove()">
+      <ion-button *ngIf="(queue.includes(item))" slot="end" fill="clear" >
+        <ion-icon name="checkmark"></ion-icon>      </ion-button>
+      <ion-button slot="end" fill="clear" (click)="onDelete(item)">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-list>
-  <ion-button (click)="uploadFiles()">Upload files</ion-button>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+  <ion-button *ngIf="fileUploader.queue.length != 0" (click)="uploadFiles()">Upload files</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button *ngIf="fileUploader.queue.length != 0" (click)="NoteDetail()" >See the Note</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="primary">
-    <input type="file" name="file" accept="image/*"  ng2FileSelect [uploader]="fileUploader" multiple />
+  <ion-toolbar color="primary"><div class="file-input-container">
+    <label>
+      <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" multiple />
+      Add Files
+    </label>
+  </div>
+
 
   </ion-toolbar>
 </ion-footer>
