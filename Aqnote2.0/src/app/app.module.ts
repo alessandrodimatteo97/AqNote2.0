@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {Platform} from '@ionic/angular';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,11 +41,11 @@ export function createTranslateLoader(http: HttpClient) {
     }),
   ],
   providers: [
-       Camera,
+    Camera,
     StatusBar,
     SplashScreen,
+    HttpClientModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-
     httpInterceptorProviders,
     HttpParams
   ],

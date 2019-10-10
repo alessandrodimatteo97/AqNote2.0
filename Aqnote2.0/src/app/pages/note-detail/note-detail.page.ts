@@ -8,6 +8,7 @@ import {Note} from '../../model/Note.model';
 import {Observer} from 'rxjs';
 import { Directive, ElementRef} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-note-detail',
@@ -15,14 +16,14 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./note-detail.page.scss'],
 })
 export class NoteDetailPage implements OnInit {
-  private note$: Observable<Note[]>;
+  private note$: Observable<Note>;
   base64Image: any;
   public post: any = {color1: '', color2: '', color3: '', color4: '', color5: ''};
   public numberStar: number;
   private formComment: FormGroup;
 
   constructor(private modalController: ModalController,
-              private noteService: NoteService, private elRef: ElementRef, renderer: Renderer2) { }
+              private noteService: NoteService, private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
   segment: string;
 
   openPreview(img) {
@@ -36,7 +37,19 @@ export class NoteDetailPage implements OnInit {
     });
   }
   ngOnInit() {
-    const imageUrl = 'http://10.170.19.61:12345/api/download';
+    this.activateRoute.queryParams.subscribe(params => {
+      // Defaults to 0 if no query param provided.
+    console.log(params.idN);
+    this.note$ = this.noteService.showNote(params.idN);
+    this.note$.subscribe(resp => {
+      console.log(resp);
+      console.log(resp[0].description);
+      console.log(resp[0].title);
+      console.log(resp[0].subject_id);
+      console.log(resp[0].user_id);
+    });
+    });
+    /*const imageUrl = 'http://10.170.19.61:12345/api/download';
     this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
       console.log(base64data);
       this.base64Image = 'data:image/jpg;base64,' + base64data;
@@ -44,7 +57,7 @@ export class NoteDetailPage implements OnInit {
     this.formComment = new FormGroup({
       stars: new FormControl(''),
       comment: new FormControl(''),
-    });
+    });*/
   }
   /*{
      this.noteService.showNote().subscribe(items => {

@@ -15,7 +15,7 @@ export const URL = {
     HOME: URL_BASE + '/homepage/informatica',
     FAVOURITE: URL_BASE + '/favourites',
     NAMESFAVOURITES: URL_BASE + '/nameSFavourites',
-    NOTE_DETAIL: URL_BASE + '/download/8',
+    NOTE_DETAIL: URL_BASE + '/notes',
     UPLOAD_PHOTO: URL_BASE + '/photos/upload/',
     SHOW_NOTE: URL_BASE + '/download/8',
     UPDATE_COMMENT: URL_BASE + '/notes/33/comment',
