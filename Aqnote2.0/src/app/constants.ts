@@ -17,11 +17,12 @@ export const URL = {
     NAMESFAVOURITES: URL_BASE + '/nameSFavourites',
     NOTE_DETAIL: URL_BASE + '/notes',
     UPLOAD_PHOTO: URL_BASE + '/photos/upload/',
-    SHOW_NOTE: URL_BASE + '/download/45',
+    SHOW_NOTE: URL_BASE + '/download/',
     UPDATE_COMMENT: URL_BASE + '/notes-update-comment',
     LOAD_PHOTO: URL_BASE + '/notes-photos',
     LOAD_COMMENT: URL_BASE + '/notes-comments',
-    ALREADY_COMMENTED: URL_BASE + '/check-commented'
+    ALREADY_COMMENTED: URL_BASE + '/check-commented',
+    DELETE_PHOTO: URL_BASE + '/photos/delete'
 };
 
 export const X_AUTH = 'Authorization';

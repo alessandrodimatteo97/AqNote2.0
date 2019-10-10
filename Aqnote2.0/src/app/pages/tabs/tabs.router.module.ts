@@ -34,7 +34,7 @@ const routes: Routes = [
         ]
       },
           {
-            path: 'note-detail',
+            path: 'note-detail/:id',
             children: [
               {
                 path: '',

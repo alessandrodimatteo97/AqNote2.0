@@ -17,32 +17,19 @@
     </ion-button>
   </ion-item>
 
-  <ion-slides [options]="sliderOpts" #slider>
-    <ion-slide>
-  <div class="swiper-zoom-container">
-    <img src="assets/dametterenelprogetto.jpg">
+  <ion-slides  [options]="sliderOpts" #slider>
+    <!--
+    <ion-slide *ngFor="let i of img">
+  <div class="swiper-zoom-container" >
+    <img src mediaPreview [media]="i?._file"  />
   </div>
-  </ion-slide>
-    <ion-slide>
-      <div class="swiper-zoom-container">
-        <img src="assets/dametterenelprogetto.jpg">
+    </ion-slide>
+    -->
+    <ion-slide *ngFor="let i of img ">
+      <div class="swiper-zoom-container" >
+        <img [attr.src]="i" mediaPreview [media]="i?._file" />
       </div>
     </ion-slide>
-<ion-slide>
-  <div class="swiper-zoom-container">
-    <img src="assets/dametterenelprogetto.jpg">
-  </div>
-</ion-slide>
- <ion-slide>
-  <div class="swiper-zoom-container">
-    <img src="assets/dametterenelprogetto.jpg">
-  </div>
-</ion-slide>
-  <ion-slide>
-  <div class="swiper-zoom-container">
-    <img src="assets/dametterenelprogetto.jpg">
-  </div>
-</ion-slide>
   </ion-slides>
 
 </ion-content>

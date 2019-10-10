@@ -5,8 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let c of photo$ | async ">
+  <div *ngFor="let c of (photo$ | async) | keyvalue ">
   <!--<img [src]="transform(c)">-->
-    <p>{{c}}</p>
-  </div>
+    <img [src]="transform(c.value)" tappable (click)="openModal(photos, 2)">  </div>
 </ion-content>

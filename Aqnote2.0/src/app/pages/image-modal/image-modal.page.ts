@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import {Component, OnInit, ViewChild, ElementRef, Input} from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-image-modal',
@@ -8,23 +9,27 @@ import { NavParams, ModalController } from '@ionic/angular';
 })
 export class ImageModalPage implements OnInit {
 
+  constructor(private modalController: ModalController, private sanitizer: DomSanitizer ) { }
+  @Input() value;
+  @Input() otherValue;
   @ViewChild('slider', {static: false, read: ElementRef })slider: ElementRef;
-  img: any;
-
+  public message: string;  img: any = [];
+  index: number;
   sliderOpts = {
+    initialSlide: null,
     zoom: {
-      maxRatio: 5
+      maxRatio: 5,
     }
   };
 
-  constructor(private navParams: NavParams, private modalController: ModalController) { }
-
   ngOnInit() {
-    this.img = this.navParams.get('img');
+   // this.massTimingsHtml = this.getInnerHTMLValue();
+    this.img = this.value;
+   this.sliderOpts.initialSlide = this.otherValue;
   }
 
   zoom(zoomIn: boolean) {
-    let zoom = this.slider.nativeElement.swiper.zoom;
+    const zoom = this.slider.nativeElement.swiper.zoom;
     if (zoomIn) {
       zoom.in();
     } else {
@@ -34,6 +39,10 @@ export class ImageModalPage implements OnInit {
 
   close() {
     this.modalController.dismiss();
+  }
+
+  transform(c) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
 
 }

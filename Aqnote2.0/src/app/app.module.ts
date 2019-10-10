@@ -31,6 +31,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     HttpClientModule,
+    ImageModalPageModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -44,7 +45,6 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     HttpClientModule,
-    HttpParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     httpInterceptorProviders,
     HttpParams
