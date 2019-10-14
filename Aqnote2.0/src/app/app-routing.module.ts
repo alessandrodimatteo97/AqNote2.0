@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' },
+    { path: '', loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule' },
     { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
     { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
  // { path: 'image-modal', loadChildren: './pages/image-modal/image-modal.module#ImageModalPageModule' },

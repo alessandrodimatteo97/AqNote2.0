@@ -8,58 +8,52 @@
 
 
   <ion-slides >
-
-
-      <ion-slide>
-          <img [src]="base64Image" />
-      </ion-slide>
-      <ion-slide>
-          <img [src]="base64Image" />
-      </ion-slide>
-      <ion-slide>
-          <img [src]="base64Image" />
-      </ion-slide>
-
-      <ion-slide >
-          <div class="slider-box">
-              <ion-card>
-                  <ion-card-header>
-                      <ion-card-content>
-                          <img src="" >
-                      </ion-card-content>
-                  </ion-card-header>
-              </ion-card>
-          </div>
-      </ion-slide>
+    <ion-slide *ngIf="photos | async as photo;">
+      <div class="slider-box">
+          <ion-card>
+              <ion-card-header>
+                  <ion-card-content>
+                    <img src="{{photo.path}}"/>
+                  </ion-card-content>
+              </ion-card-header>
+          </ion-card>
+      </div>
+    </ion-slide>
   </ion-slides >
 
     <ion-toolbar>
       <ion-segment [(ngModel)]="segment" class="card-content" scrollable>
-        <ion-segment-button value="detail" color="primary" checked layout="icon-end">
+        <ion-segment-button value="detail" color="primary" checked layout="icon-end" (click)=loadDetails()>
           <ion-label color="secondary">Dettagli</ion-label>
         </ion-segment-button>
-        <ion-segment-button  value="comment" color="primary" layout="icon-end">
+        <ion-segment-button  value="comment" color="primary" layout="icon-end" (click)="loadComments()">
           <ion-label color="secondary">Commenti</ion-label>
         </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
 
 
-    <div [ngSwitch]="segment">
+    <div [ngSwitch]="segment" >
       <div *ngSwitchCase="'comment'">
-        <ion-grid>
+        <ion-grid *ngIf="userLogged$ | async as user || alreadyCommented$ == undefined">
           <ion-item>
+
             <ion-row>
               <ion-col>
-                <h4 class="logged">Davide Fontana</h4>
+                <h4 class="logged">{{user.name}} {{user.surname}}</h4>
               </ion-col>
             </ion-row>
+            <form [formGroup]="formComment" >
+              <ion-row>
+                <ion-col>
+                  <ion-label position="stacked">Title</ion-label>
+                  <input class="comment-input" type="text" formControlName="title">
+                </ion-col>
+              </ion-row>
             <ion-row>
               <ion-col>
                 <ion-label position="stacked">Notes</ion-label>
-                <form [formGroup]="formComment">
                 <input class="comment-input" type="text" formControlName="comment">
-                </form>
               </ion-col>
               <ion-col push="2" size="auto">
                 <p>
@@ -70,150 +64,78 @@
             <ion-row>
               <ion-col size="auto">
                 <p>
-                  <ion-icon name="star" color="{{post.color1}}" value="1" (click)="starOne($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color2}}" value="2" (click)="starTwo($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color3}}" value="3" (click)="starThree($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color4}}" value="4" (click)="starFour($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color5}}" value="5" (click)="starFive($event)"></ion-icon>
+                  <ion-icon name="star" color="{{post.color1}}"  (click)="starOne($event)"></ion-icon>
+                  <ion-icon name="star" color="{{post.color2}}"  (click)="starTwo($event)"></ion-icon>
+                  <ion-icon name="star" color="{{post.color3}}"  (click)="starThree($event)"></ion-icon>
+                  <ion-icon name="star" color="{{post.color4}}"  (click)="starFour($event)"></ion-icon>
+                  <ion-icon name="star" color="{{post.color5}}"  (click)="starFive($event)"></ion-icon>
                 </p>
               </ion-col>
-
             </ion-row>
+            </form>
           </ion-item>
         </ion-grid>
 
     <ion-list>
 
-      <ion-item>
+      <ion-item *ngFor="let comment of comments | async">
         <ion-avatar slot="start">
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
         </ion-avatar>
         <ion-grid>
           <ion-row>
             <ion-col>
-              <h5>Davide Fontana</h5>
+              <h5 class="comment-title" >{{comment.name}} {{comment.surname}}</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <h6 class="comment-title" >{{comment.titleC}}</h6>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
               <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
+                {{comment.text}}
               </p>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <p>
+              <p class="paragraph-star" *ngIf="comment.like == '1'">
                 <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
               </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-        </ion-avatar>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h5>Alessandro di Matteo</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
+              <p class="paragraph-star" *ngIf="comment.like == '2'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
               </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p>
+              <p class="paragraph-star" *ngIf="comment.like == '3'">
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
               </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-        </ion-avatar>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h5>Zia pinetta</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
+              <p class="paragraph-star" *ngIf="comment.like == '4'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
               </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p>
+              <p class="paragraph-star" *ngIf="comment.like == '5'">
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-        </ion-avatar>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h5>Amleto di Salle</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
-              </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p>
                 <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star"></ion-icon>
               </p>
             </ion-col>
           </ion-row>
@@ -223,16 +145,16 @@
     </ion-list>
   </div>
 
-  <div *ngSwitchCase="'detail'">
-    <ion-grid class="white" *ngIf="note$ != null | async as note">
+  <div *ngSwitchCase="'detail'" >
+    <ion-grid class="white" *ngIf="note | async as n ">
       <ion-row class="white">
         <ion-col class="white" size="12">
             <ion-card-header class="card-header-descr">
-              <ion-card-title color="secondary">Qui {{note.title}}</ion-card-title>
+              <ion-card-title color="secondary">{{n[0].title}}</ion-card-title>
               <ion-card-subtitle>Numero di pagine: 12</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content class="card-content" align="center">
-              Qui {{note.description}}
+              {{n[0].description}}
             </ion-card-content>
           <ion-card-subtitle class="card-subtitle-descr">Numero di commenti: 122</ion-card-subtitle>
           <p>
