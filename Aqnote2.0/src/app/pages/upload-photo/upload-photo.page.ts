@@ -1,13 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
-import {ActionSheetController, AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
+import { AlertController, ModalController} from '@ionic/angular';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {concat, Observable} from 'rxjs';
 import {PhotoService} from '../../services/photo.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ImageModalPage} from '../image-modal/image-modal.page';
 import {NoteService} from '../../services/note.service';
-import {toNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Component({
   selector: 'app-upload-photo',
@@ -64,8 +63,11 @@ export class UploadPhotoPage implements OnInit {
 
   uploadFiles() {
 
-    const files = this.getFiles();
+    const files = this.getFiles(); /*.filter(r => {
+        return typeof r !== 'undefined';
+    });*/
     const requests = [];
+    console.log(files);
     files.forEach((file) => {
       console.log(file.name);
       const formData = new FormData();
@@ -75,9 +77,11 @@ export class UploadPhotoPage implements OnInit {
       formData.append('idN', this.idN);
 
 
-      requests.push(this.uploadingService.uploadFormData(formData));
+      this.uploadingService.uploadFormData(formData).subscribe(res=>{
+        console.log(res);
+      });
 
-
+/*
       concat(...requests).subscribe(
            (res) => {
              console.log(res);
@@ -87,14 +91,10 @@ export class UploadPhotoPage implements OnInit {
 
            }
        );
-
+*/
     });
 
 
-
-  }
-
-  NoteDetail() {
   }
 
   UploadItem(item) {
@@ -114,18 +114,10 @@ export class UploadPhotoPage implements OnInit {
   formData.append('idN', this.idN);
 
 
-  requests.push(this.uploadingService.uploadFormData(formData));
-  concat(...requests).subscribe(
-        (res) => {
-          console.log(res);
+  this.uploadingService.uploadFormData(formData).subscribe(res=>{
+    console.log(res);
+  })
 
-
-        },
-        (err) => {
-          console.log(err);
-
-        }
-    );
 
   }
 
@@ -161,14 +153,7 @@ export class UploadPhotoPage implements OnInit {
             this.ngOnInit();
     }
 
-  doRefresh(event) {
-    console.log('Begin async operation');
-    this.ngOnInit();
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
-  }
+
 
 
 

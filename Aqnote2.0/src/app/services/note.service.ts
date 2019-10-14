@@ -66,5 +66,4 @@ export class NoteService {
   }
 }
 
-  // la lista di noteDetail è in post e anche l'upload delle note
 
