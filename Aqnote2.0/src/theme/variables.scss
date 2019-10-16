@@ -77,4 +77,23 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --highlight-color-focused: #f04141;
+  --highlight-color-valid: black;
+  --highlight-color-invalid: black;
+  .item-interactive.item-has-focus {
+    --highlight-background: #F5F5F5;
+    --highlight-color-focused: red;
+
+    .item-input .label-md{
+      color: black; //label color
+    }
 }
+:host {
+  --highlight-color-focused: #f04141;
+  --highlight-color-valid: black;
+  --highlight-color-invalid: black;
+}
+}
+
+
