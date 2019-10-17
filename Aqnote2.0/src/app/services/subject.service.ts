@@ -29,7 +29,7 @@ export class SubjectService {
     return this.http.get<Subject[]>(subjectUrl);
 }
 
-  listFavourite(): Observable<Subject[]>{
+  listFavourite(): Observable<Subject[]> {
     const favouriteUrl = `${URL.FAVOURITE}`;
     return this.http.get<Subject[]>(favouriteUrl);
   }

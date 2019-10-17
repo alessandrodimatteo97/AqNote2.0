@@ -57,8 +57,8 @@ export class NoteService {
   constructor(private http: HttpClient, private httpParams: HttpParams, private storage: Storage) {
   }
 
-  list(idSubject): Observable<NoteDetailForList[]> {
-    const url = `${URL.NOTES}/${idSubject}/`;
+  list(nameSubject): Observable<NoteDetailForList[]> {
+    const url = `${URL.NOTES}/${nameSubject}/`;
     return this.http.get<NoteDetailForList[]>(url);
   }
 
@@ -111,7 +111,31 @@ export class NoteService {
 
   loadPhotos(idNote): Observable<PhotoSrc> {
     const url = `${URL.LOAD_PHOTO}/${idNote}`;
-    const toReturn = this.http.post<PhotoSrc>(url, 'mucchio di nulla');
+    const toReturn = this.http.post<PhotoSrc>(url, '');
+    return toReturn;
+  }
+
+  addToFavourite(user: BehaviorSubject<User>, idNote): Observable<HttpResponse<string>> {
+    const url = `${URL.ADD_TO_FAVOURITE}/${idNote}`;
+    const params = new HttpParams()
+        .append('idU', user.value.idU.toString());
+    const toReturn = this.http.post<string>(url, params, {observe: 'response'});
+    return toReturn;
+  }
+
+  removeFromFavourite(user: BehaviorSubject<User>, idNote): Observable<HttpResponse<string>> {
+    const url = `${URL.REMOVE_FAVOURITE}/${idNote}`;
+    const params = new HttpParams()
+        .append('idU', user.value.idU.toString());
+    const toReturn = this.http.post<string>(url, params, {observe: 'response'});
+    return toReturn;
+  }
+
+  checkFavourites(user: BehaviorSubject<User>, idNote): Observable<HttpResponse<string>> {
+    const url = `${URL.CHECK_FAVOURITE}/${idNote}`;
+    const params = new HttpParams()
+        .append('idU', user.value.idU.toString());
+    const toReturn = this.http.post<string>(url, params, {observe: 'response'});
     return toReturn;
   }
 }

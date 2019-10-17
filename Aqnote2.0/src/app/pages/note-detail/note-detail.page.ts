@@ -19,6 +19,7 @@ import {ActivatedRoute} from '@angular/router';
 import {User} from '../../model/User.model';
 import {HttpResponse} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
+import {$e} from "codelyzer/angular/styles/chars";
 
 @Component({
   selector: 'app-note-detail',
@@ -37,6 +38,7 @@ export class NoteDetailPage implements OnInit {
   private userLogged$: BehaviorSubject<User>;
   private alreadyCommented$: Observable<HttpResponse<boolean>>;
   private commented$: boolean;
+  private favButton: string;
   constructor(private modalController: ModalController, private userService: UserService, private modalCtrl: ModalController,
               private noteService: NoteService, private sanitizer: DomSanitizer,
               private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
@@ -55,7 +57,6 @@ export class NoteDetailPage implements OnInit {
     });
   }
   ngOnInit() {
-
     this.formComment = new FormGroup({
       titleC: new FormControl(),
       comment: new FormControl(),
@@ -205,9 +206,11 @@ ionViewWillEnter() {
       // Defaults to 0 if no query param provided.
       console.log(params.idN);
       this.note = this.noteService.showNote(params.idN);
-      console.log(this.note);
       this.note.subscribe(resp => {
         console.log(resp);
+      });
+      this.noteService.checkFavourites(this.userLogged$, params.idN).subscribe( res => {
+        this.favButton = res.body['body'];
       });
     });
   }
@@ -223,5 +226,23 @@ ionViewWillEnter() {
         this.commented$ = res.body['body'];
       });
     });
+  }
+
+  addToFavourite($event) {
+    console.log(this.favButton);
+    if (this.favButton === 'light') {
+      this.activateRoute.queryParams.subscribe(params => {
+        this.noteService.addToFavourite(this.userLogged$, params.idN).subscribe(res => {
+          this.favButton = res.body['body'];
+        });
+      });
+    }
+    if (this.favButton === 'medium') {
+      this.activateRoute.queryParams.subscribe(params => {
+        this.noteService.removeFromFavourite(this.userLogged$, params.idN).subscribe(res => {
+          this.favButton = res.body['body'];
+        });
+      });
+    }
   }
 }
