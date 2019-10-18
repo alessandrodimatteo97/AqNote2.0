@@ -7,9 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-  </ion-refresher>
-    <ion-refresher-content>
+
 
     <h3 *ngIf="fileUploader.queue.length == 0" text-center>Please Select Image!</h3>
   <h3 *ngIf="fileUploader.queue.length != 0" text-center text-wrap>push the button below the page for uploading images</h3>
@@ -59,7 +57,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-    </ion-refresher-content>
 
 </ion-content>
 
