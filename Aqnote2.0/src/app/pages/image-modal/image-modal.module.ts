@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ImageModalPage } from './image-modal.page';
-import {UploadPhotoPageModule} from '../upload-photo/upload-photo.module';
+import {MyCommonModule} from '../../my-common/my-common.module';
 
 const routes: Routes = [
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-      UploadPhotoPageModule
+      MyCommonModule
   ],
   declarations: [ImageModalPage]
 })

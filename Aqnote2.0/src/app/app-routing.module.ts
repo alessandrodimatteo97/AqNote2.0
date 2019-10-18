@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', loadChildren: './pages/list-notes/list-notes.module#ListNotesPageModule' },
+    { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
     { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
     { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
  // { path: 'image-modal', loadChildren: './pages/image-modal/image-modal.module#ImageModalPageModule' },
@@ -16,6 +16,7 @@ const routes: Routes = [
     {path: 'sign-up-page', loadChildren: './pages/sign-up-page/sign-up-page.module#SignUpPagePageModule'},
     {path: 'sign-in', loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'},
   { path: 'base64-encode', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' },
+ // { path: 'common', loadChildren: './common/common.module#CommonPageModule' },
   { path: 'upload-photo/:idS/:idN', loadChildren: './pages/upload-photo/upload-photo.module#UploadPhotoPageModule' },
 ];
 

@@ -5,6 +5,7 @@ import {X_AUTH} from '../constants';
 import {AlertController, NavController} from '@ionic/angular';
 import {catchError} from 'rxjs/operators';
 import {EMPTY} from 'rxjs';
+import {error} from 'util';
 
 
 @Injectable()
@@ -28,7 +29,9 @@ export class TokenInterceptor implements HttpInterceptor {
             console.log(authReq);
             return next.handle(authReq).pipe(
                 catchError(err => {
-                    this.showError(err);
+                   if (err.status == 409 ) { this.showError('Error in the request', 'one of the filds is wrong', false); }
+                    if (err.status == 200) { this.showError('New user-profile', 'profile has been updated', false); }
+                    if (err.status != 409 &&  err.status != 200){ this.showError('Error', 'Problem with the server', true) }
                     return EMPTY;
                 })
             );
@@ -39,17 +42,16 @@ export class TokenInterceptor implements HttpInterceptor {
         //  return next.handle(req);
     }
 
-    async showError(err: HttpErrorResponse) {
-        const errorMessage = `Status: ${err.status}, Message: ${err.message}`;
+    async showError(status: string, message:string, signIn:boolean) {
 
         const alert = await this.alertController.create({
-            header: 'Errore',
-            message: errorMessage,
+            header: status,
+            message: message,
             buttons: [
                 {
                     text: 'OK',
                     handler: () => {
-                        this.navController.navigateRoot('login');
+                    if (signIn) {  this.navController.navigateRoot('sign-in'); }
                     }
                 }
             ]

@@ -10,6 +10,8 @@ export const URL = {
     SIGNUP: URL_BASE + '/signup',
     LOGIN: URL_BASE + '/login',
     PROFILE: URL_BASE + '/profile',
+    IMAGEPROFILE: URL_BASE + '/image/profile/download',
+    UPLOADIMAGEPROFILE: URL_BASE + '/image/profile/upload',
     UPDATE: URL_BASE + '/update',
     UPLOAD_NOTE: URL_BASE + '/notes/upload',
     HOME: URL_BASE + '/homepage/informatica',

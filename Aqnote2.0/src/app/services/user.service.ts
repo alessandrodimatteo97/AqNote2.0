@@ -5,6 +5,7 @@ import {AUTH_TOKEN, URL, USER_STORAGE, X_AUTH} from '../constants';
 import {User} from '../model/User.model';
 import {delay, map} from 'rxjs/operators';
 import {Storage} from '@ionic/storage';
+import {error} from 'util';
 
 export interface Account {
   name: string;
@@ -14,14 +15,14 @@ export interface Account {
   password: string;
   repeatPassword: string;
 }
-
+export interface Image {
+    image: string;
+}
 export interface AccountUpdate {
-  name: string;
-  surname: string;
   mail: string;
-  matriculationNumber: string;
-  oldPassword: string;
-  newPassword: string;
+  OldPassword: string;
+  NewPassword: string;
+  cdl_id: string;
 }
 
 export interface LoginAccount {
@@ -67,35 +68,27 @@ export class UserService {
         .set('cdl', account.cdl)
         .set('password', account.password)
         .set('repeatPassword', account.repeatPassword);
-      console.log(params.get('name'));
-      console.log(params.get('surname'));
-      console.log(params.get('mail'));
-      console.log(params.get('password'));
-      console.log(params.get('mail'));
-      console.log(params.get('repeatPassword'));
-      console.log(params.get('cdl'));
-      const signUpUrl = `${URL.SIGNUP}/?${params}`;
+
+    const signUpUrl = `${URL.SIGNUP}/?${params}`;
     return this.http.post<User>(URL.SIGNUP, account, {observe: 'response'}).pipe(
       map((resp: HttpResponse<User>) => {
         console.log(resp);
       }));
   }
 
-  update(account: AccountUpdate) {
-    const params = new HttpParams()
-        .set('name', account.name)
-        .set('surname', account.surname)
-        .set('mail', account.mail)
-        .set('matriculationNumber', account.matriculationNumber)
-        .set('oldPassword', account.oldPassword)
-        .set('newPassword', account.newPassword);
+  update(account): Observable<User> {
 
 
-    const updateUrl = `${URL.UPDATE}/`;
+   // const updateUrl = `${URL.UPDATE}/`;
     return this.http.post<User>(URL.UPDATE, account, {observe: 'response'}).pipe(
-      map((resp: HttpResponse<User>) => {
-        console.log(resp);
-      }));
+        map((resp: HttpResponse<User>) => {
+          console.log(resp.body);
+          console.log(resp.status);
+          this.storage.set(USER_STORAGE, resp.body);
+          this.utente$.next(resp.body);
+          return resp.body;
+        }
+          ));
   }
 /*
   login(loginAccount: LoginAccount) {
@@ -132,11 +125,15 @@ export class UserService {
          return resp.body;
        }));
   }
-  // get profile in post con passaggio del token come header
-  getProfile(): Observable<User> {
-    const cdlUrl = `${URL.PROFILE}`;
+  sendImage(formdata) {
 
-    return this.http.get<User>(cdlUrl);
+      return this.http.post<any>(URL.UPLOADIMAGEPROFILE, formdata);
+  }
+  getImage(): Observable<string> {
+ //  let form = new FormData();
+  // form.append('Authorization', token);
+  // console.log(this.authToken);
+   return this.http.get<string>(URL.IMAGEPROFILE);
   }
 
   getUtente(): BehaviorSubject<User> {

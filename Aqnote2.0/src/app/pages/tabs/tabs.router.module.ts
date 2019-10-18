@@ -28,7 +28,7 @@ const routes: Routes = [
             path: 'list-notes/:id',
             children: [
               {
-                path: '',
+                path: 'list-notes/:id',
                 loadChildren: '../list-notes/list-notes.module#ListNotesPageModule'
               }
         ]
@@ -37,7 +37,7 @@ const routes: Routes = [
             path: 'note-detail/:id',
             children: [
               {
-                path: '',
+                path: 'note-detail/:id',
                 loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
               }
             ]
@@ -49,18 +49,18 @@ const routes: Routes = [
         path: 'upload-note',
         children: [
           {
-            path: '',
+            path: 'upload-note',
             loadChildren: '../upload-note/upload-note.module#UploadNotePageModule'
-          },
+          }/*,
           {
             path: 'upload-photo',
             children: [
               {
-                path: '',
+                path: 'upload-photo',
                 loadChildren: '../upload-photo/upload-photo.module#UploadPhotoPageModule'
-              }
+
             ]
-          }
+          }*/
         ]
       },
 
@@ -68,21 +68,21 @@ const routes: Routes = [
         path: 'user-profile',
         children: [
           {
-            path: '',
+            path: 'user-profile',
             loadChildren: '../user-profile/user-profile.module#UserProfilePageModule'
           }
         ]
       },
-      {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full'
-      }
     ]
   },
   {
     path: '',
     redirectTo: '/tabs/favourites',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
   {
