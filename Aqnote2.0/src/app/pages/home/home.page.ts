@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
   private subject$: Observable<Subject[]>;
 
   constructor(private menu: MenuController, private modalController: ModalController, private subjectService: SubjectService) {
@@ -23,9 +23,9 @@ export class HomePage implements OnInit{
   };
 
   ngOnInit() {
-      this.segment = '1';
+     this.segment = '1';
      this.subject$ = this.subjectService.listHome();
-      }
+  }
     // this.subjectService.listHome().subscribe
 
 

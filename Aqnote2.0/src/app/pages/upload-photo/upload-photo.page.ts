@@ -19,7 +19,7 @@ export class UploadPhotoPage implements OnInit {
   private idN: string;
   private queue = [];
   private photos = []
-  private photo$ : Observable<string[]> ;
+  private photo$: Observable<string[]> ;
   constructor(private router: Router, private alertController: AlertController,
               private uploadingService: PhotoService, private modalCtrl: ModalController,
               private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private noteService: NoteService) {

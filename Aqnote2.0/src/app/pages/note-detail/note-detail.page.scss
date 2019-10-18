@@ -9,6 +9,7 @@ ion-row {
   margin-bottom: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
+  width: 100%;
 }
 
 ion-col {
@@ -16,6 +17,17 @@ ion-col {
   margin-bottom: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+.vertical-centered {
+  align-self: center;
+}
+
+ion-button {
+  --color-activated: #806b26;
+  --color: #FFD54D;
+  --background: #F5F5F5;
+  --border-color: #F5F5F5;
 }
 
 .toolbar {
@@ -44,28 +56,41 @@ ion-col {
   margin-bottom: 4px;
 }
 
+.content-card {
+
+}
+.header-card {
+
+}
+
 ion-card {
   margin-left: 0px;
   margin-right: 0px;
   padding-right: 0px;
   padding-left: 0px;
 }
-
+ion-card-header {
+  margin-right: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
 ion-card-content {
   margin-right: 0px;
   margin-left: 0px;
-  padding-right: 0px;
-  padding-left: 0px;
+  padding: 0px;
 }
 
 ion-slides {
-  margin-top: 30%;
+  margin-top: 0%;
   background: #e6e6e6;
 
   img {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    max-width: 40%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 100%;
   }
 }
 .comment-header {
@@ -104,11 +129,21 @@ ion-textarea {
 .card-content {
   background-color: white;
   //padding-left: 1%;
+  margin-top: 15px;
+  margin-left: 8px;
 }
 
 .card-subtitle-descr {
   background-color: white;
   padding-left: 1%;
+  margin-top: 2px;
+}
+
+.card-subtitle-comment {
+  background-color: white;
+  padding-left: 1%;
+  margin-top: 8px;
+  margin-left: 5px;
 }
 
 .card-header-descr{
@@ -121,17 +156,38 @@ ion-textarea {
 }
 
 .comment-input {
-  border-width: 0px;
+  border-width: 1px;
   background-color: #F5F5F5;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
-input[type=text]:focus {
-  color: red;
+ion-input:focus {
+  --color: green;
   border-width: 1px;
-  border-color: #0ec254;
+  border-color: #806b26;
+}
+
+ion-textarea {
+  font-size: 12px;
+  --highlight-color-focused: black;
 }
 
 .logged {
   margin-bottom: 0px;
+}
+
+.comment-form {
+  width: 100%;
+}
+
+.item-has-focus .label-stacked.sc-ion-label-md-h {  //fondamentali, non ti cambiano il colore della label quando focus
+  color: #000000;
+}
+
+.label-stacked.sc-ion-label-md-h {
+  font-size: 22px;
+}
+
+.button-solid {
+
 }

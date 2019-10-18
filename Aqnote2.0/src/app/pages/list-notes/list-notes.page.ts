@@ -4,7 +4,7 @@ import {Note} from '../../model/Note.model';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-list-notes',
   templateUrl: './list-notes.page.html',
@@ -12,10 +12,15 @@ import { Router } from '@angular/router';
 })
 export class ListNotesPage implements OnInit {
   private notes$: Observable<NoteDetailForList[]>;
-  private notes1: Note[];
-  constructor(private noteService: NoteService, private http: HttpClient, private router: Router) { }
+  private name: string;
+
+  constructor(private noteService: NoteService, private http: HttpClient, private router: Router, private activateRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.notes$ = this.noteService.list(14); // INIZIALIZZA LE NOTE DELLA MATERIA
+    this.activateRoute.queryParams.subscribe(params => {
+      this.name = params['key'];
+      this.notes$ = this.noteService.list(params['key']); // INIZIALIZZA LE NOTE DELLA MATERIA
+    });
   }
 }
