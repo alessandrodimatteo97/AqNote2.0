@@ -58,7 +58,7 @@
   <div [ngSwitch]="segment" >
     <div *ngFor="let s of (subject$ | async) | keyvalue">
       <div  *ngSwitchCase="s.key">
-        <ion-card *ngFor="let d of s.value | keyvalue " class="cards">
+        <ion-card *ngFor="let d of s.value | keyvalue " class="cards" >
           <ion-card-header class="card-header">
             <ion-card-title color="secondary">{{d.key}}<span class="right"><ion-button [routerLink]="['/list-notes'] " [queryParams]="d" color="link" shape="round" size="small">  <ion-icon ios="ios-more" md="ios-more" slot="icon-only" name="more"></ion-icon></ion-button></span></ion-card-title>
           </ion-card-header>
@@ -66,9 +66,9 @@
             <ion-card-subtitle>I migliori per questa materia</ion-card-subtitle>
           </ion-card-header>
           <ion-slides [options]="sliderOpts">
-            <ion-slide *ngFor="let k of d.value | keyvalue" class="slide">
-              <ion-item-sliding class="item-slider" id="item100">
-                <ion-item [routerLink]="['/tabs/home/note-detail/',k.value.nameS]" [queryParams]="{debug: true}">
+            <ion-slide *ngFor="let k of d.value | keyvalue" class="slide" >
+              <ion-item-sliding class="item-slider" id="item100" [routerLink]="['/note-detail'] " [queryParams]="k.value">
+                <ion-item>
                   <ion-label>
                     <h1>{{k.value.title}}</h1>
                     <p>Numero di pagine {{k.value.page}}</p>

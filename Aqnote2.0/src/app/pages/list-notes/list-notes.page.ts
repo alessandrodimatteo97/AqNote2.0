@@ -12,14 +12,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ListNotesPage implements OnInit {
   private notes$: Observable<NoteDetailForList[]>;
-  private notes1: Note[];
+  private name: string;
 
   constructor(private noteService: NoteService, private http: HttpClient, private router: Router, private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {
-      console.log(params['key']);
+      this.name = params['key'];
       this.notes$ = this.noteService.list(params['key']); // INIZIALIZZA LE NOTE DELLA MATERIA
     });
   }

@@ -64,6 +64,7 @@ export class NoteDetailPage implements OnInit {
     });
     this.userLogged$ = this.userService.getUtente();
     this.activateRoute.queryParams.subscribe(params => {
+      console.log(params.idN);
       this.photo$ = this.noteService.showImage(params.idN);
     });
   }
