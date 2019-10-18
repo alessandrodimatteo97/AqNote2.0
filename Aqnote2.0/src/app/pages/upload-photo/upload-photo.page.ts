@@ -105,7 +105,6 @@ export class UploadPhotoPage implements OnInit {
 
   } else {
     }
-  const requests = [];
 //  console.log(this.fileUploader.queue.);
   const formData = new FormData();
   formData.append('file' , item.file.rawFile, item.file.name);

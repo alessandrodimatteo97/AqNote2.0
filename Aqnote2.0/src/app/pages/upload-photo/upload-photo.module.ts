@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { UploadPhotoPage } from './upload-photo.page';
 import {FileUploadModule} from 'ng2-file-upload';
-import {MediaPreviewDirective} from '../../media-preview.directive';
+import {MyCommonModule} from '../../my-common/my-common.module';
 
 const routes: Routes = [
   {
@@ -21,9 +21,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     FileUploadModule,
-
+    MyCommonModule
   ],
-  declarations: [UploadPhotoPage, MediaPreviewDirective],
-  exports: [MediaPreviewDirective]
+  declarations: [UploadPhotoPage],
 })
 export class UploadPhotoPageModule {}

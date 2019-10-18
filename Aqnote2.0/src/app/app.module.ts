@@ -12,8 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import {Platform} from '@ionic/angular';
+import { Camera } from '@ionic-native/camera/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,10 +30,10 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     HttpClientModule,
-    ImageModalPageModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ImageModalPageModule,
     IonicStorageModule.forRoot({
       name: 'AqNote__db',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
