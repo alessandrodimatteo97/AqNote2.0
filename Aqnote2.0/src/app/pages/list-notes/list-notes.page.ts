@@ -21,6 +21,9 @@ export class ListNotesPage implements OnInit {
     this.activateRoute.queryParams.subscribe(params => {
       this.name = params['key'];
       this.notes$ = this.noteService.list(params['key']); // INIZIALIZZA LE NOTE DELLA MATERIA
+      this.notes$.subscribe( res => {
+        console.log(res);
+      });
     });
   }
 }

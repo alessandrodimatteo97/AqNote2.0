@@ -21,6 +21,8 @@ export interface CommentToUpdate {
 }
 
 export interface NoteDetailForList {
+  title: string;
+  description: string;
   name: string;
   surname: string;
   pages: number;
