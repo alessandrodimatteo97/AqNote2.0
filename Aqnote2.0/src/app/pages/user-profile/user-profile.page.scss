@@ -10,12 +10,6 @@
   text-align: center;
 }
 
-ion-col {
-}
-
-ion-row {
-  background-color: white;
-}
 
 .delete-span {
   text-align: right;
@@ -32,6 +26,7 @@ ion-row {
   padding-bottom: 0px;
 }
 ion-col {
+  align-self: center;
   margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 0px;
@@ -111,16 +106,19 @@ ion-grid {
 
 img {
   border-radius: 50%;
-  max-width: 35%;
+  max-width: 100%;
 }
 
 .text {
   font-size: 10px;
 }
 
+.border-radius {
+  border-radius: 100%;
+}
 
 .file-input-container {
-
+  border-radius: 50%;
   text-align: center;
 
   input[type="file"] {
@@ -141,7 +139,14 @@ input[type="file"] {
   display: none;
 }
 
+.written-by {
+  font-size: 50%;
+  color: #2f2f2f;
+  text-align: center;
+}
 
-
+.comment-title {
+  color: #806b26;
+}
 
 

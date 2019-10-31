@@ -6,6 +6,7 @@ import {User} from '../model/User.model';
 import {delay, map} from 'rxjs/operators';
 import {Storage} from '@ionic/storage';
 import {error} from 'util';
+import {Note} from "../model/Note.model";
 
 export interface Account {
   name: string;
@@ -28,8 +29,17 @@ export interface AccountUpdate {
 export interface LoginAccount {
   email: string;
   password: string;
-
 }
+
+export interface MyComment {
+    titleC: string;
+    text: string;
+    like: number;
+    title: string;
+    name: string;
+    surname: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -146,6 +156,11 @@ export class UserService {
 
   isLogged(): Observable<boolean> {
     return this.loggedIn$.asObservable();
+  }
+
+  getUserComments(): Observable<MyComment[]> {
+      const url = `${URL.GET_USER_COMMENTS}`;
+      return this.http.get<MyComment[]>(url);
   }
 
 

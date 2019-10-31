@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountUpdate, Image, UserService} from '../../services/user.service';
+import {AccountUpdate, Image, MyComment, UserService} from '../../services/user.service';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CdlService} from '../../services/cdl.service';
 import {Observable} from 'rxjs';
@@ -17,6 +17,7 @@ import {FileUploader, FileLikeObject, FileItem} from 'ng2-file-upload';
 
 export class UserProfilePage implements OnInit {
   private cdl$: Observable<DegreeCourse[]>;
+  private comments: Observable<MyComment[]>;
   private userFormModel: FormGroup;
   private prova;
   private image: Observable<string>;
@@ -40,7 +41,10 @@ export class UserProfilePage implements OnInit {
     this.segment = 'data';
   }
   ngOnInit() {
-
+    this.comments = this.userService.getUserComments();
+    this.comments.subscribe(res => {
+      console.log(res);
+    });
     this.cdl$ = this.cdlService.list();
     this.userService.getUtente().subscribe(user => {
       this.image = this.userService.getImage();
@@ -53,6 +57,7 @@ export class UserProfilePage implements OnInit {
         cdl_id: new FormControl(user.cdl_id)
       });
     });
+
    // const authToken = this.userService.getAuthToken();
   //  console.log(authToken);
  //   this.userService.getUtente().subscribe(u=>console.log(u));

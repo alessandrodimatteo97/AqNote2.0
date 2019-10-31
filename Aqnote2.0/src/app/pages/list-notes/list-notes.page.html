@@ -12,7 +12,7 @@
     <ion-item [routerLink]="['/note-detail'] " [queryParams]="note">
       <ion-row>
         <ion-col size="3"  class="image-col">
-          <ion-thumbnail><img src="http://lorempixel.com/output/people-q-c-300-300-9.jpg" alt=""></ion-thumbnail>
+          <ion-thumbnail><img [src]="transform(note.myImg)" alt="none"></ion-thumbnail>
         </ion-col>
         <ion-col size="9">
           <ion-label>

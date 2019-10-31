@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuController, ModalController} from '@ionic/angular';
 import {SubjectService} from '../../services/subject.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Subject} from '../../model/Subject.model';
+import {User} from "../../model/User.model";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-favourites',
@@ -11,12 +13,17 @@ import {Subject} from '../../model/Subject.model';
 })
 export class FavouritesPage implements OnInit {
     private d$: Observable<Subject[]>;
+    private userLogged$: BehaviorSubject<User>;
 
-    constructor(private menu: MenuController, private modalController: ModalController, private subjectService: SubjectService) {
-    }
+    constructor(private menu: MenuController,
+                private userService: UserService,
+                private modalController: ModalController,
+                private subjectService: SubjectService) {}
 
 
-    ngOnInit(): void {
-    this.d$ = this.subjectService.listFavourite();
+    ngOnInit() {
+        this.userService.getUtente().subscribe(res => {
+            this.d$ = this.subjectService.listFavourite(res.idU);
+        });
     }
 }

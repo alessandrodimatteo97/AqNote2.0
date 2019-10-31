@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   selector: 'app-list-notes',
   templateUrl: './list-notes.page.html',
@@ -14,7 +15,8 @@ export class ListNotesPage implements OnInit {
   private notes$: Observable<NoteDetailForList[]>;
   private name: string;
 
-  constructor(private noteService: NoteService, private http: HttpClient, private router: Router, private activateRoute: ActivatedRoute) {
+  constructor(private sanitizer: DomSanitizer,
+              private noteService: NoteService, private http: HttpClient, private router: Router, private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -25,5 +27,9 @@ export class ListNotesPage implements OnInit {
         console.log(res);
       });
     });
+  }
+
+  transform(c) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
 }
