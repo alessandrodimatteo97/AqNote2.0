@@ -18,7 +18,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'home',
+        path: 'home/:id',
         children: [
           {
             path: '',
@@ -75,24 +75,10 @@ const routes: Routes = [
       },
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tabs/favourites',
-    pathMatch: 'full'
-  },
+
   {
     path: '',
     redirectTo: '/tabs/home',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/upload-note',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/user-profile',
     pathMatch: 'full'
   }
 

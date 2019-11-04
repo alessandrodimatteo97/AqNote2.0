@@ -6,6 +6,8 @@ import {User} from '../model/User.model';
 import {delay, map} from 'rxjs/operators';
 import {Storage} from '@ionic/storage';
 import {error} from 'util';
+import {Note} from '../model/Note.model';
+import {Comment} from '../model/Comment.model';
 
 export interface Account {
   name: string;
@@ -15,6 +17,8 @@ export interface Account {
   password: string;
   repeatPassword: string;
 }
+
+
 export interface Image {
     image: string;
 }
@@ -30,6 +34,16 @@ export interface LoginAccount {
   password: string;
 
 }
+
+export interface Notes {
+    idN: string;
+    idS: string;
+    title: string;
+    comment: string;
+    likes: string;
+    pages: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -149,5 +163,12 @@ export class UserService {
   }
 
 
+    getNotes(): Observable<Notes[]> {
+        return this.http.get<Notes[]>(URL.GETNOTESUSER);
+    }
 
+    deleteNote(idN) {
+        const url = `${URL.DELETE_NOTE}/${idN}`;
+        return this.http.get(url);
+    }
 }

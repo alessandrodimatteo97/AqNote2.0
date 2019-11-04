@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { UploadNotePage } from './upload-note.page';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../app.module';
+import {HttpClient} from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -18,6 +21,13 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)

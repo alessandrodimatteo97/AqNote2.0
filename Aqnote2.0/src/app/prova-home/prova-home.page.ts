@@ -29,7 +29,7 @@ export class ProvaHomePage implements OnInit {
 
   ngOnInit() {
 
-    this.subject$ = this.subjectService.listHome();
+    this.subject$ = this.subjectService.listHome(11);
   }
 
   ionViewWillEnter() {

@@ -43,7 +43,8 @@ export class SignInPage implements OnInit {
     const loginAccount: LoginAccount = this.loginFormModel.value;
     this.userService.login(loginAccount).subscribe(() => {
           this.loginFormModel.reset();
-          this.navController.navigateRoot('home');
+          console.log(this.userService.getUtente().getValue().cdl_id);
+          this.navController.navigateRoot('tabs/home/' + this.userService.getUtente().getValue().cdl_id);
         },
         (err: HttpErrorResponse) => {
           if (err.status === 401) {

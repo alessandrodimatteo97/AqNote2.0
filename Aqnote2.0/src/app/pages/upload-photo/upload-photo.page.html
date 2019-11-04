@@ -53,7 +53,7 @@
   <ion-button *ngIf="fileUploader.queue.length != 0" (click)="uploadFiles()">Upload files</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button *ngIf="fileUploader.queue.length != 0" (click)="NoteDetail()" >See the Note</ion-button>
+        <ion-button *ngIf="fileUploader.queue.length != 0" [routerLink]="['/note-detail']" [queryParams]="{idN : this.idN}" >See the Note</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -6,6 +6,9 @@ import { IonicModule } from '@ionic/angular';
 import { UploadPhotoPage } from './upload-photo.page';
 import {FileUploadModule} from 'ng2-file-upload';
 import {MyCommonModule} from '../../my-common/my-common.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../app.module';
+import {HttpClient} from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -19,6 +22,13 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     RouterModule.forChild(routes),
     FileUploadModule,
     MyCommonModule

@@ -7,6 +7,9 @@ import { TabsPageRoutingModule } from './tabs.router.module';
 import { IonicModule } from '@ionic/angular';
 
 import { TabsPage } from './tabs.page';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {createTranslateLoader} from '../../app.module';
+import {HttpClient} from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -19,6 +22,13 @@ const routes: Routes = [
   imports: [
     CommonModule,
     TabsPageRoutingModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)

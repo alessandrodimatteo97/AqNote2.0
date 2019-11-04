@@ -7,8 +7,10 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {MyCommonModule} from '../../my-common/my-common.module';
 import { IonicModule } from '@ionic/angular';
 
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { UserProfilePage } from './user-profile.page';
-
+import {createTranslateLoader} from '../../app.module';
+import {HttpClient} from '@angular/common/http';
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +23,13 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     ReactiveFormsModule,
     FileUploadModule,
     MyCommonModule,

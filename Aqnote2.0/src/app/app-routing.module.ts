@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+  //  { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+    { path: '', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
+
     { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
-    { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
+   // { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
  // { path: 'image-modal', loadChildren: './pages/image-modal/image-modal.module#ImageModalPageModule' },
   { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
   { path: 'user-profile', loadChildren: './pages/user-profile/user-profile.module#UserProfilePageModule' },
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'base64-encode', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' },
  // { path: 'common', loadChildren: './common/common.module#CommonPageModule' },
   { path: 'upload-photo/:idS/:idN', loadChildren: './pages/upload-photo/upload-photo.module#UploadPhotoPageModule' },
+  { path: 'splash-screen', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
 ];
 
 @NgModule({

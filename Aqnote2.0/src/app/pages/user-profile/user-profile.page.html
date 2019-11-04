@@ -84,12 +84,24 @@
         </ion-row>
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-
+        <ion-item>
+          <ion-label>DegreeCourse</ion-label>
           <ion-select placeholder="DegreeCourse" value="{{this.prova}}" formControlName="cdl_id">
             <ion-select-option *ngFor="let Dc of cdl$ | async" value="{{Dc.idDC}}"> {{Dc.nameDC}}</ion-select-option>
           </ion-select>
+        </ion-item>
           </ion-col>
         </ion-row>
+
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-item>
+           <ion-label>{{ 'LANGUAGE' | translate }}</ion-label> <ion-toggle checked (ionChange)="changeLanguage()"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
         <ion-button  size="large" type="submit" (click)="modify()" expand="block">Modify </ion-button>
       </ion-grid>
     </form>
@@ -217,48 +229,80 @@
   </div>
   <div *ngSwitchCase="'notes'">
    <ion-list>
-     <ion-item>
-       <ion-label>
-         <h1>Zia Pinetta<span class="delete-span">  <ion-icon name="trash"></ion-icon> </span></h1>
-         <p>Numero di pagine 19</p>
-         <p>Numero di commenti 127</p>
-         <p>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-         </p>
+     <ion-item *ngFor="let note of notes$ | async" >
+       <ion-label >
+         <h1 >{{note.title}}<span class="delete-span"><ion-icon name="information-circle"[routerLink]="['/note-detail']" [queryParams]="note"></ion-icon><ion-icon name="create" (click)="navigate(note, $event)"></ion-icon>  <ion-icon name="trash" (click)="navigate(note, $event)"></ion-icon> </span></h1>
+         <p>Numero di pagine {{note.pages}}</p>
+         <p>Numero di commenti {{note.comment}}</p>
+         <div *ngIf="((note.likes | number:'1.0-0'))==0">
+
+           <p>
+
+             <ion-icon name="star" color=""></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+           </p>
+         </div>
+         <div *ngIf="((note.likes | number:'1.0-0'))==1">
+
+           <p>
+
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+           </p>
+         </div>
+         <div *ngIf="((note.likes | number:'1.0-0'))==2">
+
+           <p>
+
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+           </p>
+         </div>
+         <div *ngIf="((note.likes | number:'1.0-0'))==3">
+
+           <p>
+
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+           </p>
+         </div>
+         <div *ngIf="((note.likes | number:'1.0-0'))==4">
+
+           <p>
+
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" ></ion-icon>
+           </p>
+         </div>
+         <div *ngIf="((note.likes | number:'1.0-0'))==5">
+
+           <p>
+
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+             <ion-icon name="star" color="primary"></ion-icon>
+           </p>
+         </div>
        </ion-label>
      </ion-item>
-     <ion-item>
-       <ion-label>
-         <h1>Zia Pinetta<span class="delete-span">  <ion-icon name="close"></ion-icon> </span></h1>
-         <p>Numero di pagine 19</p>
-         <p>Numero di commenti 127</p>
-         <p>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-         </p>
-       </ion-label>
-     </ion-item>
-     <ion-item>
-       <ion-label>
-         <h1>Zia Pinetta<span class="delete-span">  <ion-icon name="trash"></ion-icon> </span></h1>
-         <p>Numero di pagine 19</p>
-         <p>Numero di commenti 127</p>
-         <p>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-           <ion-icon name="star" color="primary"></ion-icon>
-         </p>
-       </ion-label>
-     </ion-item>
+
    </ion-list>
 </div>
 </div>

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -13,15 +14,23 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private translate: TranslateService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+     // this.splashScreen.show();
+      this.initTranslate();
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+     // this.splashScreen.hide();
     });
+  }
+
+  initTranslate() {
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
   }
 }

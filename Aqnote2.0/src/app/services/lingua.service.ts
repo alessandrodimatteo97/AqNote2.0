@@ -28,6 +28,7 @@ export class LinguaService {
   }
 
   getLinguaPreferita(): string {
+
     return this.italiano.valore;
   }
 

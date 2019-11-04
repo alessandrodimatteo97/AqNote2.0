@@ -14,7 +14,7 @@ export const URL = {
     UPLOADIMAGEPROFILE: URL_BASE + '/image/profile/upload',
     UPDATE: URL_BASE + '/update',
     UPLOAD_NOTE: URL_BASE + '/notes/upload',
-    HOME: URL_BASE + '/homepage/informatica',
+    HOME: URL_BASE + '/homepage',
     FAVOURITE: URL_BASE + '/favourites',
     NAMESFAVOURITES: URL_BASE + '/nameSFavourites',
     NOTE_DETAIL: URL_BASE + '/notes',
@@ -27,7 +27,9 @@ export const URL = {
     DELETE_PHOTO: URL_BASE + '/photos/delete',
     ADD_TO_FAVOURITE: URL_BASE + '/add-favourite',
     REMOVE_FAVOURITE: URL_BASE + '/remove-favourite',
-    CHECK_FAVOURITE: URL_BASE + '/check-favourite'
+    CHECK_FAVOURITE: URL_BASE + '/check-favourite',
+    GETNOTESUSER: URL_BASE + '/profile/notes',
+    DELETE_NOTE: URL_BASE + '/delete/note'
 };
 
 export const X_AUTH = 'Authorization';
