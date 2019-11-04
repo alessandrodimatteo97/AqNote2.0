@@ -21,12 +21,15 @@ export interface CommentToUpdate {
 }
 
 export interface NoteDetailForList {
+  title: string;
+  description: string;
   name: string;
   surname: string;
   pages: number;
   comments: number;
   avarage: number;
   idN: number;
+  myImg: string;
 }
 
 export interface PhotoSrc {
@@ -39,6 +42,7 @@ export interface CommentToLoad {
   titleC: string;
   text: string;
   like: string;
+  myImg: string;
 }
 
 export interface NoteDetail {

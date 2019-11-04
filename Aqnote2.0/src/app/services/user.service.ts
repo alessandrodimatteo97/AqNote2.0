@@ -17,8 +17,6 @@ export interface Account {
   password: string;
   repeatPassword: string;
 }
-
-
 export interface Image {
     image: string;
 }
@@ -30,9 +28,16 @@ export interface AccountUpdate {
 }
 
 export interface LoginAccount {
-  email: string;
-  password: string;
-
+    email: string;
+    password: string;
+}
+export interface MyComment {
+    titleC: string;
+    text: string;
+    like: number;
+    title: string;
+    name: string;
+    surname: string;
 }
 
 export interface Notes {
@@ -160,6 +165,11 @@ export class UserService {
 
   isLogged(): Observable<boolean> {
     return this.loggedIn$.asObservable();
+  }
+
+  getUserComments(): Observable<MyComment[]> {
+      const url = `${URL.GET_USER_COMMENTS}`;
+      return this.http.get<MyComment[]>(url);
   }
 
 

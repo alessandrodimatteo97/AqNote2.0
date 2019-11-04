@@ -9,6 +9,7 @@
 <ion-content>
   <div id="content">
     <div id="profile-info">
+
     <div *ngIf="(image | async) as img; else Goon" ><img id="profile-image" [src]="transform(img)"></div>
 
       <ng-template #Goon>
@@ -21,13 +22,14 @@
         <img id="profile-image" src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
 
       </ng-template>
-      <ion-badge  slot="end"> <div class="file-input-container">
-       <label>
-         <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" (onFileSelected)="UploadItem($event)"/>
-         Add Files
-       </label>
-     </div>
-     </ion-badge>
+      <ion-badge  slot="end">
+        <div class="file-input-container">
+          <label class="border-radius">
+            <ion-icon size="large" name="images"></ion-icon>
+            <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" (onFileSelected)="UploadItem($event)"/>
+          </label>
+        </div>
+      </ion-badge>
       <h3 id="profile-name">{{this.fullName}}</h3>
     </div>
   </div>
@@ -106,125 +108,144 @@
       </ion-grid>
     </form>
   </div>
-  <div *ngSwitchCase="'comments'">
+
+  <div *ngSwitchCase="'comments'" >
     <ion-list>
       <ion-list-header>
         I tuoi commenti
       </ion-list-header>
-
-
-      <ion-item>
+      <ion-item *ngFor="let comment of comments | async ">
         <ion-avatar slot="start">
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
         </ion-avatar>
         <ion-grid>
-          <ion-row >
+          <ion-row>
             <ion-col>
-              <h3>Marco Rossi</h3>
+              <h3 class="comment-title">{{comment.title}} </h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p class="written-by"> Scritto da: {{comment.name}} {{comment.surname}}</p>
             </ion-col>
           </ion-row>
           <ion-row class="modified-row">
             <ion-col>
-              <h5>Titolo del mio commento</h5>
+              <h5>{{comment.titleC}}</h5>
             </ion-col>
           </ion-row>
           <ion-row class="modified-row">
             <ion-col>
               <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
+                {{comment.text}}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p class="paragraph-star" *ngIf="comment.like == '1'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '2'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '3'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '4'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '5'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
               </p>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
-
-      <ion-item>
+      <!-- <ion-item *ngFor="let comment of comments | async">
         <ion-avatar slot="start">
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
         </ion-avatar>
         <ion-grid>
-          <ion-row >
+          <ion-row>
             <ion-col>
-              <h3>Marco Rossi</h3>
+              <h5 class="comment-title" >{{fullName}}</h5>
             </ion-col>
           </ion-row>
-          <ion-row class="modified-row">
+          <ion-row>
             <ion-col>
-              <h5>Titolo del mio commento</h5>
+              <h6 class="comment-title" >{{comment.titleC}}</h6>
             </ion-col>
           </ion-row>
-          <ion-row class="modified-row">
+          <ion-row>
             <ion-col>
               <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
+                {{comment.text}}
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p class="paragraph-star" *ngIf="comment.like == '1'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '2'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '3'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '4'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color=""></ion-icon>
+              </p>
+              <p class="paragraph-star" *ngIf="comment.like == '5'">
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
               </p>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-        </ion-avatar>
-        <ion-grid>
-          <ion-row >
-            <ion-col>
-              <h3>Marco Rossi</h3>
-            </ion-col>
-          </ion-row>
-          <ion-row class="modified-row">
-            <ion-col>
-              <h5>Titolo del mio commento</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row class="modified-row">
-            <ion-col>
-              <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-        </ion-avatar>
-        <ion-grid>
-          <ion-row >
-            <ion-col>
-              <h3>Marco Rossi</h3>
-            </ion-col>
-          </ion-row>
-          <ion-row class="modified-row">
-            <ion-col>
-              <h5>Titolo del mio commento</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row class="modified-row">
-            <ion-col>
-              <p class="comment">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Beatae iusto omnis ratione similique.
-                Alias dolore error harum illum, laudantium libero magni praesentium quaerat quis
-                recusandae reiciendis suscipit vero voluptates. Nobis.
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
+-->
     </ion-list>
   </div>
   <div *ngSwitchCase="'notes'">

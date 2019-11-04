@@ -63,6 +63,7 @@ export class NoteDetailPage implements OnInit {
       stars: new FormControl()
     });
     this.userLogged$ = this.userService.getUtente();
+    console.log(this.userLogged$.value.idU);
     this.activateRoute.queryParams.subscribe(params => {
       console.log(params.idN);
       this.photo$ = this.noteService.showImage(params.idN);

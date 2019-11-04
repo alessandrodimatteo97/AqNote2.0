@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountUpdate, Image, Notes, UserService} from '../../services/user.service';
+import {AccountUpdate, Image,Notes, MyComment, UserService} from '../../services/user.service';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CdlService} from '../../services/cdl.service';
 import {Observable} from 'rxjs';
@@ -20,6 +20,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 export class UserProfilePage implements OnInit {
   private cdl$: Observable<DegreeCourse[]>;
+  private comments: Observable<MyComment[]>;
   private userFormModel: FormGroup;
   private prova;
   private image: Observable<string>;
@@ -42,7 +43,6 @@ export class UserProfilePage implements OnInit {
               private translateService: TranslateService) {
 
   }
-
   segment: string;
 
   ionViewWillEnter() {
@@ -50,6 +50,10 @@ export class UserProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.comments = this.userService.getUserComments();
+    this.comments.subscribe(res => {
+      console.log(res);
+    });
     this.lingue = this.linguaService.getLingue();
     this.cdl$ = this.cdlService.list();
     this.userService.getUtente().subscribe(user => {
@@ -64,11 +68,10 @@ export class UserProfilePage implements OnInit {
         cdl_id: new FormControl(user.cdl_id)
       });
     });
-    // const authToken = this.userService.getAuthToken();
-    //  console.log(authToken);
-    //   this.userService.getUtente().subscribe(u=>console.log(u));
+   // const authToken = this.userService.getAuthToken();
+  //  console.log(authToken);
+ //   this.userService.getUtente().subscribe(u=>console.log(u));
   }
-
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
@@ -79,19 +82,19 @@ export class UserProfilePage implements OnInit {
     console.log(this.userFormModel.value);
     this.account = this.userFormModel.value;
     this.userService.update(this.account).subscribe(res => {
-      this.userFormModel.value.cdl_id = res.cdl_id;
+    this.userFormModel.value.cdl_id = res.cdl_id;
       // deve aggiornare i valori...
-    });
+        });
   }
 
   UploadItem(item) {
-    const file = new FileLikeObject(item[0]);
+    let file = new FileLikeObject(item[0]);
     const formData = new FormData();
     formData.append('file', file.rawFile, file.name);
-    this.userService.sendImage(formData).subscribe(res => {
+    this.userService.sendImage(formData).subscribe(res=>{
       console.log(res);
-    });
-    // this.image = this.userService.getImage();
+          });
+   // this.image = this.userService.getImage();
     this.image = null;
     this.proof = this.fileUploader.queue.pop();
   }

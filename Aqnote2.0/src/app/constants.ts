@@ -1,6 +1,6 @@
 export const USE_PROXY = true;
 
-export const URL_BASE = USE_PROXY ? '/api' : 'http://10.170.65.21:12345/api';
+export const URL_BASE = USE_PROXY ? '/api' : 'http://172.27.25.142:12345/api';
 
 export const URL = {
     DEPARTMENTS: URL_BASE + '/department',
@@ -29,7 +29,8 @@ export const URL = {
     REMOVE_FAVOURITE: URL_BASE + '/remove-favourite',
     CHECK_FAVOURITE: URL_BASE + '/check-favourite',
     GETNOTESUSER: URL_BASE + '/profile/notes',
-    DELETE_NOTE: URL_BASE + '/delete/note'
+    DELETE_NOTE: URL_BASE + '/delete/note',
+    GET_USER_COMMENTS: URL_BASE + '/get-user-comments'
 };
 
 export const X_AUTH = 'Authorization';

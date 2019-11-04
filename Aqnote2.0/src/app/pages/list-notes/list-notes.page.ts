@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   selector: 'app-list-notes',
   templateUrl: './list-notes.page.html',
@@ -14,13 +15,21 @@ export class ListNotesPage implements OnInit {
   private notes$: Observable<NoteDetailForList[]>;
   private name: string;
 
-  constructor(private noteService: NoteService, private http: HttpClient, private router: Router, private activateRoute: ActivatedRoute) {
+  constructor(private sanitizer: DomSanitizer,
+              private noteService: NoteService, private http: HttpClient, private router: Router, private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {
       this.name = params['key'];
       this.notes$ = this.noteService.list(params['key']); // INIZIALIZZA LE NOTE DELLA MATERIA
+      this.notes$.subscribe( res => {
+        console.log(res);
+      });
     });
+  }
+
+  transform(c) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
 }
