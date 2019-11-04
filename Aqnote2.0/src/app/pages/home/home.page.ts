@@ -4,6 +4,7 @@ import {SubjectService} from '../../services/subject.service';
 import {Subject} from '../../model/Subject.model';
 import {Observable} from 'rxjs';
 import {UserService} from '../../services/user.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,10 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  private subject$: Observable<Subject[]>;
 
-  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService) {
+  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private activatedRoute: ActivatedRoute) {
   }
+  private subject$: Observable<Subject[]>;
   segment: string;
   sliderOpts = {
     zoom: false,
@@ -22,17 +23,22 @@ export class HomePage implements OnInit {
     spaceBetween: 20,
     centeredSlides: true
   };
-
-  ngOnInit() {
-     this.segment = '1';
-     this.subject$ = this.subjectService.listHome(this.userService.getUtente().value.cdl_id);
-  }
     // this.subjectService.listHome().subscribe
 
 
 
 
   private activeTabName: string;
+
+  ngOnInit() {
+     this.segment = '1';
+     let id;
+     this.activatedRoute.params.subscribe(p => id = p.id);
+     if (id === undefined) { this.subject$ = this.subjectService.listHome(this.userService.getUtente().value.cdl_id); } else {
+       this.subject$ = this.subjectService.listHome(id);
+     }
+
+  }
 
   ionViewWillEnter() {
     this.segment = '1';

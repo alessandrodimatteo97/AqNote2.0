@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'home',
         children: [
           {
-            path: '',
+            path: ':id',
             loadChildren: '../home/home.module#HomePageModule'
           },
           {
