@@ -15,5 +15,5 @@ export class CdlService {
     const cdlUrl = `${URL.CDL}/`;
 
     return this.http.get<DegreeCourse[]>(cdlUrl);
-};
+}
 }

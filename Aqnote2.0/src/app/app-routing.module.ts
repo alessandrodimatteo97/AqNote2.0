@@ -6,7 +6,7 @@ const routes: Routes = [
     { path: '', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
 
     { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
-   // { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
+    { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
  // { path: 'image-modal', loadChildren: './pages/image-modal/image-modal.module#ImageModalPageModule' },
   { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
   { path: 'user-profile', loadChildren: './pages/user-profile/user-profile.module#UserProfilePageModule' },

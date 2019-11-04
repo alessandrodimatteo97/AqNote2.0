@@ -3,6 +3,7 @@ import {MenuController, ModalController} from '@ionic/angular';
 import {SubjectService} from '../../services/subject.service';
 import {Subject} from '../../model/Subject.model';
 import {Observable} from 'rxjs';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import {Observable} from 'rxjs';
 export class HomePage implements OnInit {
   private subject$: Observable<Subject[]>;
 
-  constructor(private menu: MenuController, private modalController: ModalController, private subjectService: SubjectService) {
+  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService) {
   }
   segment: string;
   sliderOpts = {
@@ -24,7 +25,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
      this.segment = '1';
-     this.subject$ = this.subjectService.listHome(17);
+     this.subject$ = this.subjectService.listHome(this.userService.getUtente().value.cdl_id);
   }
     // this.subjectService.listHome().subscribe
 
