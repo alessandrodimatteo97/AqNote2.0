@@ -73,6 +73,7 @@ export class SignInPage implements OnInit {
   onDCSelect($event) {
     // let cdl = this.signUpFormModel.get('cdl').value;
     console.log($event.target.value);
+    this.router.navigate(['tabs/home/' + $event.target.value ]);
   }
 
   onSignUp() {

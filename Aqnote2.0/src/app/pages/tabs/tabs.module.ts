@@ -33,6 +33,10 @@ const routes: Routes = [
             loadChildren: '../home/home.module#HomePageModule'
           },
           {
+            path: '',
+            loadChildren: '../home/home.module#HomePageModule'
+          },
+          {
             path: 'list-notes/:id',
             children: [
               {
