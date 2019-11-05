@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-card class="cards" *ngFor="let note of notes$ | async">
-    <ion-item [routerLink]="['/note-detail'] " [queryParams]="note">
+    <ion-item [routerLink]="['note-detail/'+note.idN] ">
       <ion-row>
         <ion-col size="3"  class="image-col">
           <ion-thumbnail><img [src]="transform(note.myImg)" alt="none"></ion-thumbnail>

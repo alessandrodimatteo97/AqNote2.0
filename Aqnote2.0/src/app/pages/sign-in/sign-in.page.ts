@@ -43,8 +43,10 @@ export class SignInPage implements OnInit {
     const loginAccount: LoginAccount = this.loginFormModel.value;
     this.userService.login(loginAccount).subscribe(() => {
           this.loginFormModel.reset();
-          console.log(this.userService.getUtente().getValue().cdl_id);
-          this.navController.navigateRoot('/tabs/home'); //  + this.userService.getUtente().getValue().cdl_id );
+          let cdl = this.userService.getUtente().getValue().cdl_id;
+         // this.storage.set('id', )
+          console.log(cdl);
+          this.navController.navigateRoot(['/tabs/home']); //  + this.userService.getUtente().getValue().cdl_id );
         },
         (err: HttpErrorResponse) => {
           if (err.status === 401) {
@@ -73,7 +75,8 @@ export class SignInPage implements OnInit {
   onDCSelect($event) {
     // let cdl = this.signUpFormModel.get('cdl').value;
     console.log($event.target.value);
-    this.router.navigate(['tabs/home/' + $event.target.value ]);
+    this.storage.set('cdl', $event.target.value);
+    this.router.navigate(['tabs/home/']);
   }
 
   onSignUp() {

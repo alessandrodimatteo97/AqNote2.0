@@ -5,6 +5,7 @@ import {Subject} from '../../model/Subject.model';
 import {Observable} from 'rxjs';
 import {UserService} from '../../services/user.service';
 import {ActivatedRoute} from '@angular/router';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class HomePage implements OnInit {
 
-  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private activatedRoute: ActivatedRoute) {
+  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private storage: Storage) {
   }
   private subject$: Observable<Subject[]>;
   segment: string;
@@ -31,13 +32,17 @@ export class HomePage implements OnInit {
   private activeTabName: string;
 
   ngOnInit() {
-     this.segment = '1';
-     let id;
-     this.activatedRoute.params.subscribe(p => id = p.id);
-     if (id === undefined) { this.subject$ = this.subjectService.listHome(this.userService.getUtente().value.cdl_id); } else {
-       this.subject$ = this.subjectService.listHome(id);
-     }
+      this.segment = '1';
+      // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
+      this.storage.get('cdl').then(cdl => {
+          if (cdl === null || cdl === undefined) {
+              this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
 
+          } else {
+              this.subject$ = this.subjectService.listHome(cdl);
+
+          }
+      });
   }
 
   ionViewWillEnter() {

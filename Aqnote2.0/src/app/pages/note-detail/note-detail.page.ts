@@ -64,9 +64,9 @@ export class NoteDetailPage implements OnInit {
     });
     this.userLogged$ = this.userService.getUtente();
     console.log(this.userLogged$.value.idU);
-    this.activateRoute.queryParams.subscribe(params => {
-      console.log(params.idN);
-      this.photo$ = this.noteService.showImage(params.idN);
+    this.activateRoute.params.subscribe(params => {
+      console.log(params.id);
+      this.photo$ = this.noteService.showImage(params.id);
     });
   }
   /*{
@@ -194,8 +194,8 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 0;
-    this.activateRoute.queryParams.subscribe(params => {
-    this.noteService.updateComment(comment, params.idN).subscribe(res  => {
+    this.activateRoute.params.subscribe(params => {
+    this.noteService.updateComment(comment, params.id).subscribe(res  => {
       this.formComment.setValue({titleC: '', comment: '' , stars: this.numberStar});
       this.loadComments();
     });
@@ -204,25 +204,25 @@ ionViewWillEnter() {
   }
 
   loadDetails() {
-    this.activateRoute.queryParams.subscribe(params => {
+    this.activateRoute.params.subscribe(params => {
       // Defaults to 0 if no query param provided.
-      console.log(params.idN);
-      this.note = this.noteService.showNote(params.idN);
+      console.log(params.id);
+      this.note = this.noteService.showNote(params.id);
       this.note.subscribe(resp => {
         console.log(resp);
       });
-      this.noteService.checkFavourites(this.userLogged$, params.idN).subscribe( res => {
+      this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
         this.favButton = res.body['body'];
       });
     });
   }
 
   loadComments() {
-    this.activateRoute.queryParams.subscribe(params => {
+    this.activateRoute.params.subscribe(params => {
       // Defaults to 0 if no query param provided.
       console.log("commenti");
-      this.comments = this.noteService.showNotesComments(params.idN);
-      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.idN);
+      this.comments = this.noteService.showNotesComments(params.id);
+      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
       this.alreadyCommented$.subscribe(res => {
         console.log( 'true non commentato, false commentato');
         this.commented$ = res.body['body'];
@@ -233,15 +233,15 @@ ionViewWillEnter() {
   addToFavourite($event) {
     console.log(this.favButton);
     if (this.favButton === 'light') {
-      this.activateRoute.queryParams.subscribe(params => {
-        this.noteService.addToFavourite(this.userLogged$, params.idN).subscribe(res => {
+      this.activateRoute.params.subscribe(params => {
+        this.noteService.addToFavourite(this.userLogged$, params.id).subscribe(res => {
           this.favButton = res.body['body'];
         });
       });
     }
     if (this.favButton === 'medium') {
-      this.activateRoute.queryParams.subscribe(params => {
-        this.noteService.removeFromFavourite(this.userLogged$, params.idN).subscribe(res => {
+      this.activateRoute.params.subscribe(params => {
+        this.noteService.removeFromFavourite(this.userLogged$, params.id).subscribe(res => {
           this.favButton = res.body['body'];
         });
       });

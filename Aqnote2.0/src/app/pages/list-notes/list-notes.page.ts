@@ -20,13 +20,18 @@ export class ListNotesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.activateRoute.queryParams.subscribe(params => {
-      this.name = params['key'];
-      this.notes$ = this.noteService.list(params['key']); // INIZIALIZZA LE NOTE DELLA MATERIA
+    this.activateRoute.params.subscribe(params => {
+      this.name = params.id;
+      console.log(params);
+      console.log(params.id);
+     this.notes$ = this.noteService.list(params.id); // INIZIALIZZA LE NOTE DELLA MATERIA
       this.notes$.subscribe( res => {
         console.log(res);
       });
+
+
     });
+
   }
 
   transform(c) {

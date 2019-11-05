@@ -18,7 +18,7 @@
 
 
 
-          <ion-item *ngFor='let obj of s.value'   [routerLink]="['/tabs/home/note-detail']">
+          <ion-item *ngFor='let obj of s.value'   [routerLink]="['note-detail/'+obj.id]">
             <ion-label>
               <h1> {{ obj.title }}</h1>
               <p>Numero di pagine 19</p>

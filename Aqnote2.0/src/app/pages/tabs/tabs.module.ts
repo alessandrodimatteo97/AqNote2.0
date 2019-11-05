@@ -22,37 +22,36 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../favourites/favourites.module#FavouritesPageModule'
-          }
+          },
+            {
+                path: 'note-detail/:id',
+                loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
+            }
         ]
       },
       {
         path: 'home',
         children: [
           {
-            path: ':id',
-            loadChildren: '../home/home.module#HomePageModule'
-          },
-          {
             path: '',
             loadChildren: '../home/home.module#HomePageModule'
           },
           {
             path: 'list-notes/:id',
-            children: [
-              {
-                path: 'list-notes/:id',
-                loadChildren: '../list-notes/list-notes.module#ListNotesPageModule'
-              }
-            ]
+              children: [
+                  {
+                      path: '',
+                      loadChildren: '../list-notes/list-notes.module#ListNotesPageModule'
+                  },
+                  {
+                      path: 'note-detail/:id',
+                      loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
+                  }
+              ]
           },
           {
             path: 'note-detail/:id',
-            children: [
-              {
-                path: 'note-detail/:id',
-                loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
-              }
-            ]
+            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
           }
         ]
       }
@@ -61,7 +60,7 @@ const routes: Routes = [
         path: 'upload-note',
         children: [
           {
-            path: 'upload-note',
+            path: '',
             loadChildren: '../upload-note/upload-note.module#UploadNotePageModule'
           }/*,
           {
@@ -80,33 +79,24 @@ const routes: Routes = [
         path: 'user-profile',
         children: [
           {
-            path: 'user-profile',
+            path: '',
             loadChildren: '../user-profile/user-profile.module#UserProfilePageModule'
           }
         ]
       },
+        {
+            path: '',
+            redirectTo: '/tabs/home',
+            pathMatch: 'full'
+        }
     ]
-  },
-
-  {
-    path: '',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full'
   }
-
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    TabsPageRoutingModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule.forChild(),
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
