@@ -22,7 +22,7 @@
   </ion-slides >
 
     <ion-toolbar>
-      <ion-segment [(ngModel)]="segment" class="card-content" scrollable>
+      <ion-segment [(ngModel)]="segment" [value]="'detail'" class="card-content"  scrollable >
         <ion-segment-button value="detail" color="primary" checked layout="icon-end" (click)=loadDetails()>
           <ion-label color="secondary">Dettagli</ion-label>
         </ion-segment-button>
