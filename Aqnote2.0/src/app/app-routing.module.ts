@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   //  { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
-    { path: '', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
+    { path: '', loadChildren: './pages/splash-screen/splash-screen.module#SplashScreenPageModule' },
 
     { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
     { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},

@@ -116,7 +116,18 @@
       </ion-list-header>
       <ion-item *ngFor="let comment of comments | async ">
         <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+          <div *ngIf="(image | async) as img; else Goon" ><img [src]="transform(img)"></div>
+
+          <ng-template #Goon>
+            <ng-container *ngIf="proof; else Goon1">
+              <img mediaPreview [media]="this.proof._file">
+            </ng-container>
+          </ng-template>
+
+          <ng-template #Goon1>
+            <img  src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
+
+          </ng-template>
         </ion-avatar>
         <ion-grid>
           <ion-row>
@@ -252,7 +263,7 @@
    <ion-list>
      <ion-item *ngFor="let note of notes$ | async" >
        <ion-label >
-         <h1 >{{note.title}}<span class="delete-span"><ion-icon name="information-circle"[routerLink]="['/note-detail']" [queryParams]="note"></ion-icon><ion-icon name="create" (click)="navigate(note, $event)"></ion-icon>  <ion-icon name="trash" (click)="navigate(note, $event)"></ion-icon> </span></h1>
+         <h1 >{{note.title}}<span class="delete-span"><ion-icon name="information-circle"[routerLink]="['note-detail/'+note.idN]" ></ion-icon><ion-icon name="create" (click)="navigate(note, $event)"></ion-icon>  <ion-icon name="trash" (click)="navigate(note, $event)"></ion-icon> </span></h1>
          <p>Numero di pagine {{note.pages}}</p>
          <p>Numero di commenti {{note.comment}}</p>
          <div *ngIf="((note.likes | number:'1.0-0'))==0">

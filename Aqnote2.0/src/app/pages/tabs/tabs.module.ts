@@ -2,14 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { TabsPageRoutingModule } from './tabs.router.module';
-
 import { IonicModule } from '@ionic/angular';
 
 import { TabsPage } from './tabs.page';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {createTranslateLoader} from '../../app.module';
-import {HttpClient} from '@angular/common/http';
+
 
 const routes: Routes = [
   {
@@ -62,16 +59,11 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../upload-note/upload-note.module#UploadNotePageModule'
-          }/*,
+          },
           {
-            path: 'upload-photo',
-            children: [
-              {
-                path: 'upload-photo',
-                loadChildren: '../upload-photo/upload-photo.module#UploadPhotoPageModule'
-
-            ]
-          }*/
+            path: 'note-detail/:id',
+            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
+          }
         ]
       },
 
@@ -81,6 +73,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../user-profile/user-profile.module#UserProfilePageModule'
+          },
+          {
+            path: 'note-detail/:id',
+            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
           }
         ]
       },
