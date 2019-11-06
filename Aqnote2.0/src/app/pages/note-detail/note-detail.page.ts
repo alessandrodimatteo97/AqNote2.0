@@ -42,7 +42,7 @@ export class NoteDetailPage implements OnInit {
   constructor(private modalController: ModalController, private userService: UserService, private modalCtrl: ModalController,
               private noteService: NoteService, private sanitizer: DomSanitizer,
               private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
-  segment: string;
+  segment = 'detail';
   slideOpts$ = {
     slidesPerView: 2
   };
@@ -67,6 +67,14 @@ export class NoteDetailPage implements OnInit {
     this.activateRoute.params.subscribe(params => {
       console.log(params.id);
       this.photo$ = this.noteService.showImage(params.id);
+      console.log(params.id);
+      this.note = this.noteService.showNote(params.id);
+      this.note.subscribe(resp => {
+        console.log(resp);
+      });
+      this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
+        this.favButton = res.body['body'];
+      });
     });
   }
   /*{
@@ -115,7 +123,7 @@ export class NoteDetailPage implements OnInit {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
 ionViewWillEnter() {
-    this.segment = 'data';
+    this.segment = 'detail';
   }
 
   starOne(event) {
@@ -204,6 +212,8 @@ ionViewWillEnter() {
   }
 
   loadDetails() {
+    console.log(this.segment);
+
     this.activateRoute.params.subscribe(params => {
       // Defaults to 0 if no query param provided.
       console.log(params.id);
@@ -218,6 +228,7 @@ ionViewWillEnter() {
   }
 
   loadComments() {
+    console.log(this.segment);
     this.activateRoute.params.subscribe(params => {
       // Defaults to 0 if no query param provided.
       console.log("commenti");
