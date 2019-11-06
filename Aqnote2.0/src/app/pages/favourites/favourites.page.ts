@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {MenuController, ModalController} from '@ionic/angular';
 import {SubjectService} from '../../services/subject.service';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -20,8 +20,9 @@ export class FavouritesPage implements OnInit {
                 private modalController: ModalController,
                 private subjectService: SubjectService) {}
 
+    ngOnInit() {}
 
-    ngOnInit() {
+    ionViewWillEnter() {
         this.userService.getUtente().subscribe(res => {
             this.d$ = this.subjectService.listFavourite(res.idU);
         });
