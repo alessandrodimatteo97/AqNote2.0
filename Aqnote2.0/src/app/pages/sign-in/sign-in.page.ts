@@ -76,7 +76,7 @@ export class SignInPage implements OnInit {
     // let cdl = this.signUpFormModel.get('cdl').value;
     console.log($event.target.value);
     this.storage.set('cdl', $event.target.value);
-    this.router.navigate(['tabs/home/']);
+    this.router.navigate(['tabs/']);
   }
 
   onSignUp() {

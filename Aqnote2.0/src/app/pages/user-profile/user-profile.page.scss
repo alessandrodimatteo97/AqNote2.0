@@ -20,7 +20,7 @@
 
 ion-row {
   background-color:  #F5F5F5;
-  margin-top: 0px;
+  margin-top: -16px;
   margin-bottom: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
@@ -29,7 +29,7 @@ ion-col {
   align-self: center;
   margin-top: 0px;
   margin-bottom: 0px;
-  padding-top: 0px;
+  padding-top: -5px;
   padding-bottom: 0px;
 }
 
@@ -42,7 +42,7 @@ ion-grid {
 
 
 .comment {
-  font-size: 10px;
+  font-size: 15px;
 }
 
 .modified-row {
@@ -79,11 +79,17 @@ ion-grid {
   top: -65%;
   width: 100%;
   z-index: 2;
-  text-align: center;
+ // text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 #profile-name {
   color: #444;
   font-size: 26px;
+  align-self: center;
+  width: 100%;
+  text-align: center;
+  margin-top: -6px;
 }
 #profile-description {
   font-size: 15px;
@@ -94,19 +100,23 @@ ion-grid {
 }
 
 #profile-image {
-  display: block;
   border-radius: 100px;
   border: 1px solid #fff;
   width: 128px;
   height: 128px;
   margin: 30px auto 0;
   box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
-
+  left: 125px;
+  position: relative;
+  display: unset;
 }
 
 img {
-  border-radius: 50%;
+  border-radius: 100%;
   max-width: 100%;
+  display: block;
+  width: 40px;
+  height: 40px;
 }
 
 .text {
@@ -140,9 +150,9 @@ input[type="file"] {
 }
 
 .written-by {
-  font-size: 50%;
+ // font-size: 50%;
   color: #2f2f2f;
-  text-align: center;
+ // text-align: center;
 }
 
 .comment-title {
@@ -159,5 +169,30 @@ ion-slides {
     padding-bottom: 10px;
     max-width: 100%;
   }
+
+
+
+
+}
+.badge {
+  flex-grow: 6;
+  flex-shrink: 4;
+  max-height: 40px;
+  align-self: center;
+  border-left: 500px;
+  width: 10px;
+  margin: 20px;
+  max-width: 70px;
 }
 
+.flexbox {
+  flex-grow: 6;
+}
+
+ion-input {
+  font-size: 19px;
+}
+
+ion-label {
+  font-size: 21px;
+}

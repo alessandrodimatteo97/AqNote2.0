@@ -65,7 +65,7 @@ export class UserProfilePage implements OnInit {
         mail: new FormControl(user.mail),
         OldPassword: new FormControl(),
         Newpassword: new FormControl(),
-        cdl_id: new FormControl(user.cdl_id)
+        cdl_id: new FormControl(String(user.cdl_id))
       });
     });
    // const authToken = this.userService.getAuthToken();
@@ -81,9 +81,15 @@ export class UserProfilePage implements OnInit {
   modify() {
     console.log(this.userFormModel.value);
     this.account = this.userFormModel.value;
+    console.log(this.account);
+    console.log(this.userFormModel.get('cdl_id').value);
     this.userService.update(this.account).subscribe(res => {
-    this.userFormModel.value.cdl_id = res.cdl_id;
+  //  this.userFormModel.value.cdl_id = res.cdl_id;
+      this.userFormModel.get('cdl_id').setValue(String(res.cdl_id));
       // deve aggiornare i valori...
+    //  this.userFormModel.controls.cdl_id.setValue(res.cdl_id);
+      this.prova = res.cdl_id;
+      console.log(this.prova);
         });
   }
 

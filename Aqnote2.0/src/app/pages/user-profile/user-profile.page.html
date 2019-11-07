@@ -9,7 +9,7 @@
 <ion-content>
   <div id="content">
     <div id="profile-info">
-
+<div class="flexbox">
     <div *ngIf="(image | async) as img; else Goon" ><img id="profile-image" [src]="transform(img)"></div>
 
       <ng-template #Goon>
@@ -22,7 +22,8 @@
         <img id="profile-image" src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
 
       </ng-template>
-      <ion-badge  slot="end">
+</div>
+      <ion-badge  slot="end" class="badge">
         <div class="file-input-container">
           <label class="border-radius">
             <ion-icon size="large" name="images"></ion-icon>
@@ -50,7 +51,7 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-
+<br/>
 
 <div [ngSwitch]="segment">
   <div *ngSwitchCase="'data'">
@@ -88,7 +89,7 @@
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <ion-item>
           <ion-label>DegreeCourse</ion-label>
-          <ion-select placeholder="DegreeCourse" value="{{this.prova}}" formControlName="cdl_id">
+          <ion-select placeholder="DegreeCourse"  formControlName="cdl_id">
             <ion-select-option *ngFor="let Dc of cdl$ | async" value="{{Dc.idDC}}"> {{Dc.nameDC}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -111,21 +112,18 @@
 
   <div *ngSwitchCase="'comments'" >
     <ion-list>
-      <ion-list-header>
-        I tuoi commenti
-      </ion-list-header>
       <ion-item *ngFor="let comment of comments | async ">
         <ion-avatar slot="start">
-          <div *ngIf="(image | async) as img; else Goon" ><img [src]="transform(img)"></div>
+          <div *ngIf="(image | async) as img; else Goon" ><img class="image" [src]="transform(img)"></div>
 
           <ng-template #Goon>
             <ng-container *ngIf="proof; else Goon1">
-              <img mediaPreview [media]="this.proof._file">
+              <img class="image" mediaPreview [media]="this.proof._file">
             </ng-container>
           </ng-template>
 
           <ng-template #Goon1>
-            <img  src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
+            <img class="image" src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
 
           </ng-template>
         </ion-avatar>

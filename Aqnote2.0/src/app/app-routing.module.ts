@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   //  { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
-    { path: '', loadChildren: './pages/splash-screen/splash-screen.module#SplashScreenPageModule' },
+     { path: '', loadChildren: './pages/splash-screen/splash-screen.module#SplashScreenPageModule' },
 
     { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
     { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'base64-encode', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' },
  // { path: 'common', loadChildren: './common/common.module#CommonPageModule' },
   { path: 'upload-photo/:idS/:idN', loadChildren: './pages/upload-photo/upload-photo.module#UploadPhotoPageModule' },
-  { path: 'splash-screen', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
+ // { path: 'splash-screen', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
 ];
 
 @NgModule({
