@@ -39,6 +39,7 @@ export class NoteDetailPage implements OnInit {
   private alreadyCommented$: Observable<HttpResponse<boolean>>;
   private commented$: boolean;
   private favButton: string;
+  private logged: boolean;
   constructor(private modalController: ModalController, private userService: UserService, private modalCtrl: ModalController,
               private noteService: NoteService, private sanitizer: DomSanitizer,
               private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
@@ -63,20 +64,31 @@ export class NoteDetailPage implements OnInit {
       stars: new FormControl()
     });
     this.userLogged$ = this.userService.getUtente();
+    this.userLogged$.subscribe(res => {
+      if (res != null) {
+        this.logged = true;
+        console.log(this.logged);
+      } else {
+        this.logged = false;
+        console.log(this.logged);
+      }
+    });
     this.activateRoute.params.subscribe(params => {
       this.photo$ = this.noteService.showImage(params.id);
       this.note = this.noteService.showNote(params.id);
-      this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
-        this.favButton = res.body['body'];
-      });
+      if (this.logged === true ) {
+        this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
+          this.favButton = res.body['body'];
+        });
+        this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
+        this.alreadyCommented$.subscribe(res => {
+          this.commented$ = res.body['body'];
+        });
+      }
       console.log('commenti in arrivo');
       this.comments = this.noteService.showNotesComments(params.id);
       this.comments.subscribe( res => {
         console.log(res);
-      });
-      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
-      this.alreadyCommented$.subscribe(res => {
-        this.commented$ = res.body['body'];
       });
     });
   }

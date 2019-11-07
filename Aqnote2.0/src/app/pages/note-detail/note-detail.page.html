@@ -35,7 +35,7 @@
 
     <div [ngSwitch]="segment" >
       <div *ngSwitchCase="'comment'">
-        <ion-grid *ngIf="commented$ === true ">
+        <ion-grid *ngIf="commented$ === true || logged === true">
           <ion-item>
             <ion-row>
               <ion-col>
@@ -203,7 +203,7 @@
               %</ion-card-subtitle>
           </p>
         </ion-col>
-        <ion-col class="but-fav-col" size="12" >
+        <ion-col class="but-fav-col" size="12" *ngIf="logged === true">
           <ion-button color="{{favButton}}" outline (click)="addToFavourite($event)" >
             <ion-icon name="heart" size="large"></ion-icon>
           </ion-button>

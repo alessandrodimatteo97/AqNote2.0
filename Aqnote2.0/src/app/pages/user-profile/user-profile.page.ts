@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccountUpdate, Image,Notes, MyComment, UserService} from '../../services/user.service';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CdlService} from '../../services/cdl.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {DegreeCourse} from '../../model/DegreeCourse.model';
 import {AlertController, NavController} from '@ionic/angular';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -11,6 +11,9 @@ import {FileUploader, FileLikeObject, FileItem} from 'ng2-file-upload';
 import {Note} from '../../model/Note.model';
 import {Lingua, LinguaService} from '../../services/lingua.service';
 import {TranslateService} from '@ngx-translate/core';
+import {User} from "../../model/User.model";
+import {SubjectService} from "../../services/subject.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-profile',
@@ -32,6 +35,7 @@ export class UserProfilePage implements OnInit {
   private lingue: Lingua[];
   public fileUploader: FileUploader = new FileUploader({});
   private notes$: Observable<Notes[]>;
+  private userLogged$: BehaviorSubject<User>;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -40,12 +44,20 @@ export class UserProfilePage implements OnInit {
               private sanitizer: DomSanitizer,
               private navController: NavController,
               private linguaService: LinguaService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private subjectService: SubjectService,
+              private router: Router) {
 
   }
   segment: string;
 
   ionViewWillEnter() {
+    this.userLogged$ = this.userService.getUtente();
+    this.userLogged$.subscribe(res => {
+      if (res == null) {
+        this.router.navigate(['/sign-in']);
+      }
+    });
     this.segment = 'data';
   }
 
