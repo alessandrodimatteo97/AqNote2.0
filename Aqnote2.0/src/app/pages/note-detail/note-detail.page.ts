@@ -63,17 +63,20 @@ export class NoteDetailPage implements OnInit {
       stars: new FormControl()
     });
     this.userLogged$ = this.userService.getUtente();
-    console.log(this.userLogged$.value.idU);
     this.activateRoute.params.subscribe(params => {
-      console.log(params.id);
       this.photo$ = this.noteService.showImage(params.id);
-      console.log(params.id);
       this.note = this.noteService.showNote(params.id);
-      this.note.subscribe(resp => {
-        console.log(resp);
-      });
       this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
         this.favButton = res.body['body'];
+      });
+      console.log('commenti in arrivo');
+      this.comments = this.noteService.showNotesComments(params.id);
+      this.comments.subscribe( res => {
+        console.log(res);
+      });
+      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
+      this.alreadyCommented$.subscribe(res => {
+        this.commented$ = res.body['body'];
       });
     });
   }
@@ -203,26 +206,9 @@ ionViewWillEnter() {
     this.post.color5 = '';
     this.numberStar = 0;
     this.activateRoute.params.subscribe(params => {
-    this.noteService.updateComment(comment, params.id).subscribe(res  => {
-      this.formComment.setValue({titleC: '', comment: '' , stars: this.numberStar});
-      this.loadComments();
-    });
-    });
-
-  }
-
-  loadDetails() {
-    console.log(this.segment);
-
-    this.activateRoute.params.subscribe(params => {
-      // Defaults to 0 if no query param provided.
-      console.log(params.id);
-      this.note = this.noteService.showNote(params.id);
-      this.note.subscribe(resp => {
-        console.log(resp);
-      });
-      this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
-        this.favButton = res.body['body'];
+      this.noteService.updateComment(comment, params.id).subscribe(res  => {
+        this.formComment.setValue({titleC: '', comment: '' , stars: this.numberStar});
+        this.loadComments();
       });
     });
   }

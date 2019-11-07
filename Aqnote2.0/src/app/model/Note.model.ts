@@ -9,4 +9,6 @@ export class Note {
     // tslint:disable-next-line:variable-name
     user_id: string;
     // photos: string[];
+    pages: string;
+    comments: string;
 }

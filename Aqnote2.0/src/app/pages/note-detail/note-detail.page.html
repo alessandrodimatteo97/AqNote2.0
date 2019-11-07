@@ -23,10 +23,10 @@
 
     <ion-toolbar>
       <ion-segment [(ngModel)]="segment" [value]="'detail'" class="card-content"  scrollable >
-        <ion-segment-button value="detail" color="primary" checked layout="icon-end" (click)=loadDetails()>
+        <ion-segment-button value="detail" color="primary" checked layout="icon-end">
           <ion-label color="secondary">Dettagli</ion-label>
         </ion-segment-button>
-        <ion-segment-button  value="comment" color="primary" layout="icon-end" (click)="loadComments()">
+        <ion-segment-button  value="comment" color="primary" layout="icon-end">
           <ion-label color="secondary">Commenti</ion-label>
         </ion-segment-button>
       </ion-segment>

@@ -21,8 +21,8 @@
           <ion-item *ngFor='let obj of s.value'   [routerLink]="['note-detail/'+obj.id]">
             <ion-label>
               <h1> {{ obj.title }}</h1>
-              <p>Numero di pagine 19</p>
-              <p>Numero di commenti 127</p>
+              <p>Numero di pagine: {{obj.pages}}</p>
+              <p>Numero di commenti: {{obj.comments}}</p>
               <p>
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>
