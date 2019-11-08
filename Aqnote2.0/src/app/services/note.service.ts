@@ -139,6 +139,8 @@ export class NoteService {
     const url = `${URL.CHECK_FAVOURITE}/${idNote}`;
     const params = new HttpParams()
         .append('idU', user.value.idU.toString());
+
+    console.log(params.get('idU'));
     const toReturn = this.http.post<string>(url, params, {observe: 'response'});
     return toReturn;
   }

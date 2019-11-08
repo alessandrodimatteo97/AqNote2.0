@@ -30,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
             return next.handle(authReq).pipe(
                 catchError(err => {
                    if (err.status == 409 ) { this.showError('Error in the request', 'one of the filds is wrong', false); }
-                    if (err.status == 200) { this.showError('New user-profile', 'profile has been updated', false); }
+                    if (err.status == 200) { this.showError('New user-profile', 'profile has been created', true); }
                     if (err.status != 409 &&  err.status != 200){ this.showError('Error', 'Problem with the server', true) }
                     return EMPTY;
                 })
@@ -42,7 +42,7 @@ export class TokenInterceptor implements HttpInterceptor {
         //  return next.handle(req);
     }
 
-    async showError(status: string, message:string, signIn:boolean) {
+    async showError(status: string, message: string, signIn: boolean) {
 
         const alert = await this.alertController.create({
             header: status,

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-
+import {AuthGuard} from '../../guard/auth.guard';
 import { TabsPage } from './tabs.page';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
@@ -18,11 +18,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../favourites/favourites.module#FavouritesPageModule'
+            loadChildren: '../favourites/favourites.module#FavouritesPageModule',
+            canActivate: [AuthGuard]
           },
             {
                 path: 'note-detail/:id',
-                loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
+                loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule',
+                canActivate: [AuthGuard]
             }
         ]
       },
@@ -58,11 +60,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../upload-note/upload-note.module#UploadNotePageModule'
+            loadChildren: '../upload-note/upload-note.module#UploadNotePageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'note-detail/:id',
-            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
+            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule',
+            canActivate: [AuthGuard]
           }
         ]
       },
@@ -72,11 +76,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../user-profile/user-profile.module#UserProfilePageModule'
+            loadChildren: '../user-profile/user-profile.module#UserProfilePageModule',
+            canActivate: [AuthGuard]
           },
           {
             path: 'note-detail/:id',
-            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule'
+            loadChildren: '../note-detail/note-detail.module#NoteDetailPageModule',
+            canActivate: [AuthGuard]
           }
         ]
       },

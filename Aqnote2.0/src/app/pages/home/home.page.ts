@@ -4,8 +4,11 @@ import {SubjectService} from '../../services/subject.service';
 import {Subject} from '../../model/Subject.model';
 import {Observable} from 'rxjs';
 import {UserService} from '../../services/user.service';
-import {ActivatedRoute} from '@angular/router';
 import {Storage} from '@ionic/storage';
+import {ActionSheetController} from '@ionic/angular';
+import {CdlService} from '../../services/cdl.service';
+import {map} from 'rxjs/operators';
+import {DegreeCourse} from '../../model/DegreeCourse.model';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +17,10 @@ import {Storage} from '@ionic/storage';
 })
 export class HomePage implements OnInit {
 
-  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private storage: Storage) {
+  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private storage: Storage, private actionSheet: ActionSheetController, private cdlService: CdlService) {
   }
   private subject$: Observable<Subject[]>;
+  private cdl$: DegreeCourse[] = [];
   segment: string;
   sliderOpts = {
     zoom: false,
@@ -33,6 +37,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
       this.segment = '1';
+      this.cdlService.list().subscribe(res => res.forEach(Dc => this.cdl$.push(Dc)));
       // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
       this.storage.get('cdl').then(cdl => {
           if (cdl === null || cdl === undefined) {
@@ -69,7 +74,35 @@ export class HomePage implements OnInit {
     this.menu.open('custom');
   }
 
+  async openDc() {
+    const actionSheet = await this.actionSheet.create({
+      header: 'Course Deegree',
+      buttons:  await this.Cdl()
+    });
+    await actionSheet.present();
+  }
 
+  Cdl() {
+    let buttons = [];
+    this.cdl$.forEach(res =>{
+      let button = {
+          text: res.nameDC,
+
+          handler: () => {
+           this.subject$ = this.subjectService.listHome(res.idDC);
+           this.storage.set('cdl', res.idDC);
+           return true;
+          }
+        };
+        buttons.push(button);
+
+    });
+
+
+    return buttons;
+
+
+  }
 }
 
 

@@ -18,8 +18,8 @@
           <ion-label>
             <h1>{{note.title}}</h1>
             <h4>{{note.name}} {{note.surname}}</h4>
-            <p>Numero di pagine {{note.pages}}</p>
-            <p>Numero di commenti {{note.comments}}</p>
+            <p>{{"PAGES_NUMBER" | translate}} {{note.pages}} </p>
+            <p>{{"COMMENTS_NUMBER" | translate}} {{note.comments}} </p>
             <p *ngIf="note.avarage == 0 || note.avarage == null ">
               <ion-icon name="star" color=""></ion-icon>
               <ion-icon name="star" color=""></ion-icon>

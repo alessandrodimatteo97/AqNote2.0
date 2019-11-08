@@ -48,43 +48,15 @@ export class SignUpPagePage implements OnInit {
   }
   onSignUp() {
     const account: Account = this.signUpFormModel.value;
-    this.userService.signUp(account).subscribe(() => {
+    this.userService.signUp(account).subscribe((res) => {
           this.signUpFormModel.reset();
-          this.showLoginError('esegui il login', 'utente creato')
+          console.log(res);
           this.router.navigate(['sign-in']);
-        },
-        (err: HttpErrorResponse) => {
-          if (err.status === 401) {
-            console.error('login request error: ' + err.status);
-            this.showLoginError(err.error, 'error');
-          }
-          if (err.status === 501) {
-            console.error('login request error: ' + err.status);
-            this.showLoginError(err.error, 'error');
-          }
-          if (err.status === 500) {
-            console.error('login request error: ' + err.status);
-            this.showLoginError(err.error, 'error');
-          }
-          if (err.ok) {
-            console.log('la chiamata è andata a buon fine recchia ')
-          }
-
-
         }
-
-    );
+        );
   }
 
-  async showLoginError(errMessage, header) {
-    const alert = await this.alertController.create({
-      header,
-      message: errMessage,
-      buttons: ['OK']
-    });
 
-    await alert.present();
-  }
 
 
 

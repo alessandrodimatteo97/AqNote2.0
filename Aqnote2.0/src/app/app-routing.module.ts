@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   //  { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
     { path: '', loadChildren: './pages/splash-screen/splash-screen.module#SplashScreenPageModule' },
-    { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
+   // { path: 'prova', loadChildren: './prova-home/prova-home.module#ProvaHomePageModule' },
     { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
  // { path: 'image-modal', loadChildren: './pages/image-modal/image-modal.module#ImageModalPageModule' },
   { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },

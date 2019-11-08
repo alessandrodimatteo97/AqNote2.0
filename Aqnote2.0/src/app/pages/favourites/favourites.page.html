@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar  class="toolbar">
     <ion-title>
-      Favourites
+      {{'FAVOURITES_TITLE' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -18,11 +18,11 @@
 
 
 
-          <ion-item *ngFor='let obj of s.value'   [routerLink]="['note-detail/'+obj.id]">
+          <ion-item *ngFor='let obj of s.value'   [routerLink]="['note-detail/'+obj.idN]">
             <ion-label>
               <h1> {{ obj.title }}</h1>
-              <p>Numero di pagine: {{obj.pages}}</p>
-              <p>Numero di commenti: {{obj.comments}}</p>
+              <p> {{obj.pages}} {{"PAGES_NUMBER" | translate}}</p>
+              <p>{{obj.comments}} {{"COMMENTS_NUMBER" | translate}}</p>
               <p>
                 <ion-icon name="star" color="primary"></ion-icon>
                 <ion-icon name="star" color="primary"></ion-icon>

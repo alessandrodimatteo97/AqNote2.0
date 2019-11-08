@@ -1,3 +1,68 @@
 {
+  "FAVOURITES_TITLE": "Favoriti",
+  "PAGES_NUMBER": "Numero di pagine",
+  "COMMENTS_NUMBER": "Numero di commenti",
+  "BEST_NOTES_FOR_SUBJECT": "i migliori per questa materia",
+  "NOTE_DETAIL_TITLE": "Dettaglio nota",
+  "DETAILS": "Dettagli",
+  "COMMENTS": "Commenti",
+  "TITLE": "titolo",
+  "NOTES": "appunti",
+  "COMMENTS_TITLE": "Inserisci il titolo del commento",
+  "COMMENT": "Inserisci il tuo commento",
+  "SEE_ALL": "vedi tutto",
+  "NEW_NOTE": "Nuova nota",
+  "PROFILE": "Profilo",
+
+
+  "SKIP_DEGREECOURSE": "Vai alla pagina del corso",
+  "SIGNUP": "Registrazione",
+  "LOGIN_ERROR_TITLE": "Errore login",
+  "LOGIN_ERROR_SUB_TITLE": "Email e/o password sbagliata!",
+
+
+
+  "EMAIL_REQUIRED": "Email richiesta",
+  "PASSWORD_REQUIRED": "Password richiesta",
+
+
+  "SIGNUP_TITLE": "Registrazione",
+  "NAME": "Nome",
+  "NAME_REQUIRED": "Nome obbligatorio",
+  "SURNAME": "Cognome",
+  "SURNAME_REQUIRED": "Cognome obbligatorio",
+  "EMAIL_REQUIRED": "Email obbligatorio",
+  "SELECT_DC": "seleziona un cdl",
+  "DEGREE_COURSE_REQUIRED": "Corso di laurea obbligatorio",
+  "REPEAT_PASSWORD": "ripeti password",
+  "REPEAT_PASSWORD_REQUIRED": "ripetione password obbligatoria",
+
+  "UPLOAD_NOTE_TITLE": "Inserisci i tuoi appunti",
+  "TITLE_REQUIRED": "Titolo Obbligatorio",
+  "DESCRIPTION": "Descrizione",
+  "DESCRIPRION_REQUIRED": "Descrizione Obbligatoria",
+  "SELECT_COURSE": "Seleziona corso",
+  "OK_TEXT": "Avanti",
+  "CANCEL_TEXT": "Indietro",
+
+
+
+  "SELECT_PHOTO": "Seleziona le immagini!",
+  "PUSH_BUTTON_PHOTO": "Premi il pulsante sotto per caricare le immagini",
+  "UPLOAD_PHOTO_TITLE": "Carica immagini",
+  "UPLOAD_FILES": "carica files",
+  "SEE_NOTES": "Vedi gli appunti",
+  "ADD_FILES": "aggiungi files",
+
+  "USER_PROFILE_TITLE": "Profilo utente",
+  "USER_DATA": "Dati personali",
+  "MY_COMMENTS": "I miei commenti",
+  "MY_NOTES": "I miei appunti",
+  "OLD_PASSWORD": "Vecchia password",
+  "NEW_PASSWORD": "Nuova password",
+  "DEGREECOURSE": "Corso di laurea",
+  "MODIFY": "modifica",
+  "WRITTEN_BY": "Scritto da: ",
+
   "LANGUAGE": "lingua"
 }

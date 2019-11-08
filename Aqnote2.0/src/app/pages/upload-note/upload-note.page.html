@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>let's speak about your note</ion-title>
+  <ion-toolbar class="toolbar">
+    <ion-title>{{"UPLOAD_NOTE_TITLE" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,26 +13,28 @@
       <ion-list>
       <ion-item no-padding class="animated fadeInUp">
         <ion-label color="success" position="floating">
-          Title
+          {{"TITLE" | translate}}
         </ion-label>
         <ion-input color="secondary" type="text" formControlName="title"></ion-input>
       </ion-item>
       <p ion-text class="text08" *ngIf="signUpFormModel.get('title').touched && signUpFormModel.get('title').invalid">
-        <ion-text color="danger">Title</ion-text>
+        <ion-text color="danger">{{"TITLE_REQUIRED"|translate}}</ion-text>
       </p>
       <ion-item no-padding class="animated fadeInUp">
         <ion-label color="success"position="floating">
-         Description</ion-label>
+         {{"DESCRIPTION" | translate}}</ion-label>
 
         <ion-textarea color="secondary" type="text" formControlName="description"></ion-textarea>
       </ion-item>
-
+        <p ion-text class="text08" *ngIf="signUpFormModel.get('description').touched && signUpFormModel.get('description').invalid">
+          <ion-text color="danger">{{"DESCRIPTION_REQUIRED"|translate}}</ion-text>
+        </p>
 
         <ion-label color="success" position="floating">
-          Select Course
+          {{"SELECT_COURSE" | translate}}
         </ion-label>
 
-        <ion-select (ionChange)="onDCChange()" formControlName="subject_id" value="cdl" okText="Avanti" cancelText="Indietro" >
+        <ion-select (ionChange)="onDCChange()" formControlName="subject_id" value="cdl" okText='{{"OK_TEXT" | translate}}' cancelText='{{"CANCEL_TEXT" | translate}}' >
           <div >
           <ion-select-option value="{{s.id}}" *ngFor="let s of s$ | async" text-wrap="">{{s.nameS}}</ion-select-option>
           </div>
@@ -41,7 +43,7 @@
 
       <div margin-top="10px">
         <ion-button icon-left size="medium" expand="full" expand="block" color="primary" (click)="goOn()" [disabled]="!signUpFormModel.valid" tappable>
-          Go on
+          {{"OK_TEXT" | translate}}
         </ion-button>
       </div>
       </ion-list>

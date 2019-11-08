@@ -39,6 +39,8 @@ export class NoteDetailPage implements OnInit {
   private alreadyCommented$: Observable<HttpResponse<boolean>>;
   private commented$: boolean;
   private favButton: string;
+  private favourite: boolean;
+  private idN: string;
   constructor(private modalController: ModalController, private userService: UserService, private modalCtrl: ModalController,
               private noteService: NoteService, private sanitizer: DomSanitizer,
               private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
@@ -57,40 +59,54 @@ export class NoteDetailPage implements OnInit {
     });
   }
   ngOnInit() {
-    this.formComment = new FormGroup({
-      titleC: new FormControl(),
-      comment: new FormControl(),
-      stars: new FormControl()
-    });
-    this.userLogged$ = this.userService.getUtente();
     this.activateRoute.params.subscribe(params => {
+      this.idN = params.id;
+
+
+
+
+
+    this.userService.isLogged().subscribe(res => {
+      if (res.valueOf()){
+      console.log('true');
+      this.formComment = new FormGroup({
+        titleC: new FormControl(),
+        comment: new FormControl(),
+        stars: new FormControl()
+      });
+      this.favourite = true;
+      this.userLogged$ = this.userService.getUtente();
+      console.log(this.userLogged$);
+        this.photo$ = this.noteService.showImage(params.id);
+        this.note = this.noteService.showNote(params.id);
+        this.noteService.checkFavourites(this.userLogged$, params.id).subscribe(res => {
+          this.favButton = res.body['body'];
+        });
+        console.log('commenti in arrivo');
+        this.comments = this.noteService.showNotesComments(params.id);
+        this.comments.subscribe(res => {
+          console.log(res);
+        });
+        this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
+        this.alreadyCommented$.subscribe(res => {
+          this.commented$ = res.body['body'];
+        });
+      } else {
+      this.favourite = false;
       this.photo$ = this.noteService.showImage(params.id);
       this.note = this.noteService.showNote(params.id);
-      this.noteService.checkFavourites(this.userLogged$, params.id).subscribe( res => {
-        this.favButton = res.body['body'];
-      });
-      console.log('commenti in arrivo');
       this.comments = this.noteService.showNotesComments(params.id);
-      this.comments.subscribe( res => {
-        console.log(res);
-      });
-      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
-      this.alreadyCommented$.subscribe(res => {
-        this.commented$ = res.body['body'];
-      });
+      this.commented$ = false;
+    }
+
+
     });
+
+    });
+
+
+
   }
-  /*{
-     this.noteService.showNote().subscribe(items => {
-       items.map(item => {
-         console.log(item.title);
-         console.log(item.user);
-         console.log(item.photos);
-         console.log(item.description);
-         console.log(item.subject);
-       });
-     });
-  }*/
 
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
@@ -205,42 +221,42 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 0;
-    this.activateRoute.params.subscribe(params => {
-      this.noteService.updateComment(comment, params.id).subscribe(res  => {
+
+      this.noteService.updateComment(comment, this.idN).subscribe(res  => {
         this.formComment.setValue({titleC: '', comment: '' , stars: this.numberStar});
         this.loadComments();
-      });
+
     });
   }
 
   loadComments() {
     console.log(this.segment);
-    this.activateRoute.params.subscribe(params => {
+
       // Defaults to 0 if no query param provided.
       console.log("commenti");
-      this.comments = this.noteService.showNotesComments(params.id);
-      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
+      this.comments = this.noteService.showNotesComments(this.idN);
+      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, this.idN);
       this.alreadyCommented$.subscribe(res => {
         console.log( 'true non commentato, false commentato');
         this.commented$ = res.body['body'];
       });
-    });
+
   }
 
-  addToFavourite($event) {
+  addToFavourite() {
     console.log(this.favButton);
     if (this.favButton === 'light') {
-      this.activateRoute.params.subscribe(params => {
-        this.noteService.addToFavourite(this.userLogged$, params.id).subscribe(res => {
+
+        this.noteService.addToFavourite(this.userLogged$, this.idN).subscribe(res => {
           this.favButton = res.body['body'];
-        });
+
       });
     }
     if (this.favButton === 'medium') {
-      this.activateRoute.params.subscribe(params => {
-        this.noteService.removeFromFavourite(this.userLogged$, params.id).subscribe(res => {
+
+        this.noteService.removeFromFavourite(this.userLogged$, this.idN).subscribe(res => {
           this.favButton = res.body['body'];
-        });
+
       });
     }
   }

@@ -1,3 +1,72 @@
 {
+  "FAVOURITES_TITLE": "Favourites",
+  "PAGES_NUMBER": "number of pages",
+  "COMMENTS_NUMBER": "number of comments",
+  "BEST_NOTES_FOR_SUBJECT": "the best for this subject",
+  "NOTE_DETAIL_TITLE": "Note Detail",
+  "DETAILS": "Details",
+  "COMMENTS": "Comments",
+  "TITLE": "title",
+  "NOTES": "notes",
+  "COMMENTS_TITLE": "Write the title comment",
+  "COMMENT": "Write your comment",
+  "SEE_ALL": "see all",
+  "NEW_NOTE": "New note",
+  "PROFILE": "Profile",
+
+
+
+  "SKIP_DEGREECOURSE": "Skip to DegreeCourse page",
+  "SIGNUP": "Sign-Up",
+  "LOGIN_ERROR_TITLE": "Login error",
+  "LOGIN_ERROR_SUB_TITLE": "Username and/or password Wrong!",
+
+  "EMAIL_REQUIRED": "Email required",
+  "PASSWORD_REQUIRED": "Password required",
+
+
+  "SIGNUP_TITLE": "Sign-up",
+  "NAME": "Name",
+  "NAME_REQUIRED": "Surname required",
+  "SURNAME": "Surname",
+  "SURNAME_REQUIRED": "Surname required",
+  "EMAIL_REQUIRED": "Email required",
+  "SELECT_DC": "Select Dc",
+  "DEGREE_COURSE_REQUIRED": "Degree course required",
+  "REPEAT_PASSWORD": "Repeat password",
+  "REPEAT_PASSWORD_REQUIRED": "Repeat password required",
+
+  "UPLOAD_NOTE_TITLE": "Let's speak about your notes",
+  "TITLE_REQUIRED": "Title required",
+  "DESCRIPTION": "Description",
+  "DESCRIPRION_REQUIRED": "Description required",
+  "SELECT_COURSE": "Select Course",
+  "OK_TEXT": "GO ON",
+  "CANCEL_TEXT": "GO BACK",
+
+
+
+  "SELECT_PHOTO": "Please Select Image!",
+  "PUSH_BUTTON_PHOTO": "push the button below the page for uploading images",
+  "UPLOAD_PHOTO_TITLE": "Upload-photo",
+  "UPLOAD_FILES": "Upload files",
+  "SEE_NOTES": "See the notes",
+  "ADD_FILES": "Add Files",
+
+  "USER_PROFILE_TITLE": "User-profile",
+  "USER_DATA": "User data",
+  "MY_COMMENTS": "My comments",
+  "MY_NOTES": "My notes",
+  "OLD_PASSWORD": "Old Password",
+  "NEW_PASSWORD": "New Password",
+  "DEGREECOURSE": "Degree Course",
+  "MODIFY": "Modify",
+  "WRITTEN_BY": "Written by: ",
+
+
+
+
+
+
   "LANGUAGE": "language"
 }

@@ -102,11 +102,10 @@
   --highlight-color-valid: black;
   --highlight-color-invalid: black;
 }
-  ion-button:hover {
 
-      background-color: blueviolet !important;
-
-
+  .toolbar {
+    --background: #FFD54D;
+    text-align: center;
   }
 }
 

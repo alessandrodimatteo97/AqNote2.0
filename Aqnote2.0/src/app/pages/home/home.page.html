@@ -1,8 +1,13 @@
 <ion-header>
-  <ion-toolbar  class="toolbar">
-    <ion-title>
-      LISTA MATERIE
+  <ion-toolbar class="toolbar">
+    <div style="display: flex">
+    <ion-title class="title">
+      Home
     </ion-title>
+    <div class="image" (click)="openDc()">
+  <img  src="../../../assets/icon/dc.png">
+    </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -60,10 +65,10 @@
       <div  *ngSwitchCase="s.key">
         <ion-card *ngFor="let d of s.value | keyvalue " class="cards" >
           <ion-card-header class="card-header">
-            <ion-card-title  color="secondary"><h5>{{d.key}}</h5><span [routerLink]="['list-notes/'+d.key]" class="right"> <h5>see all</h5></span></ion-card-title>
+            <ion-card-title  color="secondary"><h5>{{d.key}}</h5><span [routerLink]="['list-notes/'+d.key]" class="right"> <h5>{{"SEE_ALL"| translate}}</h5></span></ion-card-title>
           </ion-card-header>
           <ion-card-header class="second-header">
-            <ion-card-subtitle>I migliori per questa materia</ion-card-subtitle>
+            <ion-card-subtitle>{{"BEST_NOTES_FOR_SUBJECT" | translate}}</ion-card-subtitle>
           </ion-card-header>
           <ion-slides [options]="sliderOpts">
             <ion-slide *ngFor="let k of d.value | keyvalue" class="slide" >
@@ -71,8 +76,8 @@
                 <ion-item>
                   <ion-label>
                     <h1>{{k.value.title}}</h1>
-                    <p>Numero di pagine {{k.value.page}}</p>
-                    <p>Numero di commenti {{k.value.comments}}</p>
+                    <p>{{"PAGES_NUMBER" | translate}} {{k.value.page}} </p>
+                    <p>{{"COMMENTS_NUMBER" | translate}} {{k.value.comments}} </p>
                     <div *ngIf="((k.value.avarage | number:'1.0-0'))==0">
 
                       <p>

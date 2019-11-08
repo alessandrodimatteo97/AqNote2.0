@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar class="toolbar">
     <ion-title>
-      Upload-Note
+      {{"UPLOAD_PHOTO_TITLE" | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,8 +9,8 @@
 <ion-content padding>
 
 
-    <h3 *ngIf="fileUploader.queue.length == 0" text-center>Please Select Image!</h3>
-  <h3 *ngIf="fileUploader.queue.length != 0" text-center text-wrap>push the button below the page for uploading images</h3>
+    <h3 *ngIf="fileUploader.queue.length == 0" text-center>{{"SELECT_PHOTO" | translate}}</h3>
+  <h3 *ngIf="fileUploader.queue.length != 0" text-center text-wrap>{{"PUSH_BUTTON_PHOTO" | translate}}</h3>
 
   <ion-list *ngIf="fileUploader.queue.length != 0">
 
@@ -50,10 +50,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-  <ion-button *ngIf="fileUploader.queue.length != 0" (click)="uploadFiles()">Upload files</ion-button>
+  <ion-button *ngIf="fileUploader.queue.length != 0" (click)="uploadFiles()">{{"UPLOAD_FILES" | translate}}</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button *ngIf="fileUploader.queue.length != 0" [routerLink]="['/tabs/upload-note/note-detail/'+this.idN]"  >See the Note</ion-button>
+        <ion-button *ngIf="fileUploader.queue.length != 0" [routerLink]="['/tabs/upload-note/note-detail/'+this.idN]"  >{{"SEE_NOTES" | translate}}</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -64,7 +64,7 @@
   <ion-toolbar color="primary"><div class="file-input-container">
     <label>
       <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" multiple />
-      Add Files
+      {{"ADD_FILES" | translate}}
     </label>
   </div>
 

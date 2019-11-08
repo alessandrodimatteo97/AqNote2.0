@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar  class="toolbar">
     <ion-title>
-      USER PROFILE
+      {{"USER_PROFILE_TITLE" | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -41,13 +41,13 @@
 
     <ion-segment  [(ngModel)]="segment" color="primary" scrollable>
       <ion-segment-button value="data" checked layout="icon-end">
-        <ion-label class="text">Personal data</ion-label>
+        <ion-label class="text">{{"USER_DATA" | translate}}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="comments" layout="icon-end">
-        <ion-label class="text">My comments</ion-label>
+        <ion-label class="text">{{"MY_COMMENTS" | translate}}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="notes" layout="icon-end">
-        <ion-label class="text">My notes</ion-label>
+        <ion-label class="text">{{"My notes" | translate}}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -68,9 +68,9 @@
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-item>
-              <ion-label>Old Password</ion-label>
+              <ion-label>{{"OLD_PASSWORD" | translate}}</ion-label>
 
-              <ion-input name="password" [type]="passwordType" placeholder="Password" formControlName="OldPassword" ></ion-input>
+              <ion-input name="password" [type]="passwordType" placeholder='{{"OLD_PASSWORD" | translate}}' formControlName="OldPassword" ></ion-input>
               <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
             </ion-item>
           </ion-col>
@@ -78,9 +78,9 @@
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-item>
-              <ion-label>New Password</ion-label>
+              <ion-label>{{"NEW_PASSWORD" | translate}}</ion-label>
 
-              <ion-input name="password" [type]="passwordType" placeholder="Password" formControlName="Newpassword" ></ion-input>
+              <ion-input name="password" [type]="passwordType" placeholder="NEW_PASSWORD" formControlName="Newpassword" ></ion-input>
               <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
             </ion-item>
           </ion-col>
@@ -88,7 +88,7 @@
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <ion-item>
-          <ion-label>DegreeCourse</ion-label>
+          <ion-label>{{"DEGREECOURSE" | translate}}</ion-label>
           <ion-select placeholder="DegreeCourse"  formControlName="cdl_id">
             <ion-select-option *ngFor="let Dc of cdl$ | async" value="{{Dc.idDC}}"> {{Dc.nameDC}}</ion-select-option>
           </ion-select>
@@ -105,7 +105,7 @@
         </ion-row>
 
 
-        <ion-button  size="large" type="submit" (click)="modify()" expand="block">Modify </ion-button>
+        <ion-button  size="large" type="submit" (click)="modify()" expand="block">{{"MODIFY" | translate}} </ion-button>
       </ion-grid>
     </form>
   </div>
@@ -135,7 +135,7 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <p class="written-by"> Scritto da: {{comment.name}} {{comment.surname}}</p>
+              <p class="written-by"> {{"WRITTEN_BY" | translate}} {{comment.name}} {{comment.surname}}</p>
             </ion-col>
           </ion-row>
           <ion-row class="modified-row">
@@ -262,8 +262,8 @@
      <ion-item *ngFor="let note of notes$ | async" >
        <ion-label >
          <h1 >{{note.title}}<span class="delete-span"><ion-icon name="information-circle"[routerLink]="['note-detail/'+note.idN]" ></ion-icon><ion-icon name="create" (click)="navigate(note, $event)"></ion-icon>  <ion-icon name="trash" (click)="navigate(note, $event)"></ion-icon> </span></h1>
-         <p>Numero di pagine {{note.pages}}</p>
-         <p>Numero di commenti {{note.comment}}</p>
+         <p>{{"PAGES_NUMBER" | translate}} {{note.pages}}</p>
+         <p>{{"COMMENTS_NUMBER" | translate}} {{note.comment}}</p>
          <div *ngIf="((note.likes | number:'1.0-0'))==0">
 
            <p>
