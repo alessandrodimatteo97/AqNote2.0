@@ -20,9 +20,7 @@ export class FavouritesPage implements OnInit {
                 private modalController: ModalController,
                 private subjectService: SubjectService) {}
 
-    ngOnInit() {}
-
-    ionViewWillEnter() {
+    ngOnInit() {
         this.userService.getUtente().subscribe(res => {
             this.d$ = this.subjectService.listFavourite(res.idU);
         });

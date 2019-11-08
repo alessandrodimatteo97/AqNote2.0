@@ -52,6 +52,15 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.segment = '1';
+    this.storage.get('cdl').then(cdl => {
+      if (cdl === null || cdl === undefined) {
+        this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
+
+      } else {
+        this.subject$ = this.subjectService.listHome(cdl);
+
+      }
+    });
   }
   segmentChanged(ev: any) {
     console.log(ev.target.value);
