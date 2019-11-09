@@ -27,11 +27,11 @@
 
   "SIGNUP_TITLE": "Sign-up",
   "NAME": "Name",
-  "NAME_REQUIRED": "Surname required",
+  "NAME_REQUIRED": "Name required",
   "SURNAME": "Surname",
   "SURNAME_REQUIRED": "Surname required",
   "EMAIL_REQUIRED": "Email required",
-  "SELECT_DC": "Select Dc",
+  "SELECT_DC": "Select a Degree Course",
   "DEGREE_COURSE_REQUIRED": "Degree course required",
   "REPEAT_PASSWORD": "Repeat password",
   "REPEAT_PASSWORD_REQUIRED": "Repeat password required",
@@ -39,12 +39,12 @@
   "UPLOAD_NOTE_TITLE": "Let's speak about your notes",
   "TITLE_REQUIRED": "Title required",
   "DESCRIPTION": "Description",
-  "DESCRIPRION_REQUIRED": "Description required",
+  "DESCRIPTION_REQUIRED": "Description required",
   "SELECT_COURSE": "Select Course",
   "OK_TEXT": "GO ON",
   "CANCEL_TEXT": "GO BACK",
 
-
+  "SUBJECT_REQUIRED": "Subject required",
 
   "SELECT_PHOTO": "Please Select Image!",
   "PUSH_BUTTON_PHOTO": "push the button below the page for uploading images",
@@ -63,9 +63,17 @@
   "MODIFY": "Modify",
   "WRITTEN_BY": "Written by: ",
 
+  "ERRORREQUEST": "Error in the request",
+  "FIELDSWRONG": "One of the filds is wrong",
+  "NEWUSER": "New user-profile",
+  "USERCREATED": "Profile has been created",
+  "ERROR": "Error",
+  "PROBLEMSERVER": "Problem with the server",
 
+  "OKTEXT": "Ok",
+  "CANCELTEXT": "Back",
 
-
+  "SELECTLANGUAGE": "Select language",
 
 
   "LANGUAGE": "language"

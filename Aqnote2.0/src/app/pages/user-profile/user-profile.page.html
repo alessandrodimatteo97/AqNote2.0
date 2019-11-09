@@ -47,7 +47,7 @@
         <ion-label class="text">{{"MY_COMMENTS" | translate}}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="notes" layout="icon-end">
-        <ion-label class="text">{{"My notes" | translate}}</ion-label>
+        <ion-label class="text">{{"MY_NOTES" | translate}}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -80,7 +80,7 @@
             <ion-item>
               <ion-label>{{"NEW_PASSWORD" | translate}}</ion-label>
 
-              <ion-input name="password" [type]="passwordType" placeholder="NEW_PASSWORD" formControlName="Newpassword" ></ion-input>
+              <ion-input name="password" [type]="passwordType" placeholder='{{"NEW_PASSWORD" | translate}}' formControlName="Newpassword" ></ion-input>
               <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
             </ion-item>
           </ion-col>

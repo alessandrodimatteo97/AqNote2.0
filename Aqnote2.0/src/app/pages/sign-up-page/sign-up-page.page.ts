@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {Account} from '../../services/user.service';
 import {UserService} from '../../services/user.service';
@@ -32,13 +32,25 @@ export class SignUpPagePage implements OnInit {
     // this.cdlService.list().subscribe(p => console.log(p));
     this.cdl$ = this.cdlService.list();
 
-    this.signUpFormModel = new FormGroup({
-      name: new FormControl(''), // da aggiungere
-      surname: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl(''),
-      repeatPassword: new FormControl(''),
-      cdl: new FormControl('')
+    this.signUpFormModel = this.formBuilder.group({
+      name: ['', Validators.compose([
+        Validators.required
+      ])],
+      surname: ['', Validators.compose([
+        Validators.required
+      ])],
+      email: ['', Validators.compose([
+        Validators.required
+      ])],
+      password: ['', Validators.compose([
+        Validators.required
+      ])],
+      repeatPassword: ['', Validators.compose([
+        Validators.required
+      ])],
+      cdl: ['', Validators.compose([
+        Validators.required
+      ])]
     });
 
   }

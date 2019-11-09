@@ -51,7 +51,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="12">
-          <ion-button class="button-login" size="medium" expand="block" color="success" (click)="onSignUp()"  tappable >
+          <ion-button class="button-login" size="medium" expand="block" color="success" (click)="onSignUp()" tappable >
             <ion-icon name="log-in"></ion-icon>
               {{"SIGNUP" | translate}}
           </ion-button>
@@ -62,12 +62,12 @@
     <ion-grid>
       <ion-row>
         <ion-col size="12">
-          <ion-item color="success">
-            <ion-label> {{"SKIP_DEGREECOURSE" | translate}}</ion-label>
-            <ion-select (ionChange)="onDCSelect($event)">
-              <ion-select-option value="{{c.idDC}}" *ngFor="let c of cdl$ | async">{{c.nameDC}}</ion-select-option>
-            </ion-select>S
-          </ion-item>
+          <div color="success" class="flex">
+            <ion-button class="button1" (click)="navigate()"> {{"SKIP_DEGREECOURSE" | translate}}</ion-button>
+            <ion-select class="select" okText='{{"OKTEXT" | translate}}' cancelText='{{"CANCELTEXT" | translate}}' (ionChange)="onDCSelect($event)" >
+              <ion-select-option value="{{c.idDC}}" *ngFor="let c of cdl$ | async">{{c.nameDC}} </ion-select-option>
+            </ion-select>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { Router } from '@angular/router';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {Account, UserService} from '../../services/user.service';
 import {CdlService} from '../../services/cdl.service';
@@ -19,7 +19,7 @@ import {Note} from '../../model/Note.model';
 })
 export class UploadNotePage implements OnInit {
   private s$: Observable<Subject[]>;
-  private signUpFormModel: FormGroup;
+  private uploadUpFormModel: FormGroup;
   private idS: number;
 
   constructor(
@@ -39,20 +39,26 @@ export class UploadNotePage implements OnInit {
      this.s$ = this.subjectService.list1(u.cdl_id);
     });
 //   console.log(idDC);
-   this.signUpFormModel = new FormGroup({
-      title: new FormControl(''),
-      description: new FormControl(''),
-      subject_id: new FormControl('')
+   this.uploadUpFormModel = this.formBuilder.group({
+      title: ['', Validators.compose([
+        Validators.required
+      ])],
+      description: ['', Validators.compose([
+        Validators.required
+      ])],
+      subject_id:['', Validators.compose([
+        Validators.required
+      ])],
     });
 
   }
   onDCChange() {
-    console.log(this.signUpFormModel.get('subject_id').value);
-    this.idS = this.signUpFormModel.get('subject_id').value;
+    console.log(this.uploadUpFormModel.get('subject_id').value);
+    this.idS = this.uploadUpFormModel.get('subject_id').value;
   }
   goOn() {
     console.log(this.idS + 'id subjects');
-    const account: Note = this.signUpFormModel.value;
+    const account: Note = this.uploadUpFormModel.value;
     this.noteService.uploadFormData(account).subscribe((idN) => {
           console.log(idN + ' ' + this.idS); // stampa l'id della nota appena creata
         //  this.showMessage().then(r => console.log(r));
