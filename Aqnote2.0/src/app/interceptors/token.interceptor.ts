@@ -20,18 +20,18 @@ export class TokenInterceptor implements HttpInterceptor {
         // Get the auth token from the service.
         const authToken = this.userService.getAuthToken();
         if (authToken !== null && authToken !== undefined && authToken !== '') {
-            console.log('adding token into header');
             // Clone the request and replace the original headers with
             // cloned headers, updated with the authorization.
             const authReq = req.clone({
                 headers: req.headers.set(X_AUTH, `${authToken}`)
             });
-            console.log(authReq);
             return next.handle(authReq).pipe(
                 catchError(err => {
-                   if (err.status == 409 ) { this.showError('Error in the request', 'one of the filds is wrong', false); }
+                    if (err.status == 421) { this.showError('We already have a user with this email', 'We already have a user with this email', false); }
+                    if (err.status == 422) { this.showError('Old password is void', 'You must enter the old password', false); }
+                    if (err.status == 409 ) { this.showError('Error in the request', 'one of the fields is wrong', false); }
                     if (err.status == 200) { this.showError('New user-profile', 'profile has been created', true); }
-                    if (err.status != 409 &&  err.status != 200){ this.showError('Error', 'Problem with the server', true) }
+                    if (err.status != 409 && err.status != 422 && err.status != 421 && err.status != 200) { this.showError('Error', 'Problem with the server', true); }
                     return EMPTY;
                 })
             );

@@ -96,13 +96,8 @@ export class UserService {
   }
 
   update(account): Observable<User> {
-
-
-   // const updateUrl = `${URL.UPDATE}/`;
     return this.http.post<User>(URL.UPDATE, account, {observe: 'response'}).pipe(
         map((resp: HttpResponse<User>) => {
-          console.log(resp.body);
-          console.log(resp.status);
           this.storage.set(USER_STORAGE, resp.body);
           this.utente$.next(resp.body);
           return resp.body;

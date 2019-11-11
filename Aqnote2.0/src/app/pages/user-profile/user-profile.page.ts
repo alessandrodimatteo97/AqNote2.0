@@ -11,6 +11,7 @@ import {FileUploader, FileLikeObject, FileItem} from 'ng2-file-upload';
 import {Note} from '../../model/Note.model';
 import {Lingua, LinguaService} from '../../services/lingua.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -51,9 +52,6 @@ export class UserProfilePage implements OnInit {
 
   ngOnInit() {
     this.comments = this.userService.getUserComments();
-    this.comments.subscribe(res => {
-      console.log(res);
-    });
     this.lingue = this.linguaService.getLingue();
     this.cdl$ = this.cdlService.list();
     this.userService.getUtente().subscribe(user => {
@@ -61,11 +59,27 @@ export class UserProfilePage implements OnInit {
       this.notes$ = this.userService.getNotes();
       this.prova = user.cdl_id;
       this.fullName = user.name + ' ' + user.surname;
-      this.userFormModel = new FormGroup({
-        mail: new FormControl(user.mail),
-        OldPassword: new FormControl(),
-        Newpassword: new FormControl(),
+      /* this.userFormModel = new FormGroup({
+        mail: new FormControl(user.mail,  [ Validators.compose([
+            Validators.required,
+            Validators.minLength(5),
+            Validators.email
+        ])]),
+        OldPassword: new FormControl('', [ Validators.compose([
+          Validators.required,
+          Validators.minLength(5)
+        ])]),
+        Newpassword: new FormControl('', [ Validators.compose([
+          Validators.required,
+          Validators.minLength(5)
+        ])]),
         cdl_id: new FormControl(String(user.cdl_id))
+        }); */
+      this.userFormModel = this.formBuilder.group({
+        mail: [user.mail, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.email])],
+        OldPassword:  ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+        Newpassword: ['', Validators.compose([Validators.minLength(5)])],
+        cdl_id: [user.cdl_id]
       });
     });
    // const authToken = this.userService.getAuthToken();
@@ -79,17 +93,14 @@ export class UserProfilePage implements OnInit {
 
 
   modify() {
-    console.log(this.userFormModel.value);
     this.account = this.userFormModel.value;
-    console.log(this.account);
-    console.log(this.userFormModel.get('cdl_id').value);
     this.userService.update(this.account).subscribe(res => {
+      console.log(res);
   //  this.userFormModel.value.cdl_id = res.cdl_id;
       this.userFormModel.get('cdl_id').setValue(String(res.cdl_id));
       // deve aggiornare i valori...
     //  this.userFormModel.controls.cdl_id.setValue(res.cdl_id);
       this.prova = res.cdl_id;
-      console.log(this.prova);
         });
   }
 
@@ -97,9 +108,7 @@ export class UserProfilePage implements OnInit {
     let file = new FileLikeObject(item[0]);
     const formData = new FormData();
     formData.append('file', file.rawFile, file.name);
-    this.userService.sendImage(formData).subscribe(res=>{
-      console.log(res);
-          });
+    this.userService.sendImage(formData);
    // this.image = this.userService.getImage();
     this.image = null;
     this.proof = this.fileUploader.queue.pop();
@@ -115,9 +124,7 @@ export class UserProfilePage implements OnInit {
     if ($event.target.name == 'create') {
       this.navController.navigateRoot('upload-photo/' + note.idS + '/' + note.idN);
     } else {
-      console.log('coglione');
       this.userService.deleteNote(note.idN).subscribe(res => {
-        console.log(res);
         this.notes$ = this.userService.getNotes();
       });
 

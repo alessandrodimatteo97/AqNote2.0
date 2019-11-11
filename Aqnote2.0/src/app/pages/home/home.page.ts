@@ -16,8 +16,8 @@ import {DegreeCourse} from '../../model/DegreeCourse.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private storage: Storage, private actionSheet: ActionSheetController, private cdlService: CdlService) {
+    // tslint:disable-next-line:max-line-length
+    constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private storage: Storage, private actionSheet: ActionSheetController, private cdlService: CdlService) {
   }
   private subject$: Observable<Subject[]>;
   private cdl$: DegreeCourse[] = [];

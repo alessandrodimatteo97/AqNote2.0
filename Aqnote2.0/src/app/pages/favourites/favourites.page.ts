@@ -25,4 +25,10 @@ export class FavouritesPage implements OnInit {
             this.d$ = this.subjectService.listFavourite(res.idU);
         });
     }
+
+    ionViewWillEnter() {
+        this.userService.getUtente().subscribe(res => {
+            this.d$ = this.subjectService.listFavourite(res.idU);
+        });
+    }
 }
