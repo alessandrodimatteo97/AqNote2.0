@@ -10,21 +10,31 @@ import {error} from 'util';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+    private errorRequest: string;
+    private errorRequestMessage: string;
+    private newUser: string;
+    private newUserMessage: string;
+    private serverError: string;
+    private serverErrorMessage: string;
 
     constructor(private navController: NavController,
                 private alertController: AlertController,
-                private userService: UserService) {
+                private userService: UserService,
+                private translateService: TranslateService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
+        this.initTranslate();
         // Get the auth token from the service.
         const authToken = this.userService.getAuthToken();
         if (authToken !== null && authToken !== undefined && authToken !== '') {
+            console.log('adding token into header');
             // Clone the request and replace the original headers with
             // cloned headers, updated with the authorization.
             const authReq = req.clone({
                 headers: req.headers.set(X_AUTH, `${authToken}`)
             });
+            console.log(authReq);
             return next.handle(authReq).pipe(
                 catchError(err => {
                     if (err.status == 421) { this.showError('We already have a user with this email', 'We already have a user with this email', false); }
@@ -58,5 +68,26 @@ export class TokenInterceptor implements HttpInterceptor {
         });
 
         await alert.present();
+    }
+
+    initTranslate() {
+        this.translateService.get('ERRORREQUEST').subscribe((data:string)=>{
+            this.errorRequest = data;
+        });
+        this.translateService.get('FIELDSWRONG').subscribe((data:string)=>{
+            this.errorRequestMessage = data;
+        });
+        this.translateService.get('NEWUSER').subscribe((data:string)=>{
+            this.newUser = data;
+        });
+        this.translateService.get('USERCREATED').subscribe((data:string)=>{
+            this.newUserMessage = data;
+        });
+        this.translateService.get('ERROR').subscribe((data:string)=>{
+            this.serverError = data;
+        });
+        this.translateService.get('PROBLEMSERVER').subscribe((data:string)=>{
+            this.serverErrorMessage = data;
+        });
     }
 }

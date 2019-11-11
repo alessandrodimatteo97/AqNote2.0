@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AlertController, NavController} from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -14,9 +14,11 @@ import {CdlService} from '../../services/cdl.service';
   templateUrl: './sign-in.page.html',
   styleUrls: ['./sign-in.page.scss'],
 })
-export class SignInPage implements OnInit {
+export class SignInPage implements OnInit, OnDestroy{
   private loginFormModel: FormGroup;
   private cdl$: Observable<DegreeCourse[]>;
+  categories: any;
+//  DegreeCourse: string;
 
 
 
@@ -32,11 +34,21 @@ export class SignInPage implements OnInit {
   }
 
   ngOnInit() {
-    this.cdl$ = this.cdlService.list();
-    this.loginFormModel = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
+    this.loginFormModel = this.formBuilder.group({
+      email: ['', Validators.compose([
+        Validators.required
+      ])],
+      password: ['', Validators.compose([
+        Validators.required
+      ])]
     });
+  }
+  ionViewWillEnter(){
+    this.cdl$ = this.cdlService.list();
+   // this.DegreeCourse = null;
+  }
+  ngOnDestroy(): void {
+
   }
 
   onLogin() {
@@ -76,7 +88,9 @@ export class SignInPage implements OnInit {
     // let cdl = this.signUpFormModel.get('cdl').value;
     console.log($event.target.value);
     this.storage.set('cdl', $event.target.value);
-    this.router.navigate(['tabs/']);
+
+  //  $event.target.value = null;
+
   }
 
   onSignUp() {
@@ -93,4 +107,16 @@ export class SignInPage implements OnInit {
 
     await alert.present();
   }
+
+  navigate() {
+  //  console.log($event.target);
+   // this.categories = undefined;
+
+    this.router.navigate(['tabs/']);
+
+  }
+
+
+
+
 }

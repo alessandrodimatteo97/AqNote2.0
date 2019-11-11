@@ -51,7 +51,7 @@
       <ion-item no-padding>
         <ion-label color="success" position="floating">
         <ion-icon name="contact" item-start></ion-icon>{{"SELECT_DC" | translate}}</ion-label>
-        <ion-select (ionChange)="onDCChange()" formControlName="cdl" value="cdl" okText="Avanti" cancelText="Indietro">
+        <ion-select (ionChange)="onDCChange()" formControlName="cdl" value="cdl" okText='{{"OKTEXT" | translate}}' cancelText='{{"CANCELTEXT" | translate}}'>
           <ion-select-option value="{{c.nameDC}}" *ngFor="let c of cdl$ | async">{{c.nameDC}}</ion-select-option>
         </ion-select>
       </ion-item>

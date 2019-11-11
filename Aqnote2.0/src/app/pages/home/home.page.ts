@@ -9,6 +9,9 @@ import {ActionSheetController} from '@ionic/angular';
 import {CdlService} from '../../services/cdl.service';
 import {map} from 'rxjs/operators';
 import {DegreeCourse} from '../../model/DegreeCourse.model';
+import {TranslateService} from '@ngx-translate/core';
+import {LinguaService} from '../../services/lingua.service';
+declare function require(path: string);
 
 @Component({
   selector: 'app-home',
@@ -16,24 +19,25 @@ import {DegreeCourse} from '../../model/DegreeCourse.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-    // tslint:disable-next-line:max-line-length
-    constructor(private menu: MenuController, private userService: UserService , private modalController: ModalController, private subjectService: SubjectService, private storage: Storage, private actionSheet: ActionSheetController, private cdlService: CdlService) {
-  }
-  private subject$: Observable<Subject[]>;
-  private cdl$: DegreeCourse[] = [];
-  segment: string;
-  sliderOpts = {
-    zoom: false,
-    slidesPerView: 1.5,
-    spaceBetween: 20,
-    centeredSlides: true
-  };
+    private degreeCourse: string;
+    private language: string;
+
+    constructor(private menu: MenuController, private userService: UserService, private modalController: ModalController, private subjectService: SubjectService, private storage: Storage, private actionSheet: ActionSheetController, private cdlService: CdlService, private translateService: TranslateService, private linguaService: LinguaService) {
+    }
+
+    private subject$: Observable<Subject[]>;
+    private cdl$: DegreeCourse[] = [];
+    segment: string;
+    sliderOpts = {
+        zoom: false,
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        centeredSlides: true
+    };
     // this.subjectService.listHome().subscribe
 
 
-
-
-  private activeTabName: string;
+    private activeTabName: string;
 
   ngOnInit() {
       this.segment = '1';
@@ -51,7 +55,8 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.segment = '1';
+      this.initTranslate();
+      this.segment = '1';
     this.storage.get('cdl').then(cdl => {
       if (cdl === null || cdl === undefined) {
         this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
@@ -111,7 +116,59 @@ export class HomePage implements OnInit {
     return buttons;
 
 
-  }
+    }
+
+    initTranslate() {
+        this.translateService.get('DEGREECOURSE').subscribe((data: string) => {
+            this.degreeCourse = data;
+            console.log(data);
+        });
+        this.translateService.get('SELECTLANGUAGE').subscribe((data: string) => {
+            this.language = data;
+            console.log(data);
+        });
+    }
+
+    async openLanguage() {
+        const actionSheet = await this.actionSheet.create({
+            header: await this.language,
+            buttons: [{
+                text: 'italiano',
+                handler: () => {
+                    this.changeLanguage();
+                }
+            }, {
+                text: 'English',
+                icon: require('../../../assets/icon/language.png'),
+                handler: () => {
+                    this.changeLanguage();
+                }
+            }]
+
+        });
+
+        await actionSheet.present();
+    }
+
+
+    changeLanguage() {
+        /*
+         this.linguaService.getLinguaAttuale().subscribe(res=>console.log(res));
+         console.log(this.linguaService.getLingue()['1'].valore);
+         console.log(this.translateService.getDefaultLang());
+
+         */
+        if (this.translateService.getDefaultLang() === 'en') {
+            this.translateService.use(this.linguaService.getLinguaPreferita());
+            this.translateService.setDefaultLang(this.linguaService.getLinguaPreferita());
+            this.linguaService.updateLingua(this.linguaService.getLinguaPreferita());
+        } else {
+            this.translateService.use(this.linguaService.getLingue()['1'].valore);
+            this.linguaService.updateLingua(this.linguaService.getLingue()['1'].valore);
+            this.translateService.setDefaultLang(this.linguaService.getLingue()['1'].valore);
+
+        }
+    }
 }
 
 

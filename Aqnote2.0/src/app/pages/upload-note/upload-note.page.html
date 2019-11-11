@@ -9,7 +9,7 @@
   <div class="auth-content">
 
 
-    <form [formGroup]="signUpFormModel" class="list-form">
+    <form [formGroup]="uploadUpFormModel" class="list-form">
       <ion-list>
       <ion-item no-padding class="animated fadeInUp">
         <ion-label color="success" position="floating">
@@ -17,7 +17,7 @@
         </ion-label>
         <ion-input color="secondary" type="text" formControlName="title"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="signUpFormModel.get('title').touched && signUpFormModel.get('title').invalid">
+      <p ion-text class="text08" *ngIf="uploadUpFormModel.get('title').touched && uploadUpFormModel.get('title').invalid">
         <ion-text color="danger">{{"TITLE_REQUIRED"|translate}}</ion-text>
       </p>
       <ion-item no-padding class="animated fadeInUp">
@@ -26,23 +26,28 @@
 
         <ion-textarea color="secondary" type="text" formControlName="description"></ion-textarea>
       </ion-item>
-        <p ion-text class="text08" *ngIf="signUpFormModel.get('description').touched && signUpFormModel.get('description').invalid">
+        <p ion-text class="text08" *ngIf="uploadUpFormModel.get('description').touched && uploadUpFormModel.get('description').invalid">
           <ion-text color="danger">{{"DESCRIPTION_REQUIRED"|translate}}</ion-text>
         </p>
 
-        <ion-label color="success" position="floating">
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label color="success" position="floating">
           {{"SELECT_COURSE" | translate}}
-        </ion-label>
+          </ion-label>
 
         <ion-select (ionChange)="onDCChange()" formControlName="subject_id" value="cdl" okText='{{"OK_TEXT" | translate}}' cancelText='{{"CANCEL_TEXT" | translate}}' >
           <div >
           <ion-select-option value="{{s.id}}" *ngFor="let s of s$ | async" text-wrap="">{{s.nameS}}</ion-select-option>
           </div>
         </ion-select>
+        </ion-item>
+        <p ion-text class="text08" *ngIf="uploadUpFormModel.get('subject_id').touched && uploadUpFormModel.get('subject_id').invalid">
+          <ion-text color="danger">{{"SUBJECT_REQUIRED"|translate}}</ion-text>
+        </p>
 
 
       <div margin-top="10px">
-        <ion-button icon-left size="medium" expand="full" expand="block" color="primary" (click)="goOn()" [disabled]="!signUpFormModel.valid" tappable>
+        <ion-button icon-left size="medium" expand="full" expand="block" color="primary" (click)="goOn()" [disabled]="!uploadUpFormModel.valid" tappable>
           {{"OK_TEXT" | translate}}
         </ion-button>
       </div>

@@ -14,13 +14,16 @@ import {UserService} from "../../services/user.service";
 export class FavouritesPage implements OnInit {
     private d$: Observable<Subject[]>;
     private userLogged$: BehaviorSubject<User>;
+    Favourites: string;
 
     constructor(private menu: MenuController,
                 private userService: UserService,
                 private modalController: ModalController,
                 private subjectService: SubjectService) {}
 
-    ngOnInit() {
+    ngOnInit() {}
+
+    ionViewWillEnter() {
         this.userService.getUtente().subscribe(res => {
             this.d$ = this.subjectService.listFavourite(res.idU);
         });
