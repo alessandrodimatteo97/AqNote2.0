@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'base64-encode', loadChildren: './base64-encode/base64-encode.module#Base64EncodePageModule' },
  // { path: 'common', loadChildren: './common/common.module#CommonPageModule' },
   { path: 'upload-photo/:idS/:idN', loadChildren: './pages/upload-photo/upload-photo.module#UploadPhotoPageModule' },
+  { path: 'subjects', loadChildren: './pages/subjects/subjects.module#SubjectsPageModule' },
   // { path: 'splash-screen', loadChildren: './splash-screen/splash-screen.module#SplashScreenPageModule' },
 ];
 

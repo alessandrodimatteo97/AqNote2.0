@@ -39,77 +39,69 @@ export class HomePage implements OnInit {
 
     private activeTabName: string;
 
+  ngOnInit() {
+      this.initTranslate();
+      this.segment = '1';
+      this.cdlService.list().subscribe(res => res.forEach(Dc => this.cdl$.push(Dc)));
+      // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
+      this.storage.get('cdl').then(cdl => {
+          if (cdl === null || cdl === undefined) {
+              this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
 
-    ngOnInit() {
-        // this.initTranslate();
-        this.segment = '1';
-        this.cdlService.list().subscribe(res => res.forEach(Dc => this.cdl$.push(Dc)));
-        // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
-        this.storage.get('cdl').then(cdl => {
-            if (cdl === null || cdl === undefined) {
-                this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
+          } else {
+              this.subject$ = this.subjectService.listHome(cdl);
 
-            } else {
-                this.subject$ = this.subjectService.listHome(cdl);
+          }
+      });
+  }
 
-            }
-        });
-    }
+  segmentChanged(ev: any) {
+    console.log(ev.target.value);
+  }
+  getSelectedTab(): void {
+    console.log('this');
+    // this.activeTabName = this.tabs.getSelected();
+  }
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
 
-    ionViewWillEnter() {
-        this.initTranslate();
-    }
+  openEnd() {
+    this.menu.open('end');
+  }
 
+  openCustom() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
+  }
 
-    segmentChanged(ev: any) {
-        console.log(ev.target.value);
-    }
+  async openDc() {
+    const actionSheet = await this.actionSheet.create({
+      header: 'Course Deegree',
+      buttons:  await this.Cdl()
+    });
+    await actionSheet.present();
+  }
 
-    getSelectedTab(): void {
-        console.log('this');
-        // this.activeTabName = this.tabs.getSelected();
-    }
+  Cdl() {
+    let buttons = [];
+    this.cdl$.forEach(res =>{
+      let button = {
+          text: res.nameDC,
 
-    openFirst() {
-        this.menu.enable(true, 'first');
-        this.menu.open('first');
-    }
+          handler: () => {
+           this.subject$ = this.subjectService.listHome(res.idDC);
+           this.storage.set('cdl', res.idDC);
+           return true;
+          }
+        };
+        buttons.push(button);
 
-    openEnd() {
-        this.menu.open('end');
-    }
-
-    openCustom() {
-        this.menu.enable(true, 'custom');
-        this.menu.open('custom');
-    }
-
-    async openDc() {
-        const actionSheet = await this.actionSheet.create({
-            header: await this.degreeCourse,
-            buttons: await this.Cdl()
-        });
-        await actionSheet.present();
-    }
-
-    Cdl() {
-        const buttons = [];
-        this.cdl$.forEach(res => {
-            const button = {
-                text: res.nameDC,
-
-                handler: () => {
-                    this.subject$ = this.subjectService.listHome(res.idDC);
-                    this.storage.set('cdl', res.idDC);
-                    return true;
-                }
-            };
-            buttons.push(button);
-
-        });
+    });
 
 
-        return buttons;
+    return buttons;
 
 
     }
@@ -131,13 +123,12 @@ export class HomePage implements OnInit {
             buttons: [{
                 text: 'italiano',
                 handler: () => {
-                    this.changeLanguage();
+                    this.changeLanguage('it');
                 }
             }, {
                 text: 'English',
-                icon: require('../../../assets/icon/language.png'),
                 handler: () => {
-                    this.changeLanguage();
+                    this.changeLanguage('en');
                 }
             }]
 
@@ -147,14 +138,14 @@ export class HomePage implements OnInit {
     }
 
 
-    changeLanguage() {
+    changeLanguage(lan: string) {
         /*
          this.linguaService.getLinguaAttuale().subscribe(res=>console.log(res));
          console.log(this.linguaService.getLingue()['1'].valore);
          console.log(this.translateService.getDefaultLang());
 
          */
-        if (this.translateService.getDefaultLang() === 'en') {
+        if (lan === 'it') {
             this.translateService.use(this.linguaService.getLinguaPreferita());
             this.translateService.setDefaultLang(this.linguaService.getLinguaPreferita());
             this.linguaService.updateLingua(this.linguaService.getLinguaPreferita());

@@ -4,7 +4,7 @@
       <div class="image" (click)="openDc()">
         <img  src="../../../assets/icon/dc.png">
       </div>
-        <div class="image" [routerLink]="['/tabs/']">
+        <div class="image" [routerLink]="['subjects']">
             <img  src="../../../assets/icon/homework.png">
         </div>
     <ion-title class="title">
@@ -83,8 +83,8 @@
                 <ion-item>
                   <ion-label>
                     <h1>{{k.value.title}}</h1>
-                    <p>{{"PAGES_NUMBER" | translate}} {{k.value.page}} </p>
-                    <p>{{"COMMENTS_NUMBER" | translate}} {{k.value.comments}} </p>
+                    <p>{{"PAGES_NUMBER" | translate}}: {{k.value.page}} </p>
+                    <p>{{"COMMENTS_NUMBER" | translate}}: {{k.value.comments}} </p>
                     <div *ngIf="((k.value.avarage | number:'1.0-0'))==0">
 
                       <p>

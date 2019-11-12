@@ -13,7 +13,7 @@
   "SEE_ALL": "vedi tutto",
   "NEW_NOTE": "Nuova nota",
   "PROFILE": "Profilo",
-
+  "EMAIL": "Email",
 
   "SKIP_DEGREECOURSE": "Vai alla pagina del corso",
   "SIGNUP": "Registrazione",
@@ -71,10 +71,19 @@
   "USERCREATED": "Il profilo è stato creato",
   "ERROR": "Errore",
   "PROBLEMSERVER": "Problema al server",
+  "USERALREADYEXIST": "Email già esistente",
+  "USERALREADYEXISTMESSAGE": "Abbiamo già un utente con questa mail",
+  "OLDPASSWORDWOID": "Vecchia password mancante",
+  "OLDPASSWORDWOIDMESSAGE": "Devi inserire la vecchia password",
 
   "OKTEXT": "Avanti",
   "CANCELTEXT": "Indietro",
 
   "SELECTLANGUAGE": "Seleziona la lingua",
+  "SUBJECTSTITLE": "Materie",
+  "FIRSTYEAR": "Primo anno",
+  "SECONDYEAR": "Secondo anno",
+  "THIRDYEAR": "Terzo anno",
+
   "LANGUAGE": "lingua"
 }

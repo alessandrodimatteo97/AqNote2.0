@@ -3,26 +3,34 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {URL} from '../constants';
 import {Subject} from '../model/Subject.model';
-import {User} from "../model/User.model";
-import {UserService} from "./user.service";
 
+export interface Something {
+  year: Subject[];
+
+}
+
+export interface Prova {
+
+  subject: Subject;
+
+
+}
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-  constructor(private http: HttpClient, private userService: UserService) { }
+  constructor(private http: HttpClient) { }
 
-  list(year, idDC ): Observable<Subject[]> {
-    const subjectUrl = `${URL.SUBJECTS}/${year}/${idDC}`;
-
-    return this.http.get<Subject[]>(subjectUrl);
+  list2( idDC ): Observable<any[]> {
+    const subjectUrl = `${URL.SUBJECTS}/${idDC}`;
+    return this.http.get<Something[]>(subjectUrl);
 
 
   }
 
   list1(idDC): Observable<Subject[]> {
-    const subjectUrl = `${URL.SUBJECTS}/${idDC}`;
+    const subjectUrl = `${URL.SUBJECTS1}/${idDC}`;
     return this.http.get<Subject[]>(subjectUrl);
   }
 

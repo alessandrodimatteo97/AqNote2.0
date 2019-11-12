@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar  class="toolbar">
+    <ion-title>
+      {{"SUBJECTSTITLE" | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+<ion-content>
+
+
+  <div *ngFor="let s of (subject$ | async) | keyvalue">
+    <div *ngIf="s.key === '1'">
+    <h3 >{{"FIRSTYEAR" | translate}}</h3>
+    </div>
+    <div *ngIf="s.key === '2'">
+      <h3 >{{"SECONDYEAR" | translate}}</h3>
+    </div><div *ngIf="s.key === '3'">
+    <h3 >{{"THIRDYEAR" | translate}}</h3>
+  </div>
+
+    <ion-card class="cards">
+
+
+
+      <ion-item *ngFor="let d of s.value | keyvalue "    [routerLink]="['/tabs/home/list-notes/'+d.key]">
+        <ion-label>
+          <h1> {{ d.key }}</h1>
+
+        </ion-label>
+      </ion-item>
+
+
+
+
+    </ion-card>
+  </div>
+
+</ion-content>
