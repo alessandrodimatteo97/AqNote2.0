@@ -6,6 +6,7 @@ import {AlertController, NavController} from '@ionic/angular';
 import {catchError} from 'rxjs/operators';
 import {EMPTY} from 'rxjs';
 import {error} from 'util';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
