@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
     private activeTabName: string;
 
   ngOnInit() {
+      this.initTranslate();
       this.segment = '1';
       this.cdlService.list().subscribe(res => res.forEach(Dc => this.cdl$.push(Dc)));
       // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
@@ -54,19 +55,6 @@ export class HomePage implements OnInit {
       });
   }
 
-  ionViewWillEnter() {
-      this.initTranslate();
-      this.segment = '1';
-    this.storage.get('cdl').then(cdl => {
-      if (cdl === null || cdl === undefined) {
-        this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
-
-      } else {
-        this.subject$ = this.subjectService.listHome(cdl);
-
-      }
-    });
-  }
   segmentChanged(ev: any) {
     console.log(ev.target.value);
   }
@@ -135,13 +123,12 @@ export class HomePage implements OnInit {
             buttons: [{
                 text: 'italiano',
                 handler: () => {
-                    this.changeLanguage();
+                    this.changeLanguage('it');
                 }
             }, {
                 text: 'English',
-                icon: require('../../../assets/icon/language.png'),
                 handler: () => {
-                    this.changeLanguage();
+                    this.changeLanguage('en');
                 }
             }]
 
@@ -151,14 +138,14 @@ export class HomePage implements OnInit {
     }
 
 
-    changeLanguage() {
+    changeLanguage(lan: string) {
         /*
          this.linguaService.getLinguaAttuale().subscribe(res=>console.log(res));
          console.log(this.linguaService.getLingue()['1'].valore);
          console.log(this.translateService.getDefaultLang());
 
          */
-        if (this.translateService.getDefaultLang() === 'en') {
+        if (lan === 'it') {
             this.translateService.use(this.linguaService.getLinguaPreferita());
             this.translateService.setDefaultLang(this.linguaService.getLinguaPreferita());
             this.linguaService.updateLingua(this.linguaService.getLinguaPreferita());

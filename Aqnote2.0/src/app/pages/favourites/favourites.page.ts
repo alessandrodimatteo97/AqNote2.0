@@ -28,5 +28,4 @@ export class FavouritesPage implements OnInit {
             this.d$ = this.subjectService.listFavourite(res.idU);
         });
     }
-
 }

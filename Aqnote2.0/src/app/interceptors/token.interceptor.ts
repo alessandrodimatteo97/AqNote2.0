@@ -6,7 +6,6 @@ import {AlertController, NavController} from '@ionic/angular';
 import {catchError} from 'rxjs/operators';
 import {EMPTY} from 'rxjs';
 import {error} from 'util';
-import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
@@ -17,6 +16,10 @@ export class TokenInterceptor implements HttpInterceptor {
     private newUserMessage: string;
     private serverError: string;
     private serverErrorMessage: string;
+    private userAlreadyExist: string;
+    private userAlreadyExistMessage: string;
+    private oldPasswordVoid: string;
+    private oldPasswordVoidMessage: string;
 
     constructor(private navController: NavController,
                 private alertController: AlertController,
@@ -38,11 +41,11 @@ export class TokenInterceptor implements HttpInterceptor {
             console.log(authReq);
             return next.handle(authReq).pipe(
                 catchError(err => {
-                    if (err.status == 421) { this.showError('We already have a user with this email', 'We already have a user with this email', false); }
-                    if (err.status == 422) { this.showError('Old password is void', 'You must enter the old password', false); }
-                    if (err.status == 409 ) { this.showError('Error in the request', 'one of the fields is wrong', false); }
-                    if (err.status == 200) { this.showError('New user-profile', 'profile has been created', true); }
-                    if (err.status != 409 && err.status != 422 && err.status != 421 && err.status != 200) { this.showError('Error', 'Problem with the server', true); }
+                    if (err.status === 421) { this.showError(this.userAlreadyExist, this.userAlreadyExistMessage, false); }
+                    if (err.status === 422) { this.showError(this.oldPasswordVoid, this.oldPasswordVoidMessage, false); }
+                    if (err.status === 409 ) { this.showError(this.errorRequest, this.errorRequestMessage, false); }
+                    if (err.status === 200) { this.showError(this.newUser, this.newUserMessage, true); }
+                    if (err.status !== 409 && err.status !== 422 && err.status !== 421 && err.status !== 200) { this.showError(this.serverError, this.serverErrorMessage, true); }
                     return EMPTY;
                 })
             );
@@ -57,7 +60,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
         const alert = await this.alertController.create({
             header: status,
-            message: message,
+            message,
             buttons: [
                 {
                     text: 'OK',
@@ -75,20 +78,32 @@ export class TokenInterceptor implements HttpInterceptor {
         this.translateService.get('ERRORREQUEST').subscribe((data:string)=>{
             this.errorRequest = data;
         });
-        this.translateService.get('FIELDSWRONG').subscribe((data:string)=>{
+        this.translateService.get('FIELDSWRONG').subscribe((data: string) => {
             this.errorRequestMessage = data;
         });
-        this.translateService.get('NEWUSER').subscribe((data:string)=>{
+        this.translateService.get('NEWUSER').subscribe((data: string) => {
             this.newUser = data;
         });
-        this.translateService.get('USERCREATED').subscribe((data:string)=>{
+        this.translateService.get('USERCREATED').subscribe((data: string) => {
             this.newUserMessage = data;
         });
-        this.translateService.get('ERROR').subscribe((data:string)=>{
+        this.translateService.get('ERROR').subscribe((data: string) => {
             this.serverError = data;
         });
-        this.translateService.get('PROBLEMSERVER').subscribe((data:string)=>{
+        this.translateService.get('PROBLEMSERVER').subscribe((data: string) => {
             this.serverErrorMessage = data;
+        });
+        this.translateService.get('USERALREADYEXIST').subscribe((data: string) => {
+            this.userAlreadyExist = data;
+        });
+        this.translateService.get('USERALREADYEXISTMESSAGE').subscribe((data: string) => {
+            this.userAlreadyExistMessage = data;
+        });
+        this.translateService.get('OLDPASSWORDWOID').subscribe((data: string) => {
+            this.oldPasswordVoid = data;
+        });
+        this.translateService.get('OLDPASSWORDWOIDMESSAGE').subscribe((data: string) => {
+            this.oldPasswordVoidMessage = data;
         });
     }
 }

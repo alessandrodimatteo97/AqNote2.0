@@ -59,6 +59,7 @@ export class UserProfilePage implements OnInit {
       this.notes$ = this.userService.getNotes();
       this.prova = user.cdl_id;
       this.fullName = user.name + ' ' + user.surname;
+      console.log(this.prova);
       /* this.userFormModel = new FormGroup({
         mail: new FormControl(user.mail,  [ Validators.compose([
             Validators.required,
@@ -79,7 +80,9 @@ export class UserProfilePage implements OnInit {
         mail: [user.mail, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.email])],
         OldPassword:  ['', Validators.compose([Validators.required, Validators.minLength(5)])],
         Newpassword: ['', Validators.compose([Validators.minLength(5)])],
-        cdl_id: [user.cdl_id]
+        cdl_id: [String(user.cdl_id), Validators.compose([
+          Validators.required
+        ])]
       });
     });
    // const authToken = this.userService.getAuthToken();

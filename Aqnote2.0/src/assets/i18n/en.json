@@ -70,12 +70,19 @@
   "USERCREATED": "Profile has been created",
   "ERROR": "Error",
   "PROBLEMSERVER": "Problem with the server",
+  "USERALREADYEXIST": "Email already exists",
+  "USERALREADYEXISTMESSAGE": "We already have a user with this email",
+  "OLDPASSWORDWOID": "Old password is void",
+  "OLDPASSWORDWOIDMESSAGE": "You must enter the old password",
 
   "OKTEXT": "Ok",
   "CANCELTEXT": "Back",
 
   "SELECTLANGUAGE": "Select language",
-
+  "SUBJECTSTITLE": "Subjects",
+  "FIRSTYEAR": "First year",
+  "SECONDYEAR": "Second year",
+  "THIRDYEAR": "Third year",
 
   "LANGUAGE": "language"
 }

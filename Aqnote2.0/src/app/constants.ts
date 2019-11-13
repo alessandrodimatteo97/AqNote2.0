@@ -6,6 +6,7 @@ export const URL = {
     DEPARTMENTS: URL_BASE + '/department',
     CDL: URL_BASE  + '/cdl',
     SUBJECTS: URL_BASE  + '/subjectlist', // localhost:12345/api/department/cdl/year/list/1/1
+    SUBJECTS1: URL_BASE + '/subjectlist1',
     NOTES: URL_BASE + '/notesList',
     SIGNUP: URL_BASE + '/signup',
     LOGIN: URL_BASE + '/login',
