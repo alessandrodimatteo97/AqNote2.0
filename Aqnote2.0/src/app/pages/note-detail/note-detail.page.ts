@@ -46,7 +46,7 @@ export class NoteDetailPage implements OnInit {
               private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
   segment = 'detail';
   slideOpts$ = {
-    slidesPerView: 2
+    slidesPerView: 2.5
   };
   openPreview(img) {
     this.modalController.create({

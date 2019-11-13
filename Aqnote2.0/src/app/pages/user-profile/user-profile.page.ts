@@ -111,7 +111,7 @@ export class UserProfilePage implements OnInit {
     let file = new FileLikeObject(item[0]);
     const formData = new FormData();
     formData.append('file', file.rawFile, file.name);
-    this.userService.sendImage(formData);
+    this.userService.sendImage(formData).subscribe(res=>console.log(res));
    // this.image = this.userService.getImage();
     this.image = null;
     this.proof = this.fileUploader.queue.pop();

@@ -34,8 +34,10 @@ export class HomePage implements OnInit {
         spaceBetween: 20,
         centeredSlides: true
     };
-    // this.subjectService.listHome().subscribe
 
+    ionViewWillEnter(){
+        this.initTranslate();
+    }
 
     private activeTabName: string;
 
@@ -78,7 +80,7 @@ export class HomePage implements OnInit {
 
   async openDc() {
     const actionSheet = await this.actionSheet.create({
-      header: 'Course Deegree',
+      header:  this.degreeCourse,
       buttons:  await this.Cdl()
     });
     await actionSheet.present();
@@ -149,11 +151,12 @@ export class HomePage implements OnInit {
             this.translateService.use(this.linguaService.getLinguaPreferita());
             this.translateService.setDefaultLang(this.linguaService.getLinguaPreferita());
             this.linguaService.updateLingua(this.linguaService.getLinguaPreferita());
+            this.initTranslate();
         } else {
             this.translateService.use(this.linguaService.getLingue()['1'].valore);
             this.linguaService.updateLingua(this.linguaService.getLingue()['1'].valore);
             this.translateService.setDefaultLang(this.linguaService.getLingue()['1'].valore);
-
+            this.initTranslate();
         }
     }
 }
