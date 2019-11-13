@@ -76,7 +76,7 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     initTranslate() {
-        this.translateService.get('ERRORREQUEST').subscribe((data: string) => {
+        this.translateService.get('ERRORREQUEST').subscribe((data:string)=>{
             this.errorRequest = data;
         });
         this.translateService.get('FIELDSWRONG').subscribe((data: string) => {
