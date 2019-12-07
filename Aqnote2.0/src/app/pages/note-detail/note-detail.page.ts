@@ -1,25 +1,13 @@
 import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 import { ModalController } from '@ionic/angular';
-import {
-  CommentToLoad,
-  CommentToUpdate,
-  NoteDetail,
-  NoteDetailForList,
-  NoteService,
-  PhotoSrc
-} from '../../services/note.service';
+import {CommentToLoad, CommentToUpdate, NoteDetail, NoteService} from '../../services/note.service';
 import {UserService} from '../../services/user.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Note} from '../../model/Note.model';
-import {Observer} from 'rxjs';
-import { Directive, ElementRef} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../model/User.model';
-import {HttpResponse} from "@angular/common/http";
-import {DomSanitizer} from "@angular/platform-browser";
-import {$e} from "codelyzer/angular/styles/chars";
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-note-detail',
@@ -30,45 +18,31 @@ export class NoteDetailPage implements OnInit {
   private note: Observable<NoteDetail>;
   private photo$: Observable<string[]>;
   private photos = [];
-  base64Image: any;
   public post: any = {color1: '', color2: '', color3: '', color4: '', color5: ''};
   public numberStar: number;
   private formComment: FormGroup;
   private comments: Observable<CommentToLoad[]>;
   private userLogged$: BehaviorSubject<User>;
-  private alreadyCommented$: Observable<HttpResponse<boolean>>;
   private commented$: boolean;
   private favButton: string;
   private favourite: boolean;
   private idN: string;
-  constructor(private modalController: ModalController, private userService: UserService, private modalCtrl: ModalController,
-              private noteService: NoteService, private sanitizer: DomSanitizer,
-              private elRef: ElementRef, renderer: Renderer2, private activateRoute: ActivatedRoute) { }
-  segment = 'detail';
-  slideOpts$ = {
+  private segment = 'detail';
+  private slideOpts$ = {
     slidesPerView: 2.5
   };
-  openPreview(img) {
-    this.modalController.create({
-      component: ImageModalPage,
-      componentProps: {
-        img
-      }
-    }).then(modal => {
-      modal.present();
-    });
-  }
+  constructor(private modalController: ModalController,
+              private userService: UserService,
+              private modalCtrl: ModalController,
+              private noteService: NoteService,
+              private sanitizer: DomSanitizer,
+              private activateRoute: ActivatedRoute) { }
+
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
       this.idN = params.id;
-
-
-
-
-
-    this.userService.isLogged().subscribe(res => {
+      this.userService.isLogged().subscribe(res => {
       if (res.valueOf()){
-      console.log('true');
       this.formComment = new FormGroup({
         titleC: new FormControl(),
         comment: new FormControl(),
@@ -76,21 +50,15 @@ export class NoteDetailPage implements OnInit {
       });
       this.favourite = true;
       this.userLogged$ = this.userService.getUtente();
-      console.log(this.userLogged$);
-        this.photo$ = this.noteService.showImage(params.id);
-        this.note = this.noteService.showNote(params.id);
-        this.noteService.checkFavourites(this.userLogged$, params.id).subscribe(res => {
-          this.favButton = res.body['body'];
+      this.photo$ = this.noteService.showImage(params.id);
+      this.note = this.noteService.showNote(params.id);
+      this.noteService.checkFavourites(this.userLogged$, params.id).subscribe(res => {
+      this.favButton = res.body['body'];
         });
-        console.log('commenti in arrivo');
-        this.comments = this.noteService.showNotesComments(params.id);
-        this.comments.subscribe(res => {
-          console.log(res);
-        });
-        this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, params.id);
-        this.alreadyCommented$.subscribe(res => {
-          this.commented$ = res.body['body'];
-        });
+      this.comments = this.noteService.showNotesComments(params.id);
+      this.noteService.alreadyCommented(this.userLogged$, params.id).subscribe(res => {
+        this.commented$ = res.body['body'];
+      });
       } else {
       this.favourite = false;
       this.photo$ = this.noteService.showImage(params.id);
@@ -98,54 +66,18 @@ export class NoteDetailPage implements OnInit {
       this.comments = this.noteService.showNotesComments(params.id);
       this.commented$ = false;
     }
-
-
     });
 
     });
 
 
 
-  }
-
-  getBase64ImageFromURL(url: string) {
-    return Observable.create((observer: Observer<string>) => {
-      const img = new Image();
-      img.crossOrigin = 'Anonymous';
-      img.src = url;  img.src = url;
-      if (!img.complete) {
-          console.log('sei tu?0');
-          img.onload = () => {
-          observer.next(this.getBase64Image(img));
-          observer.complete();
-        };
-          img.onerror = (err) => {
-              console.log('sei tu?1');
-              observer.error(err);
-          };
-      } else {
-          console.log('sei tu?2');
-          observer.next(this.getBase64Image(img));
-          observer.complete();
-      }
-    });
-  }
-
-  getBase64Image(img: HTMLImageElement) {
-    const canvas = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    const dataURL = canvas.toDataURL('image/png');
-    console.log(dataURL);
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
 ionViewWillEnter() {
     this.segment = 'detail';
   }
 
-  starOne(event) {
+  starOne() {
     this.post.color1 = 'primary';
     this.post.color2 = '';
     this.post.color3 = '';
@@ -155,7 +87,7 @@ ionViewWillEnter() {
     this.formComment.patchValue({ stars: this.numberStar});
   }
 
-  starTwo(event) {
+  starTwo() {
     this.post.color1 = 'primary';
     this.post.color2 = 'primary';
     this.post.color3 = '';
@@ -165,7 +97,7 @@ ionViewWillEnter() {
     this.formComment.patchValue({ stars: this.numberStar});
   }
 
-  starThree(event) {
+  starThree() {
     this.post.color1 = 'primary';
     this.post.color2 = 'primary';
     this.post.color3 = 'primary';
@@ -175,7 +107,7 @@ ionViewWillEnter() {
     this.formComment.patchValue({ stars: this.numberStar});
   }
 
-  starFour(event) {
+  starFour() {
     this.post.color1 = 'primary';
     this.post.color2 = 'primary';
     this.post.color3 = 'primary';
@@ -185,7 +117,7 @@ ionViewWillEnter() {
     this.formComment.patchValue({ stars: this.numberStar});
   }
 
-  starFive(event) {
+  starFive() {
     this.post.color1 = 'primary';
     this.post.color2 = 'primary';
     this.post.color3 = 'primary';
@@ -212,7 +144,7 @@ ionViewWillEnter() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(c);
   }
 
-  sendComment(event) {
+  sendComment() {
     const comment: CommentToUpdate = this.formComment.value;
     this.formComment.reset();
     this.post.color1 = '';
@@ -221,42 +153,31 @@ ionViewWillEnter() {
     this.post.color4 = '';
     this.post.color5 = '';
     this.numberStar = 0;
-
-      this.noteService.updateComment(comment, this.idN).subscribe(res  => {
+    this.noteService.updateComment(comment, this.idN).subscribe(res  => {
         this.formComment.setValue({titleC: '', comment: '' , stars: this.numberStar});
         this.loadComments();
-
     });
   }
 
   loadComments() {
     console.log(this.segment);
-
-      // Defaults to 0 if no query param provided.
-      console.log("commenti");
-      this.comments = this.noteService.showNotesComments(this.idN);
-      this.alreadyCommented$ = this.noteService.alreadyCommented(this.userLogged$, this.idN);
-      this.alreadyCommented$.subscribe(res => {
-        console.log( 'true non commentato, false commentato');
-        this.commented$ = res.body['body'];
-      });
+    this.comments = this.noteService.showNotesComments(this.idN);
+    this.noteService.alreadyCommented(this.userLogged$, this.idN).subscribe(res => {
+      this.commented$ = res.body['body'];
+    });
 
   }
 
   addToFavourite() {
     console.log(this.favButton);
     if (this.favButton === 'light') {
-
         this.noteService.addToFavourite(this.userLogged$, this.idN).subscribe(res => {
           this.favButton = res.body['body'];
-
       });
     }
     if (this.favButton === 'medium') {
-
         this.noteService.removeFromFavourite(this.userLogged$, this.idN).subscribe(res => {
           this.favButton = res.body['body'];
-
       });
     }
   }

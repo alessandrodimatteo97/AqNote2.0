@@ -12,90 +12,87 @@
 
   <ion-router-outlet main></ion-router-outlet>
 
-    <div *ngFor="let s of (d$ | async) | keyvalue">
+  <div *ngFor="let s of (favourites$ | async) | keyvalue">
     <h3 >{{s.key}}</h3>
-  <ion-card class="cards">
+    <ion-card class="cards">
+      <ion-item *ngFor='let obj of s.value'   [routerLink]="['note-detail/'+obj.idN]">
+        <ion-label>
+          <h1> {{ obj.title }}</h1>
+          <p>  {{"PAGES_NUMBER" | translate}} {{obj.pages}}</p>
+          <p> {{"COMMENTS_NUMBER" | translate}} {{obj.comments}}</p>
+          <div *ngIf="((obj.like | number:'1.0-0'))==0">
 
+            <p>
 
+              <ion-icon name="star" color=""></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+            </p>
+          </div>
+          <div *ngIf="((obj.like | number:'1.0-0'))==1">
 
-          <ion-item *ngFor='let obj of s.value'   [routerLink]="['note-detail/'+obj.idN]">
-            <ion-label>
-              <h1> {{ obj.title }}</h1>
-              <p>  {{"PAGES_NUMBER" | translate}} {{obj.pages}}</p>
-              <p> {{"COMMENTS_NUMBER" | translate}} {{obj.comments}}</p>
-              <div *ngIf="((obj.like | number:'1.0-0'))==0">
+            <p>
 
-                <p>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+            </p>
+          </div>
+          <div *ngIf="((obj.like | number:'1.0-0'))==2">
 
-                  <ion-icon name="star" color=""></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                </p>
-              </div>
-              <div *ngIf="((obj.like | number:'1.0-0'))==1">
+            <p>
 
-                <p>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+            </p>
+          </div>
+          <div *ngIf="((obj.like | number:'1.0-0'))==3">
 
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                </p>
-              </div>
-              <div *ngIf="((obj.like | number:'1.0-0'))==2">
+            <p>
 
-                <p>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+            </p>
+          </div>
+          <div *ngIf="((obj.like | number:'1.0-0'))==4">
 
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                </p>
-              </div>
-              <div *ngIf="((obj.like | number:'1.0-0'))==3">
+            <p>
 
-                <p>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" ></ion-icon>
+            </p>
+          </div>
+          <div *ngIf="((obj.like | number:'1.0-0'))==5">
 
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                </p>
-              </div>
-              <div *ngIf="((obj.like | number:'1.0-0'))==4">
+            <p>
 
-                <p>
-
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" ></ion-icon>
-                </p>
-              </div>
-              <div *ngIf="((obj.like | number:'1.0-0'))==5">
-
-                <p>
-
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                  <ion-icon name="star" color="primary"></ion-icon>
-                </p>
-              </div>
-            </ion-label>
-          </ion-item>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+              <ion-icon name="star" color="primary"></ion-icon>
+            </p>
+          </div>
+        </ion-label>
+      </ion-item>
 
 
 
 
-  </ion-card>
-    </div>
+    </ion-card>
+  </div>
 
 </ion-content>

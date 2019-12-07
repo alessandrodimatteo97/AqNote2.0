@@ -26,7 +26,8 @@
         <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
       </ion-button>
       <ion-button *ngIf="(queue.includes(item))" slot="end" fill="clear" >
-        <ion-icon name="checkmark"></ion-icon>      </ion-button>
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-button>
       <ion-button slot="end" fill="clear" (click)="onDelete(item)">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
@@ -50,10 +51,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-  <ion-button *ngIf="fileUploader.queue.length != 0 " (click)="uploadFiles()">{{"UPLOAD_FILES" | translate}}</ion-button>
+  <ion-button *ngIf="fileUploader.queue.length!=0 || ((this.photo$| async)?.length != 0) "  [disabled]="(fileUploader.queue.length == this.queue.length)"  (click)="uploadFiles()">{{"UPLOAD_FILES" | translate}} </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button *ngIf="fileUploader.queue.length != 0 || this.photo$!=null" [routerLink]="['/tabs/upload-note/note-detail/'+this.idN]"  >{{"SEE_NOTES" | translate}}</ion-button>
+        <ion-button *ngIf="((this.photo$| async)?.length != 0) || (fileUploader.queue.length != 0)" [disabled]="(this.queue.length == 0) && ((this.photo$| async)?.length == 0)"  [routerLink]="['/tabs/upload-note/note-detail/'+this.idN]"  >{{"SEE_NOTES" | translate}}</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -46,7 +46,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     if (err.status === 422) { this.showError(this.oldPasswordVoid, this.oldPasswordVoidMessage, false); }
                     if (err.status === 409 ) { this.showError(this.errorRequest, this.errorRequestMessage, false); }
                     if (err.status === 200) { this.showError(this.newUser, this.newUserMessage, true); }
-                    if (err.status !== 409 && err.status !== 422 && err.status !== 421 && err.status !== 200) { this.showError(this.serverError, this.serverErrorMessage, true); }
+                    if (err.status !== 409 && err.status !== 422 && err.status !== 421 && err.status !== 200 && err.status !== 515 ) { this.showError(this.serverError, this.serverErrorMessage, true); }
                     return EMPTY;
                 })
             );

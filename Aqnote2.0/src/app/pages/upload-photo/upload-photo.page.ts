@@ -42,6 +42,7 @@ export class UploadPhotoPage implements OnInit {
 
   ngOnInit() {
     this.photo$ = this.noteService.showImage(this.idN);
+    this.photo$.subscribe(res=>console.log(res.length));
   }
 
 
@@ -100,12 +101,7 @@ export class UploadPhotoPage implements OnInit {
   UploadItem(item) {
  // item.remove();
   this.queue.push(item);
-  if (this.queue.includes(item)) {
-    console.log('coglione');
 
-  } else {
-    }
-//  console.log(this.fileUploader.queue.);
   const formData = new FormData();
   formData.append('file' , item.file.rawFile, item.file.name);
   console.log(this.idN, this.idS);

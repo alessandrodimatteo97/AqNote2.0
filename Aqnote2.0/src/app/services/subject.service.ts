@@ -22,14 +22,14 @@ export class SubjectService {
 
   constructor(private http: HttpClient) { }
 
-  list2( idDC ): Observable<any[]> {
+  list( idDC ): Observable<any[]> {
     const subjectUrl = `${URL.SUBJECTS}/${idDC}`;
     return this.http.get<Something[]>(subjectUrl);
 
 
   }
 
-  list1(idDC): Observable<Subject[]> {
+  list2(idDC): Observable<Subject[]> {
     const subjectUrl = `${URL.SUBJECTS1}/${idDC}`;
     return this.http.get<Subject[]>(subjectUrl);
   }
@@ -39,8 +39,8 @@ export class SubjectService {
     return this.http.get<Subject[]>(subjectUrl);
 }
 
-  listFavourite(idU): Observable<Subject[]> {
-    const favouriteUrl = `${URL.FAVOURITE}/${idU}`;
+  listFavourite(): Observable<Subject[]> {
+    const favouriteUrl = `${URL.FAVOURITE}`;
     console.log(favouriteUrl);
     return this.http.get<Subject[]>(favouriteUrl);
   }

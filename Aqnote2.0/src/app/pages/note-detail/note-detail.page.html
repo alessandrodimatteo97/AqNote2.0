@@ -58,16 +58,16 @@
             <ion-row>
               <ion-col class="vertical-centered" size="auto">
                 <p>
-                  <ion-icon name="star" color="{{post.color1}}"  (click)="starOne($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color2}}"  (click)="starTwo($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color3}}"  (click)="starThree($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color4}}"  (click)="starFour($event)"></ion-icon>
-                  <ion-icon name="star" color="{{post.color5}}"  (click)="starFive($event)"></ion-icon>
+                  <ion-icon name="star" color="{{post.color1}}"  (click)="starOne()"></ion-icon>
+                  <ion-icon name="star" color="{{post.color2}}"  (click)="starTwo()"></ion-icon>
+                  <ion-icon name="star" color="{{post.color3}}"  (click)="starThree()"></ion-icon>
+                  <ion-icon name="star" color="{{post.color4}}"  (click)="starFour()"></ion-icon>
+                  <ion-icon name="star" color="{{post.color5}}"  (click)="starFive()"></ion-icon>
                 </p>
               </ion-col>
               <ion-col class="vertical-centered" push="4" size="auto">
                 <p>
-                  <ion-button shape="round" (click)="sendComment($event)">
+                  <ion-button shape="round" (click)="sendComment()">
                     <ion-icon name="send" size="small"></ion-icon>
                   </ion-button>
                 </p>
@@ -205,7 +205,7 @@
         </ion-col>
         <div *ngIf="favourite === true">
         <ion-col class="but-fav-col" size="12" >
-          <ion-button type="button" color="{{favButton}}" outline (click)="addToFavourite()" >
+          <ion-button type="button" color="{{favButton}}"  (click)="addToFavourite()" >
             <ion-icon name="heart" size="large"></ion-icon>
           </ion-button>
         </ion-col>

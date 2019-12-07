@@ -7,123 +7,102 @@ import {UserService} from '../../services/user.service';
 import {Storage} from '@ionic/storage';
 import {ActionSheetController} from '@ionic/angular';
 import {CdlService} from '../../services/cdl.service';
-import {map} from 'rxjs/operators';
 import {DegreeCourse} from '../../model/DegreeCourse.model';
 import {TranslateService} from '@ngx-translate/core';
 import {LinguaService} from '../../services/lingua.service';
-declare function require(path: string);
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
     private degreeCourse: string;
     private language: string;
 
-    constructor(private menu: MenuController, private userService: UserService, private modalController: ModalController, private subjectService: SubjectService, private storage: Storage, private actionSheet: ActionSheetController, private cdlService: CdlService, private translateService: TranslateService, private linguaService: LinguaService) {
-    }
+    constructor(private menu: MenuController,
+                private userService: UserService,
+                private modalController: ModalController,
+                private subjectService: SubjectService,
+                private storage: Storage,
+                private actionSheet: ActionSheetController,
+                private cdlService: CdlService,
+                private translateService: TranslateService,
+                private linguaService: LinguaService) {}
 
     private subject$: Observable<Subject[]>;
     private cdl$: DegreeCourse[] = [];
-    segment: string;
-    sliderOpts = {
+    private segment: string;
+    private sliderOpts = {
         zoom: false,
         slidesPerView: 1.5,
         spaceBetween: 20,
         centeredSlides: true
     };
 
-    ionViewWillEnter(){
+    /**
+     * IonViewWillEnter ci serve per la lingua nel caso la modifichiamo nella pagina di profilo
+     * e andiamo nella home, infatti l'ngOnInit non viene lanciato e verrà richiamato da questa
+     * direttiva di Ionic.
+     */
+    ionViewWillEnter() {
         this.initTranslate();
     }
 
-    private activeTabName: string;
 
-  ngOnInit() {
-      this.initTranslate();
-      this.segment = '1';
-      this.cdlService.list().subscribe(res => res.forEach(Dc => this.cdl$.push(Dc)));
-      // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
-      this.storage.get('cdl').then(cdl => {
-          if (cdl === null || cdl === undefined) {
-              this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
+    ngOnInit() {
+        this.segment = '1';
+        this.cdlService.list().subscribe(res => res.forEach(Dc => this.cdl$.push(Dc)));
+        // this.activatedRoute.params.subscribe(p => this.subject$ = this.subjectService.listHome(p.id));
+        this.storage.get('cdl').then(cdl => {
+            if (cdl === null || cdl === undefined) {
+                this.subject$ = this.subjectService.listHome(this.userService.getUtente().getValue().cdl_id);
 
-          } else {
-              this.subject$ = this.subjectService.listHome(cdl);
+            } else {
+                this.subject$ = this.subjectService.listHome(cdl);
 
-          }
-      });
-  }
+            }
+        });
+    }
 
-  segmentChanged(ev: any) {
-    console.log(ev.target.value);
-  }
-  getSelectedTab(): void {
-    console.log('this');
-    // this.activeTabName = this.tabs.getSelected();
-  }
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
-  }
+    async openDc() {
+        const actionSheet = await this.actionSheet.create({
+            header:  this.degreeCourse,
+            buttons:  await this.Cdl()
+        });
+        await actionSheet.present();
+    }
 
-  openEnd() {
-    this.menu.open('end');
-  }
-
-  openCustom() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
-  }
-
-  async openDc() {
-    const actionSheet = await this.actionSheet.create({
-      header:  this.degreeCourse,
-      buttons:  await this.Cdl()
-    });
-    await actionSheet.present();
-  }
-
-  Cdl() {
-    let buttons = [];
-    this.cdl$.forEach(res =>{
-      let button = {
-          text: res.nameDC,
-
-          handler: () => {
-           this.subject$ = this.subjectService.listHome(res.idDC);
-           this.storage.set('cdl', res.idDC);
-           return true;
-          }
-        };
-        buttons.push(button);
-
-    });
-
-
-    return buttons;
-
-
+    Cdl() {
+        const buttons = [];
+        this.cdl$.forEach(res => {
+            let button = {
+                text: res.nameDC,
+                handler: () => {
+                    this.subject$ = this.subjectService.listHome(res.idDC);
+                    this.storage.set('cdl', res.idDC);
+                    return true;
+                }
+            };
+            buttons.push(button);
+        });
+        return buttons;
     }
 
     initTranslate() {
         this.translateService.get('DEGREECOURSE').subscribe((data: string) => {
             this.degreeCourse = data;
-            console.log(data);
         });
         this.translateService.get('SELECTLANGUAGE').subscribe((data: string) => {
             this.language = data;
-            console.log(data);
         });
     }
 
     async openLanguage() {
         const actionSheet = await this.actionSheet.create({
-            header: await this.language,
+            header: this.language,
             buttons: [{
-                text: 'italiano',
+                text: 'Italiano',
                 handler: () => {
                     this.changeLanguage('it');
                 }
@@ -134,19 +113,10 @@ export class HomePage implements OnInit {
                 }
             }]
 
-        });
-
+    });
         await actionSheet.present();
     }
-
-
     changeLanguage(lan: string) {
-        /*
-         this.linguaService.getLinguaAttuale().subscribe(res=>console.log(res));
-         console.log(this.linguaService.getLingue()['1'].valore);
-         console.log(this.translateService.getDefaultLang());
-
-         */
         if (lan === 'it') {
             this.translateService.use(this.linguaService.getLinguaPreferita());
             this.translateService.setDefaultLang(this.linguaService.getLinguaPreferita());
@@ -160,5 +130,3 @@ export class HomePage implements OnInit {
         }
     }
 }
-
-

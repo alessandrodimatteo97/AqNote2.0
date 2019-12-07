@@ -4,16 +4,16 @@
       <div class="image" (click)="openDc()">
         <img  src="../../../assets/icon/dc.png">
       </div>
-        <div class="image" [routerLink]="['subjects']">
-            <img  src="../../../assets/icon/homework.png">
-        </div>
-    <ion-title class="title">
-      Home
-    </ion-title>
+      <div class="image" [routerLink]="['subjects']">
+        <img  src="../../../assets/icon/homework.png">
+      </div>
+      <ion-title class="title">
+        Home
+      </ion-title>
 
-    <div class="image" (click)="openLanguage()">
-  <img  src="../../../assets/icon/translation.png">
-    </div>
+      <div class="image" (click)="openLanguage()">
+        <img  src="../../../assets/icon/translation.png">
+      </div>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -23,7 +23,7 @@
   <ion-toolbar>
     <ion-grid>
       <ion-row>
-        <ion-segment [(ngModel)]="segment"  (ionChange)="segmentChanged($event)" >
+        <ion-segment [(ngModel)]="segment">
           <ion-col size="4">
             <ion-segment-button value="1" color="primary">
               <ion-label color="secondary">I</ion-label>
@@ -111,6 +111,7 @@
 
                       <p>
 
+                        Davide Fontana, [07.12.19 00:30]
                         <ion-icon name="star" color="primary"></ion-icon>
                         <ion-icon name="star" color="primary"></ion-icon>
                         <ion-icon name="star" ></ion-icon>

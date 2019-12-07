@@ -9,20 +9,20 @@
 <ion-content>
   <div id="content">
     <div id="profile-info">
-<div class="flexbox">
-    <div *ngIf="(image | async) as img; else Goon" ><img id="profile-image" [src]="transform(img)"></div>
+      <div class="flexbox">
+        <div *ngIf="(image | async) as img; else Goon" ><img id="profile-image" [src]="transform(img)"></div>
 
-      <ng-template #Goon>
-      <ng-container *ngIf="proof; else Goon1">
-        <img id="profile-image" mediaPreview [media]="this.proof._file">
-      </ng-container>
-    </ng-template>
+        <ng-template #Goon>
+          <ng-container *ngIf="proof; else Goon1">
+            <img id="profile-image" mediaPreview [media]="this.proof._file">
+          </ng-container>
+        </ng-template>
 
-      <ng-template #Goon1>
-        <img id="profile-image" src="../../../assets/img/avatar-icon-300x300.png">
+        <ng-template #Goon1>
+          <img id="profile-image" src="../../../assets/img/avatar-icon-300x300.png">
 
-      </ng-template>
-</div>
+        </ng-template>
+      </div>
       <ion-badge  slot="end" class="badge">
         <div class="file-input-container">
           <label class="border-radius">
@@ -51,291 +51,228 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-<br/>
+  <br/>
 
-<div [ngSwitch]="segment">
-  <div *ngSwitchCase="'data'">
-    <form  [formGroup]="userFormModel">
-      <ion-grid>
-        <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <ion-item>
-              <ion-label>email:</ion-label>
-              <ion-input name="mail" type="email" placeholder="your@email.com" formControlName="mail" ></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <ion-item>
-              <ion-label>{{"OLD_PASSWORD" | translate}}</ion-label>
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'data'">
+      <form  [formGroup]="userFormModel">
+        <ion-grid>
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <ion-item>
+                <ion-label>email:</ion-label>
+                <ion-input name="mail" type="email" placeholder="your@email.com" formControlName="mail" ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <ion-item>
+                <ion-label>{{"OLD_PASSWORD" | translate}}</ion-label>
 
-              <ion-input name="password" [type]="passwordType" placeholder='{{"OLD_PASSWORD" | translate}}' formControlName="OldPassword" ></ion-input>
-              <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <ion-item>
-              <ion-label>{{"NEW_PASSWORD" | translate}}</ion-label>
+                <ion-input name="password" [type]="passwordType" placeholder='{{"OLD_PASSWORD" | translate}}' formControlName="OldPassword" ></ion-input>
+                <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <ion-item>
+                <ion-label>{{"NEW_PASSWORD" | translate}}</ion-label>
 
-              <ion-input name="password" [type]="passwordType" placeholder='{{"NEW_PASSWORD" | translate}}' formControlName="Newpassword" ></ion-input>
-              <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-        <ion-item>
-          <ion-label>{{"DEGREECOURSE" | translate}}</ion-label>
-          <ion-select placeholder="DegreeCourse"  formControlName="cdl_id">
-            <ion-select-option *ngFor="let Dc of cdl$ | async" value="{{Dc.idDC}}"> {{Dc.nameDC}}</ion-select-option>
-          </ion-select>
+                <ion-input name="password" [type]="passwordType" placeholder='{{"NEW_PASSWORD" | translate}}' formControlName="Newpassword" ></ion-input>
+                <ion-icon  [name]="passwordIcon" class="passwordIcon"  (click)='hideShowPassword()'></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <ion-item>
+                <ion-label>{{"DEGREECOURSE" | translate}}</ion-label>
+                <ion-select placeholder="DegreeCourse"  formControlName="cdl_id">
+                  <ion-select-option *ngFor="let Dc of cdl$ | async" value="{{Dc.idDC}}"> {{Dc.nameDC}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <ion-item>
+                <ion-label>{{ 'LANGUAGE' | translate }}</ion-label> <ion-toggle checked (ionChange)="changeLanguage()"></ion-toggle>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-button  size="large" type="submit" (click)="modify()" expand="block">{{"MODIFY" | translate}} </ion-button>
+        </ion-grid>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'comments'" >
+      <ion-list>
+        <ion-item *ngFor="let comment of comments | async ">
+          <ion-avatar slot="start">
+            <div *ngIf="(image | async) as img; else Goon" ><img class="image" [src]="transform(img)"></div>
+
+            <ng-template #Goon>
+              <ng-container *ngIf="proof; else Goon1">
+                <img class="image" mediaPreview [media]="this.proof._file">
+              </ng-container>
+            </ng-template>
+
+            <ng-template #Goon1>
+              <img class="image" src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
+
+            </ng-template>
+          </ion-avatar>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <h3 class="comment-title">{{comment.title}} </h3>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <p class="written-by"> {{"WRITTEN_BY" | translate}} {{comment.name}} {{comment.surname}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row class="modified-row">
+              <ion-col>
+                <h5>{{comment.titleC}}</h5>
+              </ion-col>
+            </ion-row>
+            <ion-row class="modified-row">
+              <ion-col>
+                <p class="comment">
+                  {{comment.text}}
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <p class="paragraph-star" *ngIf="comment.like == '1'">
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                </p>
+                <p class="paragraph-star" *ngIf="comment.like == '2'">
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                </p>
+                <p class="paragraph-star" *ngIf="comment.like == '3'">
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                </p>
+                <p class="paragraph-star" *ngIf="comment.like == '4'">
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color=""></ion-icon>
+                </p>
+                <p class="paragraph-star" *ngIf="comment.like == '5'">
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                  <ion-icon name="star" color="primary"></ion-icon>
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-item>
-          </ion-col>
-        </ion-row>
 
-        <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <ion-item>
-           <ion-label>{{ 'LANGUAGE' | translate }}</ion-label> <ion-toggle checked (ionChange)="changeLanguage()"></ion-toggle>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'notes'">
+      <ion-list>
+        <ion-item *ngFor="let note of notes$ | async" >
+          <ion-label >
+            <h1 >{{note.title}}<span class="delete-span"><ion-icon name="information-circle"[routerLink]="['note-detail/'+note.idN]" ></ion-icon><ion-icon name="create" (click)="navigate(note, $event)"></ion-icon>  <ion-icon name="trash" (click)="navigate(note, $event)"></ion-icon> </span></h1>
+            <p>{{"PAGES_NUMBER" | translate}} {{note.pages}}</p>
+            <p>{{"COMMENTS_NUMBER" | translate}} {{note.comment}}</p>
+            <div *ngIf="((note.likes | number:'1.0-0'))==0">
 
+              <p>
 
-        <ion-button  size="large" type="submit" (click)="modify()" expand="block">{{"MODIFY" | translate}} </ion-button>
-      </ion-grid>
-    </form>
+                <ion-icon name="star" color=""></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+              </p>
+            </div>
+            <div *ngIf="((note.likes | number:'1.0-0'))==1">
+
+              <p>
+
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+              </p>
+            </div>
+            <div *ngIf="((note.likes | number:'1.0-0'))==2">
+
+              <p>
+
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+              </p>
+            </div>
+            <div *ngIf="((note.likes | number:'1.0-0'))==3">
+
+              <p>
+
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+              </p>
+            </div>
+            <div *ngIf="((note.likes | number:'1.0-0'))==4">
+
+              <p>
+
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" ></ion-icon>
+              </p>
+            </div>
+            <div *ngIf="((note.likes | number:'1.0-0'))==5">
+
+              <p>
+
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon>
+              </p>
+            </div>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </div>
   </div>
-
-  <div *ngSwitchCase="'comments'" >
-    <ion-list>
-      <ion-item *ngFor="let comment of comments | async ">
-        <ion-avatar slot="start">
-          <div *ngIf="(image | async) as img; else Goon" ><img class="image" [src]="transform(img)"></div>
-
-          <ng-template #Goon>
-            <ng-container *ngIf="proof; else Goon1">
-              <img class="image" mediaPreview [media]="this.proof._file">
-            </ng-container>
-          </ng-template>
-
-          <ng-template #Goon1>
-            <img class="image" src="https://justice.org.au/wp-content/uploads/2017/08/avatar-icon-300x300.png">
-
-          </ng-template>
-        </ion-avatar>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h3 class="comment-title">{{comment.title}} </h3>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="written-by"> {{"WRITTEN_BY" | translate}} {{comment.name}} {{comment.surname}}</p>
-            </ion-col>
-          </ion-row>
-          <ion-row class="modified-row">
-            <ion-col>
-              <h5>{{comment.titleC}}</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row class="modified-row">
-            <ion-col>
-              <p class="comment">
-                {{comment.text}}
-              </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="paragraph-star" *ngIf="comment.like == '1'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '2'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '3'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '4'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '5'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-      <!-- <ion-item *ngFor="let comment of comments | async">
-        <ion-avatar slot="start">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-        </ion-avatar>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h5 class="comment-title" >{{fullName}}</h5>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <h6 class="comment-title" >{{comment.titleC}}</h6>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="comment">
-                {{comment.text}}
-              </p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <p class="paragraph-star" *ngIf="comment.like == '1'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '2'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '3'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '4'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color=""></ion-icon>
-              </p>
-              <p class="paragraph-star" *ngIf="comment.like == '5'">
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-                <ion-icon name="star" color="primary"></ion-icon>
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
--->
-    </ion-list>
-  </div>
-  <div *ngSwitchCase="'notes'">
-   <ion-list>
-     <ion-item *ngFor="let note of notes$ | async" >
-       <ion-label >
-         <h1 >{{note.title}}<span class="delete-span"><ion-icon name="information-circle"[routerLink]="['note-detail/'+note.idN]" ></ion-icon><ion-icon name="create" (click)="navigate(note, $event)"></ion-icon>  <ion-icon name="trash" (click)="navigate(note, $event)"></ion-icon> </span></h1>
-         <p>{{"PAGES_NUMBER" | translate}} {{note.pages}}</p>
-         <p>{{"COMMENTS_NUMBER" | translate}} {{note.comment}}</p>
-         <div *ngIf="((note.likes | number:'1.0-0'))==0">
-
-           <p>
-
-             <ion-icon name="star" color=""></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-           </p>
-         </div>
-         <div *ngIf="((note.likes | number:'1.0-0'))==1">
-
-           <p>
-
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-           </p>
-         </div>
-         <div *ngIf="((note.likes | number:'1.0-0'))==2">
-
-           <p>
-
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-           </p>
-         </div>
-         <div *ngIf="((note.likes | number:'1.0-0'))==3">
-
-           <p>
-
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-           </p>
-         </div>
-         <div *ngIf="((note.likes | number:'1.0-0'))==4">
-
-           <p>
-
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" ></ion-icon>
-           </p>
-         </div>
-         <div *ngIf="((note.likes | number:'1.0-0'))==5">
-
-           <p>
-
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-             <ion-icon name="star" color="primary"></ion-icon>
-           </p>
-         </div>
-       </ion-label>
-     </ion-item>
-
-   </ion-list>
-</div>
-</div>
 
 
 
@@ -347,3 +284,4 @@
 
 
 </ion-content>
+

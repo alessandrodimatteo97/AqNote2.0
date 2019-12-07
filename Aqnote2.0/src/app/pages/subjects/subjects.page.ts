@@ -18,10 +18,10 @@ export class SubjectsPage implements OnInit {
   ngOnInit() {
     this.storage.get('cdl').then(cdl => {
       if (cdl === null || cdl === undefined) {
-        this.subject$ = this.subjectService.list2(this.userService.getUtente().getValue().cdl_id);
+        this.subject$ = this.subjectService.list(this.userService.getUtente().getValue().cdl_id);
 
       } else {
-        this.subject$ = this.subjectService.list2(cdl);
+        this.subject$ = this.subjectService.list(cdl);
       }
     });
 

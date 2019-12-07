@@ -64,27 +64,31 @@ export class SignUpPagePage implements OnInit {
           this.signUpFormModel.reset();
           console.log(res);
           this.router.navigate(['sign-in']);
+        },
+        (err: HttpErrorResponse) => {
+          if (err.status) {
+            console.error('login request error: ' + err.status);
+            this.showLoginError(err.error.toString(), 'Error');
+          }
         }
+
         );
   }
 
 
+  async showLoginError(errMessage, header) {
+    const alert = await this.alertController.create({
+      header,
+      message: errMessage,
+      buttons: ['OK']
+    });
 
-
-
-  /*
-  ionChange($event) {
-    console.log($event.target.value);
-    this.translate.use($event.target.value);
-    this.translate.use($event.target.value);
-    this.translate.setDefaultLang($event.target.value);
-  }*/
-
-  onLeft() {
-    this.router.navigate(['login']);
+    await alert.present();
   }
-  /*
-    onSubmit() {
-      console.warn(this.signupForm.value);
-    } */
+
+
+  goToLogin() {
+    this.router.navigate(['sign-in']);
+  }
+
 }
